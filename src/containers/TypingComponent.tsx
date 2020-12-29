@@ -40,7 +40,7 @@ const Typing: React.FC = () => {
         {word.split('').map((char: string, index: number) => {
           const color = correctTypingConut > index ? 'black' : 'grey';
           return (
-            <span style={{ color }} key={`${word}-${char}`}>
+            <span style={{ color }} key={`${word}-${index}`}>
               {char}
             </span>
           );
