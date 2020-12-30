@@ -1,15 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import wordsJson from '../../constant/words.json';
+import { RootState } from '../../store';
 
 interface Word {
   word: string;
   meaning: string;
 }
 
+interface StateToProps {
+  currentContainer: string;
+}
+
+type Props = StateToProps;
+
 const words: Word[] = JSON.parse(JSON.stringify(wordsJson));
 let { word } = words[Math.floor(Math.random() * words.length - 1)];
 
-const Typing: React.FC = () => {
+const Typing: React.FC<Props> = (props: Props) => {
   const [correctTypingConut, setCorrectTypingConut] = React.useState(0);
   const containerRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
   const isElement = (element: HTMLDivElement | null): element is HTMLDivElement => {
@@ -20,7 +28,7 @@ const Typing: React.FC = () => {
     if (isElement(current)) {
       current.focus();
     }
-  }, [setCorrectTypingConut]);
+  }, [props.currentContainer]);
   React.useEffect(() => {
     if (correctTypingConut >= word.length) {
       ({ word } = words[Math.floor(Math.random() * words.length - 1)]);
@@ -50,4 +58,11 @@ const Typing: React.FC = () => {
   );
 };
 
-export const TypingContainer = Typing;
+const mapStateToProps = (state: RootState): StateToProps => {
+  const { currentContainer } = state.containerManager;
+  return {
+    currentContainer
+  };
+};
+
+export const TypingContainer = connect(mapStateToProps)(Typing);
