@@ -1,5 +1,5 @@
 import React from 'react';
-import wordsJson from '../constant/words.json';
+import wordsJson from '../../constant/words.json';
 
 interface Word {
   word: string;
@@ -50,4 +50,4 @@ const Typing: React.FC = () => {
   );
 };
 
-export const TypingComponent = Typing;
+export const TypingContainer = Typing;

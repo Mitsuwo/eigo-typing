@@ -10,4 +10,4 @@ const Home: React.FC = () => {
   );
 };
 
-export const HomeComponent = Home;
+export const HomeContainer = Home;

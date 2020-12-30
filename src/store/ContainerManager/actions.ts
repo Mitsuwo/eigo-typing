@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { ContainerManagerState, SET_CURRENT_CONTAINER, ContainerManagerActionTypes } from './types';
 
 export function setCurrentContainer(

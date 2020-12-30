@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { ContainerManagerState, ContainerManagerActionTypes, SET_CURRENT_CONTAINER } from './types';
 
 const initialState: ContainerManagerState = {

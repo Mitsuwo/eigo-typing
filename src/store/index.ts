@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { combineReducers } from 'redux';
 import { containerManagerReducer } from './ContainerManager/reducers';
 
