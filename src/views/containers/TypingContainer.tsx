@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import wordsJson from '../../constant/words.json';
 import { RootState } from '../../store';
+import { Keyboard } from '../components/Keyboard';
 
 interface Word {
   word: string;
@@ -18,7 +19,8 @@ const words: Word[] = JSON.parse(JSON.stringify(wordsJson));
 let { word } = words[Math.floor(Math.random() * words.length - 1)];
 
 const Typing: React.FC<Props> = (props: Props) => {
-  const [correctTypingConut, setCorrectTypingConut] = React.useState(0);
+  const [correctTypingConut, setCorrectTypingConut] = React.useState<number>(0);
+  const [currentKeys, setCurrentKeys] = React.useState<string[]>([]);
   const containerRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
   const isElement = (element: HTMLDivElement | null): element is HTMLDivElement => {
     return typeof element !== null;
@@ -37,12 +39,25 @@ const Typing: React.FC<Props> = (props: Props) => {
   }, [correctTypingConut]);
   const handleKeyDown = (event: React.KeyboardEvent): void => {
     const { code } = event;
-    if (code.startsWith('Key') && word[correctTypingConut].toUpperCase() === code.substr(-1)) {
-      setCorrectTypingConut((count: number) => count + 1);
+    if (code.startsWith('Key')) {
+      const keyText = code.substr(-1);
+      if (word[correctTypingConut].toUpperCase() === keyText) {
+        setCorrectTypingConut((count: number) => count + 1);
+      }
+      if (currentKeys.indexOf(keyText) === -1) {
+        setCurrentKeys([...currentKeys, keyText]);
+      }
+    }
+  };
+  const handleKeyUp = (event: React.KeyboardEvent): void => {
+    const { code } = event;
+    if (code.startsWith('Key')) {
+      const keyText = code.substr(-1);
+      setCurrentKeys(currentKeys.filter((currentKey: string) => currentKey !== keyText));
     }
   };
   return (
-    <div ref={containerRef} onKeyDown={handleKeyDown} tabIndex={0}>
+    <div ref={containerRef} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} tabIndex={0}>
       <div>Type below</div>
       <div key={word}>
         {word.split('').map((char: string, index: number) => {
@@ -54,6 +69,7 @@ const Typing: React.FC<Props> = (props: Props) => {
           );
         })}
       </div>
+      <Keyboard currentKeys={currentKeys} />
     </div>
   );
 };
