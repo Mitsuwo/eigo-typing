@@ -1,9 +1,13 @@
 import { Action, combineReducers, createStore, Store } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
-import { containerManagerReducer } from './ContainerManager/reducers';
+import { pageManagerReducer } from './PageManager/reducers';
+import { keyboardReducer } from './Keyboard/reducers';
+import { typingContentReducer } from './TypingContent.tsx/reducer';
 
 export const rootReducer = combineReducers({
-  containerManager: containerManagerReducer
+  pageManager: pageManagerReducer,
+  keyboard: keyboardReducer,
+  typingContent: typingContentReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

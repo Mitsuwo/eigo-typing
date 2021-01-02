@@ -1,36 +1,21 @@
-import React, { Dispatch } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Action } from 'redux';
-import { setCurrentContainer } from '../../store/ContainerManager/actions';
-import { ContainerManagerState } from '../../store/ContainerManager/types';
+import { setCurrentPage } from '../../store/PageManager/actions';
 
-interface DispatchToProps {
-  setCurrentContainer: (containerManagerState: ContainerManagerState) => void;
-}
-
-type Props = DispatchToProps;
-
-const HomeContainer: React.FC<Props> = (props: Props) => {
+const HomeContainer: React.FC = () => {
+  const dispatch = useDispatch();
   const handleClickLink = () => {
-    props.setCurrentContainer({ currentContainer: 'typing' });
+    dispatch(setCurrentPage('typing'));
   };
   return (
     <div>
-      <div>This is home.</div>
+      <div>英語でタイピング</div>
       <Link to="/typing" onClick={handleClickLink}>
-        スタート
+        タイピング スタート
       </Link>
     </div>
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchToProps => {
-  return {
-    setCurrentContainer: (containerManagerState: ContainerManagerState) => {
-      dispatch(setCurrentContainer(containerManagerState));
-    }
-  };
-};
-
-export const Home = connect(null, mapDispatchToProps)(HomeContainer);
+export const Home = HomeContainer;
