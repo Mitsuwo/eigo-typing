@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Result: React.FC = () => {
+const ResultContainer: React.FC = () => {
   return (
     <div>
       <div>Result Page</div>
@@ -8,4 +8,4 @@ const Result: React.FC = () => {
   );
 };
 
-export const ResultContainer = Result;
+export const Result = ResultContainer;

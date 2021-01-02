@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, BrowserRouter } from 'react-router-dom';
 import './index.css';
-import { HomeContainer } from './views/containers/HomeContainer';
-import { TypingContainer } from './views/containers/TypingContainer';
-import { ResultContainer } from './views/containers/ResultContainer';
+import { Home } from './views/containers/Home';
+import { Typing } from './views/containers/Typing';
+import { Result } from './views/containers/Result';
 import { store } from './store';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Route exact path="/" component={HomeContainer} />
-        <Route exact path="/typing" component={TypingContainer} />
-        <Route exact path="/result" component={ResultContainer} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/typing" component={Typing} />
+        <Route exact path="/result" component={Result} />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

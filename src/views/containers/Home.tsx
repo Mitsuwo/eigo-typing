@@ -11,7 +11,7 @@ interface DispatchToProps {
 
 type Props = DispatchToProps;
 
-const Home: React.FC<Props> = (props: Props) => {
+const HomeContainer: React.FC<Props> = (props: Props) => {
   const handleClickLink = () => {
     props.setCurrentContainer({ currentContainer: 'typing' });
   };
@@ -33,4 +33,4 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchToProps => {
   };
 };
 
-export const HomeContainer = connect(null, mapDispatchToProps)(Home);
+export const Home = connect(null, mapDispatchToProps)(HomeContainer);
