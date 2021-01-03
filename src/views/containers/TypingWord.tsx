@@ -12,7 +12,7 @@ import {
 import { RootState } from '../../store';
 import { setCurrentWordIndex, setWord } from '../../store/TypingContent.tsx/action';
 
-const TypingWordComponent: React.FC = () => {
+const TypingWordContainer: React.FC = () => {
   const containerRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
   const dispatch = useDispatch();
   const { nextKey, correctCharCount } = useSelector((state: RootState) => state.keyboard);
@@ -66,4 +66,4 @@ const TypingWordComponent: React.FC = () => {
   );
 };
 
-export const TypingWord = TypingWordComponent;
+export const TypingWord = TypingWordContainer;
