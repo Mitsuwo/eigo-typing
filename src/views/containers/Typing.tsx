@@ -52,7 +52,6 @@ const TypingContainer: React.FC = () => {
   }, []);
   return (
     <div>
-      <div>Type below</div>
       {contentType === 'word' ? <TypingWord /> : <TypingConversation />}
       <Keyboard />
     </div>

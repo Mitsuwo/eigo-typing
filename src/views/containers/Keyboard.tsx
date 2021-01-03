@@ -45,12 +45,10 @@ export const Keyboard: React.FC = () => {
     return { text, width };
   };
   return (
-    <div>
+    <div style={{ height: '260px', width: '814px', margin: 'auto' }}>
       {keys.map((keyArray: string[]) => {
         return (
-          <div
-            key={keyArray.join('-').replaceAll(' ', '')}
-            style={{ display: 'flex', width: '814px' }}>
+          <div key={keyArray.join('-').replaceAll(' ', '')} style={{ display: 'flex' }}>
             {keyArray.map((keyText: string, index: number) => {
               const { text, width } = createKeyInfo(keyText);
               const isCurrentKey = !!text && currentKeys.indexOf(text) !== -1;
