@@ -27,7 +27,9 @@ export function keyboardReducer(state = initialState, action: KeyboardActionType
     case DELETE_CURRENT_KEY: {
       return {
         ...state,
-        currentKeys: state.currentKeys.filter((key: string) => key !== action.payload)
+        currentKeys: state.currentKeys.filter(
+          (key: string) => key.toUpperCase() !== action.payload.toUpperCase()
+        )
       };
     }
     case CLEAR_CURRENT_KEYS: {

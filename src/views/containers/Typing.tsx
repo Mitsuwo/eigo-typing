@@ -36,7 +36,7 @@ const TypingContainer: React.FC = () => {
     const { word } = words[currentWordIndex];
     dispatch(setWords(words));
     dispatch(setWord(word));
-    dispatch(setNextKey(word[correctCharCount].toUpperCase()));
+    dispatch(setNextKey(word[correctCharCount]));
   };
   const setStoryContent = () => {
     let stories: Story[] = JSON.parse(JSON.stringify(storiesJson));
