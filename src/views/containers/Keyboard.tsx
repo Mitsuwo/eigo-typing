@@ -2,64 +2,62 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { keys } from '../../constant/keyboardKeys';
 import {
+  KEY_COLOR_ACTIVE_SHIFT,
   KEY_COLOR_CORRECT,
   KEY_COLOR_DEFAULT,
   KEY_COLOR_DISABLED,
-  KEY_COLOR_INCORRECT,
-  KEY_WIDTH_COMMAND,
-  KEY_WIDTH_DEFAULT,
-  KEY_WIDTH_OTHER,
-  KEY_WIDTH_SHIFT,
-  KEY_WIDTH_SPACE
+  KEY_COLOR_INCORRECT
 } from '../../constant/styles';
 import { RootState } from '../../store';
 import { Key } from '../components/Key';
 
-interface KeyInfo {
+export interface KeyInfo {
   text: string;
+  code: string;
   width: string;
 }
 
 export const Keyboard: React.FC = () => {
+  const [shiftKey, setShiftKey] = React.useState(false);
   const { currentKeys, nextKey } = useSelector((state: RootState) => state.keyboard);
-  const createKeyInfo = (text: string): KeyInfo => {
-    let width = KEY_WIDTH_DEFAULT;
-    switch (text) {
-      case 'shift':
-        width = KEY_WIDTH_SHIFT;
-        break;
-      case 'space':
-        width = KEY_WIDTH_SPACE;
-        text = '';
-        break;
-      case 'command':
-        width = KEY_WIDTH_COMMAND;
-        text = '';
-        break;
-      case '':
-        width = KEY_WIDTH_OTHER;
-        break;
-      default:
-        break;
+  React.useEffect(() => {
+    setShiftKey(currentKeys.some((currentKey: string) => currentKey.startsWith('Shift')));
+  }, [currentKeys]);
+  const isCurrentKey = (code: string): boolean => {
+    if (!code || currentKeys.length === 0) {
+      return false;
     }
-    return { text, width };
+    return currentKeys.some((currentKey: string) => currentKey === code);
+  };
+  const isCorrectKey = (text: string): boolean => {
+    let key = '';
+    const [firstKey, secondKey] = text.split(' ');
+    if (firstKey && secondKey) {
+      key = shiftKey ? firstKey : secondKey;
+    } else if (text === '') {
+      key = 'space';
+    } else {
+      key = shiftKey ? text : text.toLowerCase();
+    }
+    return nextKey === key;
   };
   return (
     <div style={{ height: '260px', width: '814px', margin: 'auto' }}>
-      {keys.map((keyArray: string[]) => {
+      {keys.map((keyRow: KeyInfo[], index: number) => {
         return (
-          <div key={keyArray.join('-').replaceAll(' ', '')} style={{ display: 'flex' }}>
-            {keyArray.map((keyText: string, index: number) => {
-              const { text, width } = createKeyInfo(keyText);
-              const isCurrentKey = !!text && currentKeys.indexOf(text) !== -1;
-              const disabled = !text && width !== KEY_WIDTH_SPACE;
+          <div key={index} style={{ display: 'flex' }}>
+            {keyRow.map((keyInfo: KeyInfo, index: number) => {
+              const { text, code, width } = keyInfo;
+              const disabled = text === '';
               let keyColor = KEY_COLOR_DEFAULT;
               if (disabled) {
                 keyColor = KEY_COLOR_DISABLED;
-              } else if (isCurrentKey) {
-                if (nextKey === keyText) {
+              } else if (isCurrentKey(code)) {
+                if (isCorrectKey(text)) {
                   keyColor = KEY_COLOR_CORRECT;
-                } else if (keyColor === KEY_COLOR_DEFAULT) {
+                } else if (text === 'shift') {
+                  keyColor = KEY_COLOR_ACTIVE_SHIFT;
+                } else {
                   keyColor = KEY_COLOR_INCORRECT;
                 }
               }
