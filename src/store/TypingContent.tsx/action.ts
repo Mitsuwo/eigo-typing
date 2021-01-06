@@ -9,7 +9,8 @@ import {
   Conversation,
   SET_CONVERSATION,
   SET_CURRENT_STORY_INDEX,
-  SET_CONTENT_TYPE
+  SET_CONTENT_TYPE,
+  SET_CURRENT_SCRIPT_INDEX
 } from './types';
 
 export function setWords(words: Word[]): TypingContentActionTypes {
@@ -50,6 +51,13 @@ export function setCurrentWordIndex(index: number): TypingContentActionTypes {
 export function setCurrentStoryIndex(index: number): TypingContentActionTypes {
   return {
     type: SET_CURRENT_STORY_INDEX,
+    payload: index
+  };
+}
+
+export function setCurrentScriptIndex(index: number): TypingContentActionTypes {
+  return {
+    type: SET_CURRENT_SCRIPT_INDEX,
     payload: index
   };
 }

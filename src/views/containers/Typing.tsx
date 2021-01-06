@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import wordsJson from '../../constant/words.json';
 import storiesJson from '../../constant/stories.json';
-import { Story, Word } from '../../store/TypingContent.tsx/types';
+import { Conversation, Story, Word } from '../../store/TypingContent.tsx/types';
 import {
   setWords,
   setWord,
@@ -17,7 +17,7 @@ import { Keyboard } from './Keyboard';
 
 const TypingContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const { currentWordIndex, currentStoryIndex, contentType } = useSelector(
+  const { currentWordIndex, currentStoryIndex, currentScriptIndex, contentType } = useSelector(
     (state: RootState) => state.typingContent
   );
   const { correctCharCount } = useSelector((state: RootState) => state.keyboard);
@@ -41,10 +41,15 @@ const TypingContainer: React.FC = () => {
   const setStoryContent = () => {
     let stories: Story[] = JSON.parse(JSON.stringify(storiesJson));
     stories = shuffleArray<Story>(stories);
-    const { conversation } = stories[currentStoryIndex];
+    let { conversation } = stories[currentStoryIndex];
+    conversation = conversation.map((obj: Conversation) => {
+      obj.script = obj.script.replaceAll(' ', '␣');
+      return obj;
+    });
+    const { script } = conversation[currentScriptIndex];
     dispatch(setStories(stories));
     dispatch(setConversation(conversation));
-    // TODO: setNextKey
+    dispatch(setNextKey(script[currentWordIndex]));
   };
   React.useEffect(() => {
     setWordContent();

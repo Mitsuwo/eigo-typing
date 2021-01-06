@@ -7,7 +7,8 @@ import {
   SET_STORIES,
   SET_CONVERSATION,
   SET_CURRENT_STORY_INDEX,
-  SET_CONTENT_TYPE
+  SET_CONTENT_TYPE,
+  SET_CURRENT_SCRIPT_INDEX
 } from './types';
 
 const initialState: TypingContentState = {
@@ -17,6 +18,7 @@ const initialState: TypingContentState = {
   conversation: [],
   currentWordIndex: 0,
   currentStoryIndex: 0,
+  currentScriptIndex: 0,
   contentType: ''
 };
 
@@ -59,6 +61,12 @@ export function typingContentReducer(
       return {
         ...state,
         currentStoryIndex: action.payload
+      };
+    }
+    case SET_CURRENT_SCRIPT_INDEX: {
+      return {
+        ...state,
+        currentScriptIndex: action.payload
       };
     }
     case SET_CONTENT_TYPE: {

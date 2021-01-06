@@ -5,6 +5,7 @@ export const SET_CONVERSATION = 'SET_CONVERSATION';
 export const SET_CURRENT_WORD_INDEX = 'SET_CURRENT_WORD_INDEX';
 export const SET_CURRENT_STORY_INDEX = 'SET_CURRENT_STORY_INDEX';
 export const SET_CONTENT_TYPE = 'SET_CONTENT_TYPE';
+export const SET_CURRENT_SCRIPT_INDEX = 'SET_CURRENT_SCRIPT';
 
 interface SetWordsAction {
   type: typeof SET_WORDS;
@@ -41,6 +42,11 @@ interface SetContentType {
   payload: string;
 }
 
+interface SetCurrentScriptIndex {
+  type: typeof SET_CURRENT_SCRIPT_INDEX;
+  payload: number;
+}
+
 export type TypingContentActionTypes =
   | SetWordsAction
   | SetWordAction
@@ -48,7 +54,8 @@ export type TypingContentActionTypes =
   | SetConversation
   | SetCurrentWordIndex
   | SetCurrentStoryIndex
-  | SetContentType;
+  | SetContentType
+  | SetCurrentScriptIndex;
 
 export interface Word {
   word: string;
@@ -75,5 +82,6 @@ export interface TypingContentState {
   conversation: Conversation[];
   currentWordIndex: number;
   currentStoryIndex: number;
+  currentScriptIndex: number;
   contentType: string;
 }
