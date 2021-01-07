@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import wordsJson from '../../constant/words.json';
 import storiesJson from '../../constant/stories.json';
-import { Conversation, Story, Word } from '../../store/TypingContent.tsx/types';
+import { Line, Story, Word } from '../../store/TypingContent.tsx/types';
 import {
   setWords,
   setWord,
@@ -42,7 +42,7 @@ const TypingContainer: React.FC = () => {
     let stories: Story[] = JSON.parse(JSON.stringify(storiesJson));
     stories = shuffleArray<Story>(stories);
     let { conversation } = stories[currentStoryIndex];
-    conversation = conversation.map((obj: Conversation) => {
+    conversation = conversation.map((obj: Line) => {
       obj.script = obj.script.replaceAll(' ', '␣');
       return obj;
     });

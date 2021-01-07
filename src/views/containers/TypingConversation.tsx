@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import {
   addCurrentKey,
+  clearCorrectCharCount,
   deleteCurrentKey,
   incrementCorrectCharCount,
   setNextKey
 } from '../../store/Keyboard/actions';
 import { setCurrentScriptIndex } from '../../store/TypingContent.tsx/action';
-import { Conversation } from '../../store/TypingContent.tsx/types';
-import { Character } from '../components/Character';
+import { Line } from '../../store/TypingContent.tsx/types';
+import { Script } from '../components/Script';
 
 const TypingConversationContainer: React.FC = () => {
   const { conversation, currentScriptIndex } = useSelector(
@@ -38,11 +39,17 @@ const TypingConversationContainer: React.FC = () => {
       dispatch(setNextKey(script[correctCharCount]));
     } else {
       dispatch(setCurrentScriptIndex(currentScriptIndex + 1));
+      dispatch(clearCorrectCharCount());
     }
   }, [correctCharCount]);
   const handleKeyDown = (event: React.KeyboardEvent): void => {
-    const { code, key } = event;
-    if (key && key === nextKey) {
+    const { code } = event;
+    let { key } = event;
+    if (key === ' ') {
+      key = '␣';
+      event.preventDefault();
+    }
+    if (key === nextKey) {
       dispatch(incrementCorrectCharCount());
     }
     if (!currentKeys.includes(code)) {
@@ -69,18 +76,18 @@ const TypingConversationContainer: React.FC = () => {
       tabIndex={0}>
       <table>
         <tbody>
-          {conversation.map((obj: Conversation, index: number) => {
+          {conversation.map((line: Line, index: number) => {
             return (
               <tr key={index} style={{ fontSize: '25px', verticalAlign: 'top' }}>
-                <td style={{ whiteSpace: 'nowrap' }}>{obj.character}</td>
+                <td style={{ whiteSpace: 'nowrap' }}>{line.character}</td>
                 <td>: </td>
                 <td>
-                  {obj.script
-                    ? obj.script.split('').map((char: string, index: number) => {
-                        const color = correctCharCount > index ? 'black' : 'grey';
-                        return <Character key={`char-${index}`} char={char} color={color} />;
-                      })
-                    : ''}
+                  <Script
+                    script={line.script}
+                    correctCharCount={correctCharCount}
+                    isCurrentScript={index === currentScriptIndex}
+                    isTypedScript={index < currentScriptIndex}
+                  />
                 </td>
               </tr>
             );

@@ -24,7 +24,7 @@ interface SetStories {
 
 interface SetConversation {
   type: typeof SET_CONVERSATION;
-  payload: Conversation[];
+  payload: Line[];
 }
 
 interface SetCurrentWordIndex {
@@ -67,10 +67,10 @@ export interface Story {
   auther: string;
   characters: string[];
   description: string;
-  conversation: Conversation[];
+  conversation: Line[];
 }
 
-export interface Conversation {
+export interface Line {
   character: string;
   script: string;
 }
@@ -79,7 +79,7 @@ export interface TypingContentState {
   words: Word[];
   word: string;
   stories: Story[];
-  conversation: Conversation[];
+  conversation: Line[];
   currentWordIndex: number;
   currentStoryIndex: number;
   currentScriptIndex: number;

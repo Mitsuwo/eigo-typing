@@ -6,7 +6,7 @@ import {
   SET_CURRENT_WORD_INDEX,
   Story,
   SET_STORIES,
-  Conversation,
+  Line,
   SET_CONVERSATION,
   SET_CURRENT_STORY_INDEX,
   SET_CONTENT_TYPE,
@@ -34,7 +34,7 @@ export function setStories(stories: Story[]): TypingContentActionTypes {
   };
 }
 
-export function setConversation(conversation: Conversation[]): TypingContentActionTypes {
+export function setConversation(conversation: Line[]): TypingContentActionTypes {
   return {
     type: SET_CONVERSATION,
     payload: conversation
