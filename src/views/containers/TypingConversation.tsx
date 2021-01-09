@@ -85,8 +85,8 @@ const TypingConversationContainer: React.FC = () => {
                   <Script
                     script={line.script}
                     correctCharCount={correctCharCount}
-                    isCurrentScript={index === currentScriptIndex}
-                    isTypedScript={index < currentScriptIndex}
+                    scriptIndex={index}
+                    currentScriptIndex={currentScriptIndex}
                   />
                 </td>
               </tr>

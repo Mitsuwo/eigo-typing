@@ -54,7 +54,17 @@ const TypingWordContainer: React.FC = () => {
       {word
         ? word.split('').map((char: string, index: number) => {
             const color = correctCharCount > index ? 'black' : 'grey';
-            return <Character key={`${word}-${index}`} char={char} color={color} />;
+            const isNextChar = correctCharCount === index;
+            return (
+              <Character
+                id={`${word}-${index}`}
+                key={index}
+                char={char}
+                color={color}
+                isNextChar={isNextChar}
+                isCurrentScript
+              />
+            );
           })
         : ''}
     </div>
