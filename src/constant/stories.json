@@ -1,0 +1,994 @@
+[
+  {
+    "title": "THE ANGEL INTRUDES",
+    "auther": "Floyd Dell",
+    "characters": ["THE POLICEMAN", "THE ANGEL", "JIMMY PENDLETON", "ANNABELLE"],
+    "description": "Washington Square by moonlight. A stream of Greenwich Villagers hurrying across to the Brevoort before the doors are locked. In their wake a sleepy policeman. The policeman stops suddenly on seeing an Angel with shining garments and great white wings, who has just appeared out of nowhere.",
+    "conversation": [
+      {
+        "character": "THE POLICEMAN",
+        "script": "Hey, you!"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "(haughtily, turning) Sir! Are you addressing me?"
+      },
+      {
+        "character": "THE POLICEMAN",
+        "script": "(severely) Yes, an' I've a good mind to lock you up."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "(surprised and indignant) How very inhospitable! Is that the way you treat strangers?"
+      },
+      {
+        "character": "THE POLICEMAN",
+        "script": "Don't you know it's agen the law of New York to parade the streets in a masquerade costume?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "No. I didn't know. You see, I've just arrived this minute from Heaven."
+      },
+      {
+        "character": "THE POLICEMAN",
+        "script": "Ye look it. (Taking his arm kindly) See here, me lad, you've been drinkin' too many of them stingers. Ye'd better take a taxi and go home."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "What! So soon?"
+      },
+      {
+        "character": "THE POLICEMAN",
+        "script": "I know how ye feel. I've been that way meself. But I can't leave ye go traipsin' about in skirts."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "(drawing away) Sir, I'm not traipsing about. I am attending to important business, and I must ask you not to detain me."
+      },
+      {
+        "character": "THE POLICEMAN",
+        "script": "(suspiciously) Not so fast, me laddie-buck. What business have you at this hour of the night? Tell me that."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "I don't mind telling you. It concerns a mortal called James Pendleton."
+      },
+      {
+        "character": "THE POLICEMAN",
+        "script": "(genial again) Aha! So you're a friend of Jimmy Pendleton's, are you?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Not exactly. I am his Guardian Angel."
+      },
+      {
+        "character": "THE POLICEMAN",
+        "script": "Well, faith, he needs one! Come, me b'y, I'll see ye safe to his door."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Thank you. But, if you don't mind, I prefer to go alone."
+      },
+      {
+        "character": "",
+        "script": "He turns away."
+      },
+      {
+        "character": "THE POLICEMAN",
+        "script": "Good night to you, then."
+      },
+      {
+        "character": "",
+        "script": "He idly watches the angelic figure walk away, and then stares with amazement as it spreads its wings and soars to the top of Washington Arch. Pausing there a moment, it soars again in the air, and is seen wafting its way over the neighbouring housetops to the northeast. The policeman shakes his head in disapproval."
+      },
+
+      {
+        "character": "",
+        "script": "Jimmy Pendleton is dozing in an easy chair before the grate-fire in his studio in Washington Mews. A yellow-backed French novel has fallen from his knee to the floor. It is Anatole France's 'La Revolte des Anges'. A suitcase stands beside the chair. Jimmy is evidently about to go on some journey."
+      },
+
+      {
+        "character": "",
+        "script": "A clock begins to strike somewhere. Jimmy Pendleton awakes."
+      },
+      {
+        "character": "JIMMY",
+        "script": "What a queer dream! (He looks at his watch.) Twelve o'clock. The taxi ought to be here. (He takes two tickets from his pocket, looks at them, and puts them back. Then he commences to pace nervously up and down the room, muttering to himself)--Fool! Idiot! Imbecile! (He is not, so that you could notice it, any of these things. He is a very handsome man of forty. There is the blast of an auto-horn outside. He makes an angry gesture.) Too late! That's the taxi. (But he stands uncertainly in the middle of the floor. There is a loud pounding on the knocker.) Yes, yes!"
+      },
+      {
+        "character": "",
+        "script": "He makes a movement toward the door, when it suddenly opens, and a lovely lady enters. He stares at her in surprise."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Annabelle!"
+      },
+
+      {
+        "character": "",
+        "script": "Annabelle is little. Annabelle's petulant upturned lips are rosebud red. Annabelle's round eyes are baby-blue. Annabelle is--young."
+      },
+
+      {
+        "character": "ANNABELLE",
+        "script": "Yes! It's me! (There is a tiny lisp in Annabelle's speech.) I got tired of waiting, and the door was unlocked, so I came right in."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Well!"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(hurt) Aren't you glad to see me?"
+      },
+      {
+        "character": "JIMMY",
+        "script": "I'm--delighted. But--but--I thought we were to meet at the station."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "So we were."
+      },
+      {
+        "character": "JIMMY",
+        "script": "You haven't changed your mind?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "No. . . ."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Er--good."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "But--"
+      },
+      {
+        "character": "JIMMY",
+        "script": "Yes--?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "I got to wondering. . . . (She drifts to the easy chair in front of the fire.)"
+      },
+      {
+        "character": "JIMMY",
+        "script": "Wondering . . . about what? (He looks at his watch.)"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "About love. . . ."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Well . . . (He lights a cigarette)--it's a subject that can stand a good deal of wondering about. I've wondered about it myself."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "That's just it--you speak so cynically about it. I don't believe you're in love with me at all!"
+      },
+      {
+        "character": "JIMMY",
+        "script": "Nonsense! Of course I'm in love with you."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(sadly) No you're not."
+      },
+      {
+        "character": "JIMMY",
+        "script": "(angrily) But I tell you I am!"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "No. . . ."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Foolish child!"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "Well, let's not quarrel about it. We'll talk about something else."
+      },
+      {
+        "character": "JIMMY",
+        "script": "(vehemently) What do you suppose this insanity is if it is not love? What do you imagine leads me to this preposterous escapade, if not that preposterous passion?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "That isn't the way I love you."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Then why do you come with me?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "Perhaps I'm not coming."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Yes you are. It's foolish--mad--wicked--but you're coming. (She begins to cry softly.) If not--ten minutes away is safety and peace and comfort. Shall I call a taxi for you? (She shakes her head.) No, I thought not. Oh, it's love all right. . . . Antony and Cleopatra defying the Mann Act! Romance! Beauty! Adventure! How can you doubt it?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "I hate you!"
+      },
+      {
+        "character": "JIMMY",
+        "script": "(cheerfully) I don't mind. (Smiling) I rather hate you myself. And that's the final proof that this is love."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(sobbing) I thought love was something quite--different!"
+      },
+      {
+        "character": "JIMMY",
+        "script": "You thought it was beautiful. It isn't. It's just blithering, blathering folly. We'll both regret it tomorrow."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "I Won't!"
+      },
+      {
+        "character": "JIMMY",
+        "script": "Yes you will. It's human nature. Face the facts."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(tearfully) Facing the facts is one thing and being in love is another."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Quite so. Well, how long do you think your love for me will last?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "For ever!"
+      },
+      {
+        "character": "JIMMY",
+        "script": "H'm! I predict that you will fall in love with the next man you meet."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "I think you're perfectly horrid."
+      },
+      {
+        "character": "JIMMY",
+        "script": "So do I. I disapprove of myself violently. I'm a doddering lunatic, incapable of thinking of anything but you. I can't work. I can't eat, I can't sleep. I'm no use to the world. I'm not a man, I'm a mess. I'm about to do something silly because I can't do anything else."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(pouting) You've no respect for me."
+      },
+      {
+        "character": "JIMMY",
+        "script": "None whatever. I love you. And I'm going to carry you off."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "You're a brute."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Absolutely. I'd advise you to go straight home."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(defiantly) Perhaps I shall!"
+      },
+      {
+        "character": "JIMMY",
+        "script": "Then go quick. (He takes out his watch.) In one minute, if you are still here, I shall pick you up and carry you off to South America.--Quick! there's the door!"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(faintly) I--I want to go. . . ."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Well, why don't you? . . . Thirty seconds!"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "I--I can't!"
+      },
+      {
+        "character": "JIMMY",
+        "script": "(shutting his watch) Time's up. The die is cast! (He lifts her from the chair. She clings to him helplessly.) My darling! My treasure! My beloved!--Idiot that I am!"
+      },
+      {
+        "character": "",
+        "script": "He kisses her fiercely."
+      },
+
+      {
+        "character": "ANNABELLE",
+        "script": "(struggling in his arms) No! No! No! Stop!"
+      },
+      {
+        "character": "JIMMY",
+        "script": "Never!"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "Stop! Please! Please! Oh! . . ."
+      },
+      {
+        "character": "",
+        "script": "The light suddenly goes out, and an instant later blazes out again, revealing the Angel, who has suddenly arrived in the middle of the room. The two of them stare at the apparition."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "(politely) I hope I am not intruding?"
+      },
+      {
+        "character": "JIMMY",
+        "script": "Why--why--not exactly!"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(in his arms, indignantly) Jimmy! who is that man?"
+      },
+      {
+        "character": "JIMMY:",
+        "script": "becoming aware of her and putting her down carefully) I--why--the fact is, I don't--"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "The fact is, madam, I am his Guardian Angel."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "An Angel! Oh!"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Tell me, have I intruded?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "No, not at all!"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Thank you for reassuring me. I feared for a moment that I had made an inopportune entrance. I was about to suggest that I withdraw until you had finished the--er--ceremony--which I seem to have interrupted."
+      },
+      {
+        "character": "JIMMY:",
+        "script": "surprised) But wasn't that what you came for--to interrupt?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "I beg your pardon!"
+      },
+      {
+        "character": "JIMMY:",
+        "script": "bewilderedly) I mean--if you are my Guardian Angel, and all that sort of thing, you must have come to--to interfere!"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "I hope you will not think I would be capable of such presumption."
+      },
+      {
+        "character": "JIMMY:",
+        "script": "puzzled) You don't want to--so to speak--reform me?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Not at all. Why, I scarcely know you!"
+      },
+      {
+        "character": "JIMMY:",
+        "script": "ut you're my--my Guardian Angel, you say?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Ah, yes, to be sure. But the relation of angelic guardianship has for some hundreds of years been a purely nominal one. We have come to feel that it is best to allow mortals to attend to their own affairs."
+      },
+      {
+        "character": "JIMMY:",
+        "script": "abruptly) Then what did you come for?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "For a change. One becomes tired of familiar scenes. And I thought that perhaps my relationship to you might serve in lieu of an introduction. I wanted to be among friends."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Oh--I see."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "Of course. We're delighted to have you with us. Won't you sit down? (She leads the way to the fire.)"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "(perching on back of one of the big chairs) If you don't mind! My wings, you know."
+      },
+      {
+        "character": "JIMMY:",
+        "script": "hesitantly) Have a cigarette?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Thank you. (He takes one.) I am most anxious to learn the more important of your earthly arts and sciences. Please correct me if I go wrong. This is my first attempt, remember. He blows out a puff of smoke."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(from the settle) You're doing it very nicely."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "It is incense to the mind."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(laughing, blowing a series of smoke rings) You must learn to do it like this!"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "(in awe) That is too wonderful an art. I fear I can never learn it!"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "I will teach you."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "(earnestly) If you were my teacher, I think I could learn anything."
+      },
+      {
+        "character": "",
+        "script": "Annabelle giggles charmingly."
+      },
+      {
+        "character": "JIMMY",
+        "script": "(embarrassed) Really, Annabelle...!"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "What's the matter?"
+      },
+      {
+        "character": "JIMMY",
+        "script": "Ordinarily I wouldn't mind your flirting with strangers, but..."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(indignantly) Jimmy! How can you?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "It was my fault, I'm sure--if fault there was. But what is it--to flirt? You see, I wish to learn everything."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "I hope you never learn that."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "I put myself in your hands."
+      },
+      {
+        "character": "JIMMY:",
+        "script": "r--would you like a--drink?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Thank you. I am very thirsty. (Taking the glass.) This is very different from what we have in Heaven. (He tastes it. A look of gratified surprise appears on his face.) And much better! (He drains the glass and hands it back.) May I have some more?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "Be careful!"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "What should I be careful of?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "Don't drink too much of that--if it's the first time."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Why not? It is an excellent drink."
+      },
+      {
+        "character": "JIMMY:",
+        "script": "laughing) The maternal instinct! She is afraid you may make yourself--ridiculous."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Angels do not care for appearances. (He stands up magnificently in the chair, towering above them.) Besides . . . (refilling his glass) I feel that you do an injustice to this drink. Already it has made a new being of me. (He looks at Annabelle.) I feel an emotion that I have never known before. If I were in heaven, I should sing."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "Oh! Won't you sing?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "The fact is, I know nothing but hymns. And I'm tired of them. That was one reason why I left heaven. And this robe. . . . (He descends to the floor, viewing his garment with disapproval.) Have you an extra suit of clothes you could lend me?"
+      },
+      {
+        "character": "JIMMY",
+        "script": "(reflectively) Yes, I think I have some things that might fit. (The Angel waits.) Do you want them now? I'll look."
+      },
+      {
+        "character": "",
+        "script": "He goes into the bedroom. . . . The Angel looks at Annabelle until his gaze becomes insupportable, and she covers her eyes. Then he comes over to her side."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "(gravely) I am very much afraid of you. (He takes her hands in his.)"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(smiling) One would never guess it!"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "I am more afraid of you than I was of God. But even though I fear you, I must come close to you, and touch you. I feel a strange, new emotion like fire in my veins. This world has become beautiful to me because you are in it. I want to stay here so that I may be with you. . . ."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(shaken, but doubting) For how long?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "For ever. . . ."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(in his arms) Darling!"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "I am so ignorant! There is something I want to do right now, only I do not know how to go about it properly."
+      },
+      {
+        "character": "",
+        "script": "He bends shyly toward her lips."
+      },
+
+      {
+        "character": "ANNABELLE",
+        "script": "I will teach you."
+      },
+
+      {
+        "character": "",
+        "script": "She kisses him."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Heaven was nothing to this."
+      },
+      {
+        "character": "",
+        "script": "They kiss again. . . . Enter Jimmy, with an old suit of clothes over his arm. He pauses in dumbfounderment. At last he regains his voice."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Well!"
+      },
+      {
+        "character": "",
+        "script": "They look up. Neither of them is perturbed."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "(blandly) Has something happened to annoy you? (Jimmy shakes the clothes at him in an outraged gesture.) Oh, my new costume. Thank you so much!"
+      },
+      {
+        "character": "",
+        "script": "He takes the clothes from Jimmy, and examines them with interest."
+      },
+      {
+        "character": "JIMMY",
+        "script": "(bitterly, to Annabelle) I suppose I've no right to complain. You can make love to anybody you like. In fact, now that I come to think of it, I predicted this very thing. I said you'd fall in love with the next man you met. So it's off with the old love, and--"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(calmly) I have never been in love before."
+      },
+      {
+        "character": "JIMMY:",
+        "script": "he fickleness of women is notorious. It is exceeded only by their mendacity. But Angels have up to this time stood in good repute. Your conduct, sir, is scandalous. I am amazed at you."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "It may be scandalous, but it should not amaze you. It has happened too often before. I could quote you many texts from learned theological works. 'And the sons of God looked at the daughters of men and saw that they were fair.' But even if it were as unusual as you imagine, that would not deter me."
+      },
+      {
+        "character": "JIMMY:",
+        "script": "ou are an unscrupulous wretch. If these are the manners of Heaven, I am glad it is so far away, and means of communication so difficult. A few more of you would corrupt the morals of five continents. You are utterly depraved--Here! what are you doing?"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "I am taking off my robes, so as to put on my new clothes."
+      },
+      {
+        "character": "JIMMY:",
+        "script": "pare the common decencies at least. Go in the other room."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Certainly, if that is the custom here. With the clothes over his arm, he goes into the bedroom."
+      },
+      {
+        "character": "JIMMY",
+        "script": "(sternly, to Annabelle) And now tell me, what do you mean by this?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(simply)--We are in love."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Do you mean to say you would throw me over for that fellow?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "Why not?"
+      },
+      {
+        "character": "JIMMY",
+        "script": "What good is he? All he can do is sing hymns. In three months he'll be a tramp."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "I don't care. And he won't be a tramp. I'll look after him."
+      },
+      {
+        "character": "JIMMY",
+        "script": "(sneeringly) The maternal instinct! Well, take care of him if you like. But of course you know that in six weeks he'll fall in love with somebody else?"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "No he won't. I'm sure that I am the only girl in the world to him."
+      },
+      {
+        "character": "JIMMY",
+        "script": "Of course you're the only girl in the world to him--now. You're the only one he's ever seen. But wait till he sees the others! Six weeks? On second thought I make it three days. Immortal love! (He laughs.)"
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "What difference does it make? You don't understand. Whether it lasts a day or a year, while it lasts it will be immortal."
+      },
+
+      {
+        "character": "",
+        "script": "The Angel enters, dressed in Jimmy's old clothes, and carrying his wings in his hands. He seems exhilarated."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "How do I look?"
+      },
+      {
+        "character": "JIMMY:",
+        "script": "t is customary to wear one's tie tucked inside the vest."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "(flinging the ends of the gorgeous necktie over his shoulder) No! Though I have become a man, I do not without some regret put on the dull garb of mortality. I would not have my form lose all its original brightness. Even so it is the excess of glory obscured."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "(coming over to him) You are quite right, darling."
+      },
+
+      {
+        "character": "",
+        "script": "She tucks the tie inside his vest."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Thank you, beloved.--And now these wings! Take them, and burn them with your own sweet hands, so that I can never leave you, even if I would."
+      },
+      {
+        "character": "ANNABELLE",
+        "script": "No! I would rather put them away for you in a closet, so that you can go and look at them any time you want to, and see that you have the means to freedom ready to your hand. I shall never hold you against your will. I do not want to burn your wings. I really don't! But if you insist--!"
+      },
+
+      {
+        "character": "",
+        "script": "She takes the wings, and approaches the grate."
+      },
+      {
+        "character": "JIMMY",
+        "script": "(to the Angel) Don't let her do it! Fool! You don't know what you are doing. Listen to me! You think that she is wonderful--superior--divine. It is only natural. There are moments when I have thought so myself. But I know why I thought so, and you have yet to learn. Keep your wings, my friend, against the day of your awakening--the day when the glamour of sex has vanished, and you see in her, as you will see, an inferior being, with a weak body, a stunted mind, devoid of creative power, almost devoid of imagination, utterly lacking in critical capacity--a being who does not know how to work, nor how to talk, nor even how to play!"
+      },
+      {
+        "character": "",
+        "script": "Annabelle, dropping the wings on the hearth, stares at him, in speechless anger."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Sir! Do you refer in these vulgar and insulting terms to the companion of my soul, the desire of my heart, the perfect lover whose lips have kindled my dull senses to ecstasy?"
+      },
+      {
+        "character": "JIMMY:",
+        "script": " do. Remember that I know her better than you do, young man. Take my advice and leave her alone. Even now it is not too late! Save yourself from this folly while there is still time!"
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Never!"
+      },
+      {
+        "character": "JIMMY",
+        "script": "Then take these tickets--and I hope that I never see either of you again!"
+      },
+      {
+        "character": "",
+        "script": "He holds out the tickets. Annabelle, after a pause, steps forward and takes them."
+      },
+
+      {
+        "character": "ANNABELLE",
+        "script": "That is really sweet of you, Jimmy!"
+      },
+
+      {
+        "character": "",
+        "script": "The blast of an auto-horn is heard outside."
+      },
+      {
+        "character": "JIMMY:",
+        "script": "(bitterly) And there's my taxi. Take that, too."
+      },
+      {
+        "character": "THE ANGEL",
+        "script": "Farewell!"
+      }
+    ]
+  },
+  {
+    "title": "THE BATTLE OF THE BARDS",
+    "auther": "Theocritus",
+    "characters": ["COMETAS", "LACON", "MORSON"],
+    "description": "",
+    "conversation": [
+      {
+        "character": "COMETAS",
+        "script": "Goats, from a shepherd who stands here, from Lacon, keep away: Sibyrtas owns him; and he stole my goatskin yesterday."
+      },
+      {
+        "character": "LACON",
+        "script": "Hi! lambs! avoid yon fountain. Have ye not eyes to see Cometas, him who filched a pipe but two days back from me?"
+      },
+      {
+        "character": "COMETAS",
+        "script": "Sibyrtas' bondsman own a pipe? whence gotst thou that, and how? Tootling through straws with Corydon mayhap's beneath thee now?"
+      },
+      {
+      "character": "LACON",
+      "script": "'Twas Lycon's gift, your highness. But pray, Cometas, say, What is that skin wherewith thou saidst that Lacon walked away? Why, thy lord's self had ne'er a skin whereon his limbs to lay."
+      },
+      {
+        "character": "COMETAS",
+        "script": "The skin that Crocylus gave me, a dark one streaked with white, The day he slew his she-goat. Why, thou wert ill with spite, Then, my false friend; and thou would'st end by beggaring me quite."
+      },
+      {
+      "character": "LACON",
+      "script": "Did Lacon, did Calaethis' son purloin a goatskin? No, By Pan that haunts the sea-beach! Lad, if I served thee so, Crazed may I drop from yon hill-top to Crathis' stream below!"
+      },
+      {
+        "character": "COMETAS",
+        "script": "Nor pipe of thine, good fellow--the Ladies of the Lake So be still kind and good to me--did e'er Cometas take."
+      },
+      {
+        "character": "LACON",
+        "script": "Be Daphnis' woes my portion, should that my credence win! Still, if thou list to stake a kid--that surely were no sin--Come on, I'll sing it out with thee--until thou givest in."
+      },
+      {
+        "character": "COMETAS",
+        "script": "'The hog he braved Athene.' As for the kid, 'tis there: You stake a lamb against him--that fat one--if you dare."
+      },
+      {
+        "character": "LACON",
+        "script": "Fox! were that fair for either? At shearing who'd prefer Horsehair to wool? or when the goat stood handy, suffer her To nurse her firstling, and himself go milk a blatant cur?"
+      },
+      {
+        "character": "COMETAS",
+        "script": "The same who deemed his hornet's-buzz the true cicala's note, And braved--like you--his better. And so forsooth you vote My kid a trifle? Then come on, fellow! I stake the goat."
+      },
+      {
+        "character": "LACON",
+        "script": "Why be so hot? Art thou on fire? First prythee take thy seat 'Neath this wild woodland olive: thy tones will sound more sweet. Here falls a cold rill drop by drop, and green grass-blades uprear Their heads, and fallen leaves are thick, and locusts prattle here."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Hot I am not; but hurt I am, and sorely, when I think That thou canst look me in the face and never bleach nor blink--Me, thine own boyhood's tutor! Go, train the she-wolf's brood: Train dogs--that they may rend thee! This, this is gratitude!"
+      },
+      {
+        "character": "LACON",
+        "script": "When learned I from thy practice or thy preaching aught that's right, Thou puppet, thou misshapen lump of ugliness and spite?"
+      },
+      {
+        "character": "COMETAS",
+        "script": "When? When I beat thee, wailing sore: yon goats looked on with glee, And bleated; and were dealt with e'en as I had dealt with thee."
+      },
+      {
+        "character": "LACON",
+        "script": "Well, hunchback, shallow be thy grave as was thy judgment then! But hither, hither! Thou'lt not dip in herdsman's lore again."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Nay, here are oaks and galingale: the hum of housing bees Makes the place pleasant, and the birds are piping in the trees. And here are two cold streamlets; here deeper shadows fall Than yon place owns, and look what cones drop from the pinetree tall."
+      },
+      {
+        "character": "LACON",
+        "script": "Come hither, and tread on lambswool that is soft as any dream: Still more unsavoury than thyself to me thy goatskins seem. Here will I plant a bowl of milk, our ladies' grace to win; And one, as huge, beside it, sweet olive-oil therein."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Come hither, and trample dainty fern and poppy-blossom: sleep On goatskins that are softer than thy fleeces piled three deep. Here will I plant eight milkpails, great Pan's regard to gain, Bound them eight cups: full honeycombs shall every cup contain."
+      },
+      {
+        "character": "LACON",
+        "script": "Well! there essay thy woodcraft: thence fight me, never budge From thine own oak; e'en have thy way. But who shall be our judge? Oh, if Lycopas with his kine should chance this way to trudge!"
+      },
+      {
+        "character": "COMETAS",
+        "script": "Nay, I want no Lycopas. But hail yon woodsman, do: 'Tis Morson--see! his arms are full of bracken--there, by you."
+      },
+      {
+        "character": "LACON",
+        "script": "We'll hail him."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Ay, you hail him."
+      },
+      {
+        "character": "LACON",
+        "script": "Friend, 'twill not take thee long: We're striving which is master, we twain, in woodland song: And thou, my good friend Morson, ne'er look with favouring eyes On me; nor yet to yonder lad be fain to judge the prize."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Nay, by the Nymphs, sweet Morson, ne'er for Cometas' sake Stretch thou a point; nor e'er let him undue advantage take. Sibyrtas owns yon wethers; a Thurian is he: And here, my friend, Eumares' goats, of Sybaris, you may see."
+      },
+      {
+        "character": "LACON",
+        "script": "And who asked thee, thou naughty knave, to whom belonged these flocks, Sibyrtas, or (it might be) me? Eh, thou'rt a chatter-box!"
+      },
+      {
+        "character": "COMETAS",
+        "script": "The simple truth, most worshipful, is all that I allege: I'm not for boasting. But thy wit hath all too keen an edge."
+      },
+      {
+        "character": "LACON",
+        "script": "Come sing, if singing's in thee--and may our friend get back To town alive! Heaven help us, lad, how thy tongue doth clack!"
+      },
+      {
+        "character": "COMETAS",
+        "script": "[Sings] Daphnis the mighty minstrel was less precious to the Nine Than I. I offered yesterday two kids upon their shrine."
+      },
+      {
+        "character": "LACON",
+        "script": "[Sings] Ay, but Apollo fancies me hugely: for him I rear A lordly ram: and, look you, the Carnival is near."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Twin kids hath every goat I milk, save two. My maid, my own, Eyes me and asks 'At milking time, rogue, art thou all alone?'"
+      },
+      {
+        "character": "LACON",
+        "script": "Go to! nigh twenty baskets doth Lacon fill with cheese: Hath time to woo a sweetheart too upon the blossomed leas."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Clarissa pelts her goatherd with apples, should he stray By with his goats; and pouts her lip in a quaint charming way."
+      },
+      {
+        "character": "LACON",
+        "script": "Me too a darling smooth of face notes as I tend my flocks: How maddeningly o'er that fair neck ripple those shining locks!"
+      },
+      {
+        "character": "COMETAS",
+        "script": "Tho' dogrose and anemone are fair in their degree, The rose that blooms by garden-walls still is the rose for me."
+      },
+      {
+        "character": "LACON",
+        "script": "Tho' acorns' cups are fair, their taste is bitterness, and still I'll choose, for honeysweet are they, the apples of the hill."
+      },
+      {
+        "character": "COMETAS",
+        "script": "A cushat I will presently procure and give to her Who loves me: I know where it sits; up in the juniper."
+      },
+      {
+        "character": "LACON",
+        "script": "Pooh! a soft fleece, to make a coat, I'll give the day I shear My brindled ewe--(no hand but mine shall touch it)--to my dear."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Back, lambs, from that wild-olive: and be content to browse Here on the shoulder of the hill, beneath the myrtle boughs."
+      },
+      {
+        "character": "LACON",
+        "script": "Run, (will ye?) Ball and Dogstar, down from that oak tree, run: And feed where Spot is feeding, and catch the morning sun."
+      },
+      {
+        "character": "COMETAS",
+        "script": "I have a bowl of cypress-wood: I have besides a cup: Praxiteles designed them: for her they're treasured up."
+      },
+      {
+        "character": "LACON",
+        "script": "I have a dog who throttles wolves: he loves the sheep, and they Love him: I'll give him to my dear, to keep wild beasts at bay."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Ye locusts that o'erleap my fence, oh let my vines escape Your clutches, I beseech you: the bloom is on the grape."
+      },
+      {
+        "character": "LACON",
+        "script": "Ye crickets, mark how nettled our friend the goatherd is! I ween, ye cost the reapers pangs as acute as his."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Those foxes with their bushy tails, I hate to see them crawl Round Micon's homestead and purloin his grapes at evenfall."
+      },
+      {
+        "character": "LACON",
+        "script": "I hate to see the beetles that come warping on the wind. And climb Philondas' trees, and leave never a fig behind."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Have you forgot that cudgelling I gave you? At each stroke You grinned and twisted with a grace, and clung to yonder oak."
+      },
+      {
+        "character": "LACON",
+        "script": "That I've forgot--but I have not, how once Eumares tied You to that selfsame oak-trunk, and tanned your unclean hide."
+      },
+      {
+        "character": "COMETAS",
+        "script": "There's some one ill--of heartburn. You note it, I presume, Morson? Go quick, and fetch a squill from some old beldam's tomb."
+      },
+      {
+        "character": "LACON",
+        "script": "I think I'm stinging somebody, as Morson too perceives-- Go to the river and dig up a clump of sowbread-leaves."
+      },
+      {
+        "character": "COMETAS",
+        "script": "May Himera flow, not water, but milk: and may'st thou blush, Crathis, with wine; and fruitage grow upon every rush."
+      },
+      {
+        "character": "LACON",
+        "script": "For me may Sybaris' fountain flow, pure honey: so that you, My fair, may dip your pitcher each morn in honey-dew."
+      },
+      {
+        "character": "COMETAS",
+        "script": "My goats are fed on clover and goat's-delight: they tread On lentisk leaves; or lie them down, ripe strawberries o'er their head."
+      },
+      {
+        "character": "LACON",
+        "script": "My sheep crop honeysuckle bloom, while all around them blows In clusters rich the jasmine, as brave as any rose."
+      },
+      {
+        "character": "COMETAS",
+        "script": "I scorn my maid; for when she took my cushat, she did not Draw with both hands my face to hers and kiss me on the spot."
+      },
+      {
+        "character": "LACON",
+        "script": "I love my love, and hugely: for, when I gave my flute, I was rewarded with a kiss, a loving one to boot."
+      },
+      {
+        "character": "COMETAS",
+        "script": "Lacon, the nightingale should scarce be challenged by the jay, Nor swan by hoopoe: but, poor boy, thou aye wert for a fray."
+      },
+      {
+        "character": "MORSON",
+        "script": "I bid the shepherd hold his peace. Cometas, unto you I, Morson, do adjudge the lamb. You'll first make offering due Unto the nymphs: then savoury meat you'll send to Morson too."
+      },
+      {
+        "character": "COMETAS",
+        "script": "By Pan I will! Snort, all my herd of he-goats: I shall now O'er Lacon, shepherd as he is, crow ye shall soon see how. I've won, and I could leap sky-high! Ye also dance and skip, My horned ewes: in Sybaris' fount to-morrow all shall dip. Ho! you, sir, with the glossy coat and dangerous crest; you dare Look at a ewe, till I have slain my lamb, and ill you'll fare. What! is he at his tricks again? He is, and he will get (Or my name's not Cometas) a proper pounding yet."
+      }
+    ]
+  }
+]
