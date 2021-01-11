@@ -62,6 +62,7 @@ const TypingConversationContainer: React.FC = () => {
   };
   return (
     <div
+      id="table-wrapper"
       style={{
         height: '50vh',
         width: '94vw',
@@ -74,13 +75,15 @@ const TypingConversationContainer: React.FC = () => {
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
       tabIndex={0}>
-      <table>
+      <table style={{ width: '100%' }}>
         <tbody>
           {conversation.map((line: Line, index: number) => {
             return (
               <tr key={index} style={{ fontSize: '25px', verticalAlign: 'top' }}>
-                <td style={{ whiteSpace: 'nowrap' }}>{line.character}</td>
-                <td>: </td>
+                <td id="td-character" style={{ whiteSpace: 'nowrap' }}>
+                  {line.character}
+                </td>
+                <td style={{ width: '10px' }}>: </td>
                 <td>
                   <Script
                     script={line.script}
