@@ -24,21 +24,35 @@ const ScriptComponent: React.FC<Props> = (props: Props) => {
     const scriptEl = document.getElementById(`script-${props.scriptIndex}`);
     const charArray = scriptEl !== null ? Array.from(scriptEl.children) : [];
     if (tableWrapperWidth && tdCharacterWidth && charArray.length > 0) {
-      const scriptMaxWidth = Number(tableWrapperWidth) - Number(tdCharacterWidth) - 12;
+      // 22 = 10(余白) + 2(ラッパーのpadding) + 4(tdのmargin) + 6(「:」のwidth)
+      const scriptMaxWidth = Number(tableWrapperWidth) - Number(tdCharacterWidth) - 22;
       let scriptWidth = 0;
       let newScript = script;
-      charArray.forEach((el: Element, index: number) => {
-        const { width } = el.getBoundingClientRect();
+      for (let i = 0; i < charArray.length; i++) {
+        const { width } = charArray[i].getBoundingClientRect();
         scriptWidth += width;
         if (scriptWidth > scriptMaxWidth) {
-          const lastSpaceIndex = newScript.substring(0, index).lastIndexOf('␣');
+          const lastSpaceIndex = newScript.substring(0, i).lastIndexOf('␣');
           newScript =
             newScript.substring(0, lastSpaceIndex + 1) +
             '¥' +
             newScript.substring(lastSpaceIndex + 1);
           scriptWidth = 0;
+          i = lastSpaceIndex;
         }
-      });
+      }
+      // charArray.forEach((el: Element, index: number) => {
+      //   const { width } = el.getBoundingClientRect();
+      //   scriptWidth += width;
+      //   if (scriptWidth > scriptMaxWidth) {
+      //     const lastSpaceIndex = newScript.substring(0, index).lastIndexOf('␣');
+      //     newScript =
+      //       newScript.substring(0, lastSpaceIndex + 1) +
+      //       '¥' +
+      //       newScript.substring(lastSpaceIndex + 1);
+      //     scriptWidth = 0;
+      //   }
+      // });
       setScript(newScript);
     }
   }, []);
