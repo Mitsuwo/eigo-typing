@@ -6,56 +6,48 @@ interface Props {
   correctCharCount: number;
   scriptIndex: number;
   currentScriptIndex: number;
+  tableWrapperRect: DOMRect | null;
 }
 
 const ScriptComponent: React.FC<Props> = (props: Props) => {
   const [script, setScript] = React.useState(props.script);
-  const getElementWidthById = (elementId: string): number | null => {
-    const element = document.getElementById(elementId);
-    if (element === null) {
-      return null;
-    }
-    const { width } = element.getBoundingClientRect();
-    return width;
-  };
   React.useEffect(() => {
-    const tableWrapperWidth = getElementWidthById('table-wrapper');
-    const tdCharacterWidth = getElementWidthById('td-character');
     const scriptEl = document.getElementById(`script-${props.scriptIndex}`);
+    const scriptRect = scriptEl?.getBoundingClientRect();
     const charArray = scriptEl !== null ? Array.from(scriptEl.children) : [];
-    if (tableWrapperWidth && tdCharacterWidth && charArray.length > 0) {
-      // 22 = 10(余白) + 2(ラッパーのpadding) + 4(tdのmargin) + 6(「:」のwidth)
-      const scriptMaxWidth = Number(tableWrapperWidth) - Number(tdCharacterWidth) - 22;
-      let scriptWidth = 0;
-      let newScript = script;
-      for (let i = 0; i < charArray.length; i++) {
-        const { width } = charArray[i].getBoundingClientRect();
-        scriptWidth += width;
-        if (scriptWidth > scriptMaxWidth) {
-          const lastSpaceIndex = newScript.substring(0, i).lastIndexOf('␣');
-          newScript =
-            newScript.substring(0, lastSpaceIndex + 1) +
-            '¥' +
-            newScript.substring(lastSpaceIndex + 1);
-          scriptWidth = 0;
-          i = lastSpaceIndex;
-        }
-      }
-      // charArray.forEach((el: Element, index: number) => {
-      //   const { width } = el.getBoundingClientRect();
-      //   scriptWidth += width;
-      //   if (scriptWidth > scriptMaxWidth) {
-      //     const lastSpaceIndex = newScript.substring(0, index).lastIndexOf('␣');
-      //     newScript =
-      //       newScript.substring(0, lastSpaceIndex + 1) +
-      //       '¥' +
-      //       newScript.substring(lastSpaceIndex + 1);
-      //     scriptWidth = 0;
-      //   }
-      // });
-      setScript(newScript);
+    if (
+      props.tableWrapperRect === null ||
+      scriptRect === undefined ||
+      !props.tableWrapperRect.width ||
+      !props.tableWrapperRect.left ||
+      !scriptRect.left ||
+      charArray.length === 0
+    ) {
+      return;
     }
-  }, []);
+    const SCRIPT_MARGIN_RIGHT = 10;
+    const scriptMaxWidth =
+      props.tableWrapperRect.width +
+      props.tableWrapperRect.left -
+      scriptRect.left -
+      SCRIPT_MARGIN_RIGHT;
+    let scriptWidth = 0;
+    let newScript = script;
+    for (let i = 0; i < charArray.length; i++) {
+      const { width } = charArray[i].getBoundingClientRect();
+      scriptWidth += width;
+      if (scriptWidth > scriptMaxWidth) {
+        const lastSpaceIndex = newScript.substring(0, i).lastIndexOf('␣');
+        newScript =
+          newScript.substring(0, lastSpaceIndex + 1) +
+          '¥' +
+          newScript.substring(lastSpaceIndex + 1);
+        scriptWidth = 0;
+        i = lastSpaceIndex;
+      }
+    }
+    setScript(newScript);
+  }, [props.tableWrapperRect]);
   const isTypedScript = props.scriptIndex < props.currentScriptIndex;
   return (
     <div id={`script-${props.scriptIndex}`} style={{ width: '100%' }}>

@@ -60,6 +60,13 @@ const TypingConversationContainer: React.FC = () => {
     const { code } = event;
     dispatch(deleteCurrentKey(code));
   };
+  const getElementRectById = (elementId: string): DOMRect | null => {
+    const element = document.getElementById(elementId);
+    if (element === null) {
+      return null;
+    }
+    return element.getBoundingClientRect();
+  };
   return (
     <div
       id="table-wrapper"
@@ -67,6 +74,7 @@ const TypingConversationContainer: React.FC = () => {
         height: '50vh',
         width: '94vw',
         margin: '3vw',
+        padding: '0',
         overflowY: 'scroll',
         display: 'inline-block',
         textAlign: 'left'
@@ -90,6 +98,7 @@ const TypingConversationContainer: React.FC = () => {
                     correctCharCount={correctCharCount}
                     scriptIndex={index}
                     currentScriptIndex={currentScriptIndex}
+                    tableWrapperRect={getElementRectById('table-wrapper')}
                   />
                 </td>
               </tr>
