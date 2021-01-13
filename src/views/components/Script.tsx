@@ -1,4 +1,5 @@
 import React from 'react';
+import { INDENTION_MARK, SPACE_VIEW } from '../../constant/typingConst';
 import { Character } from '../components/Character';
 
 interface Props {
@@ -6,7 +7,7 @@ interface Props {
   correctCharCount: number;
   scriptIndex: number;
   currentScriptIndex: number;
-  tableWrapperRect: DOMRect | null;
+  tableWrapperRect: DOMRect | undefined;
 }
 
 const ScriptComponent: React.FC<Props> = (props: Props) => {
@@ -16,7 +17,7 @@ const ScriptComponent: React.FC<Props> = (props: Props) => {
     const scriptRect = scriptEl?.getBoundingClientRect();
     const charArray = scriptEl !== null ? Array.from(scriptEl.children) : [];
     if (
-      props.tableWrapperRect === null ||
+      props.tableWrapperRect === undefined ||
       scriptRect === undefined ||
       !props.tableWrapperRect.width ||
       !props.tableWrapperRect.left ||
@@ -37,17 +38,17 @@ const ScriptComponent: React.FC<Props> = (props: Props) => {
       const { width } = charArray[i].getBoundingClientRect();
       scriptWidth += width;
       if (scriptWidth > scriptMaxWidth) {
-        const lastSpaceIndex = newScript.substring(0, i).lastIndexOf('␣');
+        const lastSpaceIndex = newScript.substring(0, i).lastIndexOf(SPACE_VIEW);
         newScript =
           newScript.substring(0, lastSpaceIndex + 1) +
-          '¥' +
+          INDENTION_MARK +
           newScript.substring(lastSpaceIndex + 1);
         scriptWidth = 0;
         i = lastSpaceIndex;
       }
     }
     setScript(newScript);
-  }, [props.tableWrapperRect]);
+  }, [props.tableWrapperRect?.left, props.tableWrapperRect?.width]);
   const isTypedScript = props.scriptIndex < props.currentScriptIndex;
   return (
     <div id={`script-${props.scriptIndex}`} style={{ width: '100%' }}>
@@ -56,7 +57,7 @@ const ScriptComponent: React.FC<Props> = (props: Props) => {
             const color = props.correctCharCount > index || isTypedScript ? 'black' : 'grey';
             const isNextChar = props.correctCharCount === index;
             const isCurrentScript = props.scriptIndex === props.currentScriptIndex;
-            return char === '¥' ? (
+            return char === INDENTION_MARK ? (
               <br />
             ) : (
               <Character

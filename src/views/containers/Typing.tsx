@@ -1,44 +1,26 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import wordsJson from '../../constant/words.json';
 import storiesJson from '../../constant/stories.json';
-import { Line, Story, Word } from '../../store/TypingContent.tsx/types';
-import {
-  setWords,
-  setWord,
-  setStories,
-  setConversation
-} from '../../store/TypingContent.tsx/action';
+import { Line, Story } from '../../store/TypingContent.tsx/types';
+import { setStories, setConversation } from '../../store/TypingContent.tsx/action';
 import { RootState } from '../../store';
 import { setNextKey } from '../../store/Keyboard/actions';
-import { TypingWord } from './TypingWord';
+import { CountDown } from '../components/CountDown';
+import { Keyboard } from '../components/Keyboard';
 import { TypingConversation } from './TypingConversation';
-import { Keyboard } from './Keyboard';
 
 const TypingContainer: React.FC = () => {
-  const dispatch = useDispatch();
-  const { currentWordIndex, currentStoryIndex, currentScriptIndex, contentType } = useSelector(
+  const { currentKeys, nextKey, correctCharCount } = useSelector(
+    (state: RootState) => state.keyboard
+  );
+  const { currentScriptIndex, currentStoryIndex } = useSelector(
     (state: RootState) => state.typingContent
   );
-  const { correctCharCount } = useSelector((state: RootState) => state.keyboard);
-  const shuffleArray = <T extends unknown>(array: T[]): T[] => {
-    for (let i = array.length - 1; 0 < i; i--) {
-      const randomNumber = Math.floor(Math.random() * (i + 1));
-      const obj = array[i];
-      array[i] = array[randomNumber];
-      array[randomNumber] = obj;
-    }
-    return array;
-  };
-  const setWordContent = () => {
-    let words: Word[] = JSON.parse(JSON.stringify(wordsJson));
-    words = shuffleArray<Word>(words);
-    const { word } = words[currentWordIndex];
-    dispatch(setWords(words));
-    dispatch(setWord(word));
-    dispatch(setNextKey(word[correctCharCount]));
-  };
-  const setStoryContent = () => {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    initialize();
+  }, []);
+  const initialize = () => {
     let stories: Story[] = JSON.parse(JSON.stringify(storiesJson));
     stories = shuffleArray<Story>(stories);
     let { conversation } = stories[currentStoryIndex];
@@ -49,18 +31,25 @@ const TypingContainer: React.FC = () => {
     const { script } = conversation[currentScriptIndex];
     dispatch(setStories(stories));
     dispatch(setConversation(conversation));
-    dispatch(setNextKey(script[currentWordIndex]));
+    dispatch(setNextKey(script[correctCharCount]));
   };
-  React.useEffect(() => {
-    setWordContent();
-    setStoryContent();
-  }, []);
   return (
     <div>
-      {contentType === 'word' ? <TypingWord /> : <TypingConversation />}
-      <Keyboard />
+      <CountDown />
+      <TypingConversation />
+      <Keyboard currentKeys={currentKeys} nextKey={nextKey} />
     </div>
   );
+};
+
+const shuffleArray = <T extends unknown>(array: T[]): T[] => {
+  for (let i = array.length - 1; 0 < i; i--) {
+    const randomNumber = Math.floor(Math.random() * (i + 1));
+    const obj = array[i];
+    array[i] = array[randomNumber];
+    array[randomNumber] = obj;
+  }
+  return array;
 };
 
 export const Typing = TypingContainer;

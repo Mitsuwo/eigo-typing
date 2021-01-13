@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { keys } from '../../constant/keyboardKeys';
 import {
   KEY_COLOR_ACTIVE_SHIFT,
@@ -8,8 +7,12 @@ import {
   KEY_COLOR_DISABLED,
   KEY_COLOR_INCORRECT
 } from '../../constant/styles';
-import { RootState } from '../../store';
 import { Key } from '../components/Key';
+
+interface Props {
+  currentKeys: string[];
+  nextKey: string;
+}
 
 export interface KeyInfo {
   text: string;
@@ -17,17 +20,16 @@ export interface KeyInfo {
   width: string;
 }
 
-export const Keyboard: React.FC = () => {
+const KeyboardComponent: React.FC<Props> = (props: Props) => {
   const [shiftKey, setShiftKey] = React.useState(false);
-  const { currentKeys, nextKey } = useSelector((state: RootState) => state.keyboard);
   React.useEffect(() => {
-    setShiftKey(currentKeys.some((currentKey: string) => currentKey.startsWith('Shift')));
-  }, [currentKeys]);
+    setShiftKey(props.currentKeys.some((currentKey: string) => currentKey.startsWith('Shift')));
+  }, [props.currentKeys]);
   const isCurrentKey = (code: string): boolean => {
-    if (!code || currentKeys.length === 0) {
+    if (!code || props.currentKeys.length === 0) {
       return false;
     }
-    return currentKeys.some((currentKey: string) => currentKey === code);
+    return props.currentKeys.some((currentKey: string) => currentKey === code);
   };
   const isCorrectKey = (text: string): boolean => {
     let key = '';
@@ -39,7 +41,7 @@ export const Keyboard: React.FC = () => {
     } else {
       key = shiftKey ? text : text.toLowerCase();
     }
-    return nextKey === key;
+    return props.nextKey === key;
   };
   return (
     <div style={{ height: '260px', width: '814px', margin: 'auto' }}>
@@ -69,3 +71,5 @@ export const Keyboard: React.FC = () => {
     </div>
   );
 };
+
+export const Keyboard = React.memo(KeyboardComponent);

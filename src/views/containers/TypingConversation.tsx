@@ -1,35 +1,30 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import {
-  addCurrentKey,
-  clearCorrectCharCount,
-  deleteCurrentKey,
-  incrementCorrectCharCount,
-  setNextKey
-} from '../../store/Keyboard/actions';
-import { setCurrentScriptIndex } from '../../store/TypingContent.tsx/action';
+import styled from 'styled-components';
+import { SPACE_VALUE, SPACE_VIEW } from '../../constant/typingConst';
 import { Line } from '../../store/TypingContent.tsx/types';
 import { Script } from '../components/Script';
+import {
+  clearCorrectCharCount,
+  setNextKey,
+  addCurrentKey,
+  deleteCurrentKey,
+  incrementCorrectCharCount
+} from '../../store/Keyboard/actions';
+import { setCurrentScriptIndex } from '../../store/TypingContent.tsx/action';
+import { RootState } from '../../store';
 
 const TypingConversationContainer: React.FC = () => {
-  const { conversation, currentScriptIndex } = useSelector(
+  const { currentScriptIndex, conversation } = useSelector(
     (state: RootState) => state.typingContent
   );
-  const dispatch = useDispatch();
-  const { nextKey, correctCharCount, currentKeys } = useSelector(
+  const { currentKeys, nextKey, correctCharCount } = useSelector(
     (state: RootState) => state.keyboard
   );
-  const tdRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
-  const isElement = (element: HTMLDivElement | null): element is HTMLDivElement => {
-    return typeof element !== null;
-  };
+  const dispatch = useDispatch();
   React.useEffect(() => {
-    const { current } = tdRef;
-    if (isElement(current) && current !== document.activeElement) {
-      current.focus();
-    }
-  });
+    focusTableWrapper();
+  }, []);
   React.useEffect(() => {
     if (conversation.length === 0) {
       return;
@@ -42,14 +37,28 @@ const TypingConversationContainer: React.FC = () => {
       dispatch(clearCorrectCharCount());
     }
   }, [correctCharCount]);
+  const tableWrapperRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
+  const isElement = (element: HTMLDivElement | null): element is HTMLDivElement => {
+    return typeof element !== null;
+  };
+  const focusTableWrapper = (): void => {
+    const { current } = tableWrapperRef;
+    if (isElement(current) && current !== document.activeElement) {
+      current.focus();
+    }
+  };
+  const isCorrectInput = (key: string): boolean => {
+    if (key === SPACE_VALUE) {
+      key = SPACE_VIEW;
+    }
+    return key === nextKey;
+  };
   const handleKeyDown = (event: React.KeyboardEvent): void => {
-    const { code } = event;
-    let { key } = event;
-    if (key === ' ') {
-      key = '␣';
+    const { code, key } = event;
+    if (key === SPACE_VALUE) {
       event.preventDefault();
     }
-    if (key === nextKey) {
+    if (isCorrectInput(key)) {
       dispatch(incrementCorrectCharCount());
     }
     if (!currentKeys.includes(code)) {
@@ -57,40 +66,21 @@ const TypingConversationContainer: React.FC = () => {
     }
   };
   const handleKeyUp = (event: React.KeyboardEvent): void => {
-    const { code } = event;
-    dispatch(deleteCurrentKey(code));
-  };
-  const getElementRectById = (elementId: string): DOMRect | null => {
-    const element = document.getElementById(elementId);
-    if (element === null) {
-      return null;
-    }
-    return element.getBoundingClientRect();
+    dispatch(deleteCurrentKey(event.code));
   };
   return (
-    <div
-      id="table-wrapper"
-      style={{
-        height: '50vh',
-        width: '94vw',
-        margin: '3vw',
-        padding: '0',
-        overflowY: 'scroll',
-        display: 'inline-block',
-        textAlign: 'left'
-      }}
-      ref={tdRef}
+    <TableWrapper
+      ref={tableWrapperRef}
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
+      onBlur={focusTableWrapper}
       tabIndex={0}>
       <table style={{ width: '100%' }}>
         <tbody>
           {conversation.map((line: Line, index: number) => {
             return (
               <tr key={index} style={{ fontSize: '25px', verticalAlign: 'top' }}>
-                <td id="td-character" style={{ whiteSpace: 'nowrap' }}>
-                  {line.character}
-                </td>
+                <td style={{ whiteSpace: 'nowrap' }}>{line.character}</td>
                 <td style={{ width: '10px' }}>: </td>
                 <td>
                   <Script
@@ -98,7 +88,7 @@ const TypingConversationContainer: React.FC = () => {
                     correctCharCount={correctCharCount}
                     scriptIndex={index}
                     currentScriptIndex={currentScriptIndex}
-                    tableWrapperRect={getElementRectById('table-wrapper')}
+                    tableWrapperRect={tableWrapperRef.current?.getBoundingClientRect()}
                   />
                 </td>
               </tr>
@@ -106,8 +96,18 @@ const TypingConversationContainer: React.FC = () => {
           })}
         </tbody>
       </table>
-    </div>
+    </TableWrapper>
   );
 };
 
-export const TypingConversation = TypingConversationContainer;
+const TableWrapper = styled.div`
+  height: 50vh;
+  width: 94vw;
+  margin: 0 3vw 25px 3vw;
+  padding: 0;
+  overflow-y: scroll;
+  display: inline-block;
+  text-align: left;
+`;
+
+export const TypingConversation = React.memo(TypingConversationContainer);
