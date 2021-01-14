@@ -1,8 +1,15 @@
-import { SET_CURRENT_PAGE, PageManagerActionTypes } from './types';
+import { SET_APP_STATE, PageManagerActionTypes, SET_COUNT_DOWN_TIME, AppStates } from './types';
 
-export function setCurrentPage(currentPage: string): PageManagerActionTypes {
+export function setAppState(appState: AppStates): PageManagerActionTypes {
   return {
-    type: SET_CURRENT_PAGE,
-    payload: currentPage
+    type: SET_APP_STATE,
+    payload: appState
+  };
+}
+
+export function setCountDownTime(countDownTime: number): PageManagerActionTypes {
+  return {
+    type: SET_COUNT_DOWN_TIME,
+    payload: countDownTime
   };
 }

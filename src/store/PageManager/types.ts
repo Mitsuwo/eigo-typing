@@ -1,12 +1,28 @@
-export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_APP_STATE = 'SET_APP_STATE';
+export const SET_COUNT_DOWN_TIME = 'SET_COUNT_DOWN_TIME';
 
-interface SetCurrentPageAction {
-  type: typeof SET_CURRENT_PAGE;
-  payload: string;
+interface SetAppStateAction {
+  type: typeof SET_APP_STATE;
+  payload: AppStates;
 }
 
-export type PageManagerActionTypes = SetCurrentPageAction;
+interface SetCountDownTime {
+  type: typeof SET_COUNT_DOWN_TIME;
+  payload: number;
+}
+
+export type PageManagerActionTypes = SetAppStateAction | SetCountDownTime;
+
+export const APP_STATE_INITIAL = 'initial';
+export const APP_STATE_TYPING = 'typing';
+export const APP_STATE_TIMEUP = 'timeup';
+
+export type AppStates =
+  | typeof APP_STATE_INITIAL
+  | typeof APP_STATE_TYPING
+  | typeof APP_STATE_TIMEUP;
 
 export interface PageManagerState {
-  currentPage: string;
+  appState: AppStates;
+  countDownTime: number;
 }

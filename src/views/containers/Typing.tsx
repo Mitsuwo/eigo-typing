@@ -7,6 +7,8 @@ import { RootState } from '../../store';
 import { setNextKey } from '../../store/Keyboard/actions';
 import { CountDown } from '../components/CountDown';
 import { Keyboard } from '../components/Keyboard';
+import { setAppState, setCountDownTime } from '../../store/PageManager/actions';
+import { APP_STATE_TIMEUP, APP_STATE_TYPING } from '../../store/PageManager/types';
 import { TypingConversation } from './TypingConversation';
 
 const TypingContainer: React.FC = () => {
@@ -16,10 +18,16 @@ const TypingContainer: React.FC = () => {
   const { currentScriptIndex, currentStoryIndex } = useSelector(
     (state: RootState) => state.typingContent
   );
+  const { appState, countDownTime } = useSelector((state: RootState) => state.pageManager);
   const dispatch = useDispatch();
   React.useEffect(() => {
     initialize();
   }, []);
+  React.useEffect(() => {
+    if (appState === APP_STATE_TYPING) {
+      startCountDown();
+    }
+  }, [appState]);
   const initialize = () => {
     let stories: Story[] = JSON.parse(JSON.stringify(storiesJson));
     stories = shuffleArray<Story>(stories);
@@ -32,10 +40,24 @@ const TypingContainer: React.FC = () => {
     dispatch(setStories(stories));
     dispatch(setConversation(conversation));
     dispatch(setNextKey(script[correctCharCount]));
+    dispatch(setAppState(APP_STATE_TYPING));
   };
-  return (
+  const startCountDown = () => {
+    let count = countDownTime;
+    const countDown = setInterval(() => {
+      count -= 1;
+      dispatch(setCountDownTime(count));
+      if (count === 0) {
+        clearInterval(countDown);
+        dispatch(setAppState(APP_STATE_TIMEUP));
+      }
+    }, 1000);
+  };
+  return appState === APP_STATE_TIMEUP ? (
+    <div>タイムアップ</div>
+  ) : (
     <div>
-      <CountDown />
+      <CountDown countDownTime={countDownTime} />
       <TypingConversation />
       <Keyboard currentKeys={currentKeys} nextKey={nextKey} />
     </div>

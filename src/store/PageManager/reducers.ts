@@ -1,7 +1,14 @@
-import { PageManagerState, PageManagerActionTypes, SET_CURRENT_PAGE } from './types';
+import {
+  PageManagerState,
+  PageManagerActionTypes,
+  SET_APP_STATE,
+  SET_COUNT_DOWN_TIME,
+  APP_STATE_INITIAL
+} from './types';
 
 const initialState: PageManagerState = {
-  currentPage: 'home'
+  appState: APP_STATE_INITIAL,
+  countDownTime: 180
 };
 
 export function pageManagerReducer(
@@ -9,9 +16,16 @@ export function pageManagerReducer(
   action: PageManagerActionTypes
 ): PageManagerState {
   switch (action.type) {
-    case SET_CURRENT_PAGE: {
+    case SET_APP_STATE: {
       return {
-        currentPage: action.payload
+        ...state,
+        appState: action.payload
+      };
+    }
+    case SET_COUNT_DOWN_TIME: {
+      return {
+        ...state,
+        countDownTime: action.payload
       };
     }
     default:
