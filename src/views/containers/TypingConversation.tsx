@@ -62,9 +62,8 @@ const TypingConversationContainer: React.FC = () => {
       event.preventDefault();
     }
     if (isCorrectInput(key)) {
-      const currentInputTime = performance.now();
       if (lastInputTime !== 0) {
-        const interval = currentInputTime - lastInputTime;
+        const interval = performance.now() - lastInputTime;
         console.log(interval);
       }
       lastInputTime = performance.now();
