@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import storiesJson from '../../constant/stories.json';
 import { Line, Story } from '../../store/TypingContent.tsx/types';
 import { setStories, setConversation } from '../../store/TypingContent.tsx/action';
@@ -54,7 +55,10 @@ const TypingContainer: React.FC = () => {
     }, 1000);
   };
   return appState === APP_STATE_TIMEUP ? (
-    <div>タイムアップ</div>
+    <div>
+      <div>タイムアップ</div>
+      <Link to="/result">結果を表示する</Link>
+    </div>
   ) : (
     <div>
       <CountDown countDownTime={countDownTime} />

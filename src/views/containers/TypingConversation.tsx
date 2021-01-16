@@ -14,6 +14,8 @@ import {
 import { setCurrentScriptIndex } from '../../store/TypingContent.tsx/action';
 import { RootState } from '../../store';
 
+let lastInputTime = 0;
+
 const TypingConversationContainer: React.FC = () => {
   const { currentScriptIndex, conversation } = useSelector(
     (state: RootState) => state.typingContent
@@ -24,6 +26,7 @@ const TypingConversationContainer: React.FC = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     focusTableWrapper();
+    lastInputTime = 0;
   }, []);
   React.useEffect(() => {
     if (conversation.length === 0) {
@@ -59,6 +62,12 @@ const TypingConversationContainer: React.FC = () => {
       event.preventDefault();
     }
     if (isCorrectInput(key)) {
+      const currentInputTime = performance.now();
+      if (lastInputTime !== 0) {
+        const interval = currentInputTime - lastInputTime;
+        console.log(interval);
+      }
+      lastInputTime = performance.now();
       dispatch(incrementCorrectCharCount());
     }
     if (!currentKeys.includes(code)) {
