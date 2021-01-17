@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { SPACE_VALUE, SPACE_VIEW } from '../../constant/typingConst';
-import { Line } from '../../store/TypingContent.tsx/types';
+import { Line } from '../../store/TypingContent/types';
 import { Script } from '../components/Script';
 import {
   clearCorrectCharCount,
@@ -11,7 +11,8 @@ import {
   deleteCurrentKey,
   incrementCorrectCharCount
 } from '../../store/Keyboard/actions';
-import { setCurrentScriptIndex } from '../../store/TypingContent.tsx/action';
+import { setCurrentScriptIndex } from '../../store/TypingContent/actions';
+import { addTypingInterval } from '../../store/PageManager/actions';
 import { RootState } from '../../store';
 
 let lastInputTime = 0;
@@ -56,17 +57,20 @@ const TypingConversationContainer: React.FC = () => {
     }
     return key === nextKey;
   };
+  const setTypingInterval = (key: string) => {
+    if (lastInputTime !== 0) {
+      const interval = performance.now() - lastInputTime;
+      dispatch(addTypingInterval({ key, interval }));
+    }
+    lastInputTime = performance.now();
+  };
   const handleKeyDown = (event: React.KeyboardEvent): void => {
     const { code, key } = event;
     if (key === SPACE_VALUE) {
       event.preventDefault();
     }
     if (isCorrectInput(key)) {
-      if (lastInputTime !== 0) {
-        const interval = performance.now() - lastInputTime;
-        console.log(interval);
-      }
-      lastInputTime = performance.now();
+      setTypingInterval(key);
       dispatch(incrementCorrectCharCount());
     }
     if (!currentKeys.includes(code)) {

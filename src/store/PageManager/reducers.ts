@@ -3,12 +3,14 @@ import {
   PageManagerActionTypes,
   SET_APP_STATE,
   SET_COUNT_DOWN_TIME,
-  APP_STATE_INITIAL
+  APP_STATE_INITIAL,
+  ADD_TYPING_INTERVAL
 } from './types';
 
 const initialState: PageManagerState = {
   appState: APP_STATE_INITIAL,
-  countDownTime: 180
+  countDownTime: 180,
+  intervals: []
 };
 
 export function pageManagerReducer(
@@ -26,6 +28,12 @@ export function pageManagerReducer(
       return {
         ...state,
         countDownTime: action.payload
+      };
+    }
+    case ADD_TYPING_INTERVAL: {
+      return {
+        ...state,
+        intervals: state.intervals.concat([action.payload])
       };
     }
     default:
