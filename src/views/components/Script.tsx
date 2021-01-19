@@ -49,11 +49,12 @@ const ScriptComponent: React.FC<Props> = (props: Props) => {
     }
     setScript(newScript);
   }, [props.tableWrapperRect?.left, props.tableWrapperRect?.width]);
-  const isTypedScript = props.scriptIndex < props.currentScriptIndex;
   return (
     <div id={`script-${props.scriptIndex}`} style={{ width: '100%' }}>
       {script
         ? script.split('').map((char: string, index: number) => {
+            index = index - script.slice(0, index + 1).split(INDENTION_MARK).length + 1;
+            const isTypedScript = props.scriptIndex < props.currentScriptIndex;
             const color = props.correctCharCount > index || isTypedScript ? 'black' : 'grey';
             const isNextChar = props.correctCharCount === index;
             const isCurrentScript = props.scriptIndex === props.currentScriptIndex;
@@ -62,7 +63,7 @@ const ScriptComponent: React.FC<Props> = (props: Props) => {
             ) : (
               <Character
                 id={`char_${props.scriptIndex}_${index}`}
-                key={`char_${index}`}
+                key={index}
                 char={char}
                 color={color}
                 isNextChar={isNextChar}
