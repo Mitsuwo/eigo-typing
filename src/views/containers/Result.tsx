@@ -7,7 +7,7 @@ import { Chart } from '../components/Chart';
 const ResultContainer: React.FC = () => {
   const { intervals } = useSelector((state: RootState) => state.pageManager);
   React.useEffect(() => {
-    const data: Interval[] = [];
+    let data: Interval[] = [];
     intervals.forEach((interval: Interval) => {
       const sameKeyIndex = data.findIndex(
         (addedInterval: Interval) => addedInterval.key === interval.key
@@ -18,6 +18,8 @@ const ResultContainer: React.FC = () => {
         data[sameKeyIndex].interval = (data[sameKeyIndex].interval + interval.interval) / 2;
       }
     });
+    data = data.sort((a: Interval, b: Interval) => b.interval - a.interval);
+    data = data.slice(0, 10);
     setDataState(data);
   }, []);
   const [dataState, setDataState] = React.useState<Interval[]>([]);
