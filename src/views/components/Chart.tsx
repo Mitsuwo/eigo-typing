@@ -1,12 +1,11 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { Interval } from '../../store/PageManager/types';
 
-type Props = {
-  data: Interval[];
+type Props<T> = {
+  data: T[];
 };
 
-const ChartComponent: React.FC<Props> = (props: Props) => {
+function ChartComponent<T>(props: Props<T>) {
   return (
     <BarChart
       width={500}
@@ -26,6 +25,6 @@ const ChartComponent: React.FC<Props> = (props: Props) => {
       <Bar dataKey="interval" fill="#82ca9d" />
     </BarChart>
   );
-};
+}
 
 export const Chart = React.memo(ChartComponent);
