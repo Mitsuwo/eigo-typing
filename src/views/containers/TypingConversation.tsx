@@ -12,7 +12,7 @@ import {
   incrementCorrectCharCount
 } from '../../store/Keyboard/actions';
 import { setCurrentScriptIndex } from '../../store/TypingContent/actions';
-import { addIncorrectKey, addTypingInterval } from '../../store/PageManager/actions';
+import { addIncorrectKey, addCorrectKey } from '../../store/PageManager/actions';
 import { RootState } from '../../store';
 
 let lastInputTime = 0;
@@ -60,7 +60,7 @@ const TypingConversationContainer: React.FC = () => {
   const setTypingInterval = (key: string) => {
     if (lastInputTime !== 0) {
       const interval = performance.now() - lastInputTime;
-      dispatch(addTypingInterval({ key, interval }));
+      dispatch(addCorrectKey({ keyText: key, interval }));
     }
     lastInputTime = performance.now();
   };

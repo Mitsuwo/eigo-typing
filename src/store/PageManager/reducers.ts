@@ -4,13 +4,15 @@ import {
   SET_APP_STATE,
   SET_COUNT_DOWN_TIME,
   APP_STATE_INITIAL,
-  ADD_TYPING_INTERVAL
+  ADD_INCORRECT_KEY,
+  ADD_CORRECT_KEY
 } from './types';
 
 const initialState: PageManagerState = {
   appState: APP_STATE_INITIAL,
   countDownTime: 180,
-  intervals: []
+  correctKeys: [],
+  incorrectKeys: []
 };
 
 export function pageManagerReducer(
@@ -30,10 +32,16 @@ export function pageManagerReducer(
         countDownTime: action.payload
       };
     }
-    case ADD_TYPING_INTERVAL: {
+    case ADD_CORRECT_KEY: {
       return {
         ...state,
-        intervals: state.intervals.concat([action.payload])
+        correctKeys: state.correctKeys.concat([action.payload])
+      };
+    }
+    case ADD_INCORRECT_KEY: {
+      return {
+        ...state,
+        incorrectKeys: state.incorrectKeys.concat([action.payload])
       };
     }
     default:

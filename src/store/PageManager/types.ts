@@ -1,6 +1,7 @@
 export const SET_APP_STATE = 'SET_APP_STATE';
 export const SET_COUNT_DOWN_TIME = 'SET_COUNT_DOWN_TIME';
-export const ADD_TYPING_INTERVAL = 'ADD_TYPING_INTERVAL';
+export const ADD_CORRECT_KEY = 'ADD_CORRECT_KEY';
+export const ADD_INCORRECT_KEY = 'ADD_INCORRECT_KEY';
 
 interface SetAppStateAction {
   type: typeof SET_APP_STATE;
@@ -12,13 +13,18 @@ interface SetCountDownTime {
   payload: number;
 }
 
-interface AddTypingInterval {
-  type: typeof ADD_TYPING_INTERVAL;
-  payload: Interval;
+interface AddCorrectKey {
+  type: typeof ADD_CORRECT_KEY;
+  payload: CorrectKey;
 }
 
-export interface Interval {
-  key: string;
+interface AddIncorrectKey {
+  type: typeof ADD_INCORRECT_KEY;
+  payload: string;
+}
+
+export interface CorrectKey {
+  keyText: string;
   interval: number;
 }
 
@@ -31,10 +37,15 @@ export type AppStates =
   | typeof APP_STATE_TYPING
   | typeof APP_STATE_TIMEUP;
 
-export type PageManagerActionTypes = SetAppStateAction | SetCountDownTime | AddTypingInterval;
+export type PageManagerActionTypes =
+  | SetAppStateAction
+  | SetCountDownTime
+  | AddCorrectKey
+  | AddIncorrectKey;
 
 export interface PageManagerState {
   appState: AppStates;
   countDownTime: number;
-  intervals: Interval[];
+  correctKeys: CorrectKey[];
+  incorrectKeys: string[];
 }

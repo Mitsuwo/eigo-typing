@@ -3,8 +3,9 @@ import {
   PageManagerActionTypes,
   SET_COUNT_DOWN_TIME,
   AppStates,
-  Interval,
-  ADD_TYPING_INTERVAL
+  ADD_INCORRECT_KEY,
+  ADD_CORRECT_KEY,
+  CorrectKey
 } from './types';
 
 export function setAppState(appState: AppStates): PageManagerActionTypes {
@@ -21,9 +22,16 @@ export function setCountDownTime(countDownTime: number): PageManagerActionTypes 
   };
 }
 
-export function addTypingInterval(interval: Interval): PageManagerActionTypes {
+export function addCorrectKey(interval: CorrectKey): PageManagerActionTypes {
   return {
-    type: ADD_TYPING_INTERVAL,
+    type: ADD_CORRECT_KEY,
     payload: interval
+  };
+}
+
+export function addIncorrectKey(incorrectKey: string): PageManagerActionTypes {
+  return {
+    type: ADD_INCORRECT_KEY,
+    payload: incorrectKey
   };
 }

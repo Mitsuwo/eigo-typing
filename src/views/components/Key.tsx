@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const KeyComponent: React.FC<Props> = (props: Props) => {
-  const __html: string = props.text ? props.text.replace(' ', '<br>') : '';
+  const __html = props.text ? props.text.replace(' ', '<br>') : '';
   return (
     <StyledKey width={props.width} keyColor={props.keyColor}>
       <InnerText dangerouslySetInnerHTML={{ __html }} />

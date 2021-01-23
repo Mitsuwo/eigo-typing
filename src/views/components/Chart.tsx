@@ -4,6 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'rec
 type Props<T> = {
   data: T[];
   barDataKey: string;
+  barColor: string;
 };
 
 function ChartComponent<T>(props: Props<T>) {
@@ -19,11 +20,11 @@ function ChartComponent<T>(props: Props<T>) {
         bottom: 5
       }}>
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="key" />
+      <XAxis dataKey="keyText" />
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey={props.barDataKey} fill="#82ca9d" />
+      <Bar dataKey={props.barDataKey} fill={props.barColor} />
     </BarChart>
   );
 }
