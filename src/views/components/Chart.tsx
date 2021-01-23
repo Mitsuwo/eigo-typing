@@ -3,6 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'rec
 
 type Props<T> = {
   data: T[];
+  barDataKey: string;
 };
 
 function ChartComponent<T>(props: Props<T>) {
@@ -22,7 +23,7 @@ function ChartComponent<T>(props: Props<T>) {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="interval" fill="#82ca9d" />
+      <Bar dataKey={props.barDataKey} fill="#82ca9d" />
     </BarChart>
   );
 }
