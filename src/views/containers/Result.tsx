@@ -29,7 +29,6 @@ const ResultContainer: React.FC = () => {
       }
     });
     result = result.sort((a: CorrectKey, b: CorrectKey) => b.interval - a.interval);
-    result = result.slice(0, 10);
     return result;
   };
   const generateIncorrectCountData = (): IncorrectKey[] => {
@@ -43,7 +42,6 @@ const ResultContainer: React.FC = () => {
       result.push({ keyText: targetKey, incorrectCount });
     }
     result = result.sort((a: IncorrectKey, b: IncorrectKey) => b.incorrectCount - a.incorrectCount);
-    result = result.slice(0, 10);
     return result;
   };
   const generateCorrectCountData = (): TypedKey[] => {
@@ -57,12 +55,10 @@ const ResultContainer: React.FC = () => {
       result.push({ keyText: targetKey, typedCount });
     }
     result = result.sort((a: TypedKey, b: TypedKey) => b.typedCount - a.typedCount);
-    result = result.slice(0, 20);
     return result;
   };
   return (
     <div>
-      <div>Result Page</div>
       <Chart data={generateIntervalData()} barDataKey="interval" barColor="#f9c00c" />
       <Chart data={generateIncorrectCountData()} barDataKey="incorrectCount" barColor="#f9320c" />
       <Chart data={generateCorrectCountData()} barDataKey="typedCount" barColor="#00b9f1" />

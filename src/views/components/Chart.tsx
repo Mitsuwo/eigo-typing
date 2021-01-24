@@ -12,7 +12,7 @@ function ChartComponent<T>(props: Props<T>) {
     <BarChart
       width={500}
       height={300}
-      data={props.data}
+      data={props.data.slice(0, 10)}
       margin={{
         top: 5,
         right: 30,
