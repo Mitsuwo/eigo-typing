@@ -1,22 +1,41 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import storiesJson from '../../constant/stories.json';
-import { Line, Story } from '../../store/TypingContent/types';
-import { setStories, setConversation } from '../../store/TypingContent/actions';
+import scriptsJson from '../../constant/corpus.json';
 import { RootState } from '../../store';
-import { setNextKey } from '../../store/Keyboard/actions';
+import {
+  setCurrentScript,
+  setCurrentScriptIndex,
+  setScripts
+} from '../../store/TypingContent/actions';
+import { Script } from '../../store/TypingContent/types';
 import { CountDown } from '../components/CountDown';
 import { Keyboard } from '../components/Keyboard';
-import { setAppState, setCountDownTime } from '../../store/PageManager/actions';
+import {
+  setAppState,
+  setCountDownTime,
+  addIncorrectKey,
+  addCorrectKey
+} from '../../store/PageManager/actions';
 import { APP_STATE_TIMEUP, APP_STATE_TYPING } from '../../store/PageManager/types';
-import { TypingConversation } from './TypingConversation';
+import { SPACE_VALUE } from '../../constant/typingConst';
+import { ScriptEnglish } from '../components/ScriptEnglish';
+import {
+  clearCorrectCharCount,
+  setNextKey,
+  addCurrentKey,
+  deleteCurrentKey,
+  incrementCorrectCharCount
+} from '../../store/Keyboard/actions';
+
+let lastInputTime = 0;
 
 const TypingContainer: React.FC = () => {
   const { currentKeys, nextKey, correctCharCount } = useSelector(
     (state: RootState) => state.keyboard
   );
-  const { currentScriptIndex, currentStoryIndex } = useSelector(
+  const { scripts, currentScript, currentScriptIndex } = useSelector(
     (state: RootState) => state.typingContent
   );
   const { appState, countDownTime } = useSelector((state: RootState) => state.pageManager);
@@ -25,23 +44,27 @@ const TypingContainer: React.FC = () => {
     initialize();
   }, []);
   React.useEffect(() => {
-    if (appState === APP_STATE_TYPING) {
-      startCountDown();
+    if (!currentScript) {
+      return;
     }
-  }, [appState]);
+    if (correctCharCount < currentScript.english.length) {
+      dispatch(setNextKey(currentScript.english[correctCharCount]));
+    } else {
+      const nextScriptIndex = currentScriptIndex + 1;
+      dispatch(setCurrentScriptIndex(nextScriptIndex));
+      dispatch(setCurrentScript(scripts[nextScriptIndex]));
+      dispatch(clearCorrectCharCount());
+    }
+  }, [correctCharCount]);
   const initialize = () => {
-    let stories: Story[] = JSON.parse(JSON.stringify(storiesJson));
-    stories = shuffleArray<Story>(stories);
-    let { conversation } = stories[currentStoryIndex];
-    conversation = conversation.map((obj: Line) => {
-      obj.script = obj.script.replaceAll(' ', '␣');
-      return obj;
-    });
-    const { script } = conversation[currentScriptIndex];
-    dispatch(setStories(stories));
-    dispatch(setConversation(conversation));
-    dispatch(setNextKey(script[correctCharCount]));
-    dispatch(setAppState(APP_STATE_TYPING));
+    let scripts: Script[] = JSON.parse(JSON.stringify(scriptsJson));
+    scripts = shuffleArray<Script>(scripts);
+    dispatch(setScripts(scripts));
+    dispatch(setCurrentScript(scripts[currentScriptIndex]));
+    dispatch(setNextKey(scripts[currentScriptIndex].english[0]));
+    focusScriptWrapper();
+    lastInputTime = 0;
+    startCountDown();
   };
   const startCountDown = () => {
     let count = countDownTime;
@@ -54,6 +77,44 @@ const TypingContainer: React.FC = () => {
       }
     }, 1000);
   };
+  const scriptWrapperRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
+  const isElement = (element: HTMLDivElement | null): element is HTMLDivElement => {
+    return typeof element !== null;
+  };
+  const focusScriptWrapper = (): void => {
+    const { current } = scriptWrapperRef;
+    if (isElement(current) && current !== document.activeElement) {
+      current.focus();
+    }
+  };
+  const isCorrectInput = (key: string): boolean => {
+    return key === nextKey;
+  };
+  const setTypingInterval = (key: string) => {
+    if (lastInputTime !== 0) {
+      const interval = performance.now() - lastInputTime;
+      dispatch(addCorrectKey({ keyText: key, interval }));
+    }
+    lastInputTime = performance.now();
+  };
+  const handleKeyDown = (event: React.KeyboardEvent): void => {
+    const { code, key } = event;
+    if (key === SPACE_VALUE) {
+      event.preventDefault();
+    }
+    if (isCorrectInput(key)) {
+      setTypingInterval(key);
+      dispatch(incrementCorrectCharCount());
+    } else {
+      dispatch(addIncorrectKey(key));
+    }
+    if (!currentKeys.includes(code)) {
+      dispatch(addCurrentKey(code));
+    }
+  };
+  const handleKeyUp = (event: React.KeyboardEvent): void => {
+    dispatch(deleteCurrentKey(event.code));
+  };
   return appState === APP_STATE_TIMEUP ? (
     <div>
       <div>タイムアップ</div>
@@ -62,13 +123,25 @@ const TypingContainer: React.FC = () => {
   ) : (
     <div>
       <CountDown countDownTime={countDownTime} />
-      <TypingConversation />
+      <ScriptWrapper
+        ref={scriptWrapperRef}
+        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
+        onBlur={focusScriptWrapper}
+        tabIndex={0}>
+        <ScriptEnglish
+          script={currentScript ? currentScript.english : ''}
+          correctCharCount={correctCharCount}
+          scriptIndex={currentScriptIndex}
+          currentScriptIndex={currentScriptIndex}
+        />
+      </ScriptWrapper>
       <Keyboard currentKeys={currentKeys} nextKey={nextKey} />
     </div>
   );
 };
 
-const shuffleArray = <T extends unknown>(array: T[]): T[] => {
+function shuffleArray<T>(array: T[]): T[] {
   for (let i = array.length - 1; 0 < i; i--) {
     const randomNumber = Math.floor(Math.random() * (i + 1));
     const obj = array[i];
@@ -76,6 +149,16 @@ const shuffleArray = <T extends unknown>(array: T[]): T[] => {
     array[randomNumber] = obj;
   }
   return array;
-};
+}
+
+const ScriptWrapper = styled.div`
+  height: 50vh;
+  width: 94vw;
+  margin: 0 3vw 25px 3vw;
+  padding: 0;
+  overflow-y: scroll;
+  display: inline-block;
+  text-align: left;
+`;
 
 export const Typing = TypingContainer;

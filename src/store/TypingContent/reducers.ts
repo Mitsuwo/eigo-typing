@@ -1,25 +1,15 @@
 import {
   TypingContentState,
   TypingContentActionTypes,
-  SET_WORDS,
-  SET_WORD,
-  SET_CURRENT_WORD_INDEX,
-  SET_STORIES,
-  SET_CONVERSATION,
-  SET_CURRENT_STORY_INDEX,
-  SET_CONTENT_TYPE,
-  SET_CURRENT_SCRIPT_INDEX
+  SET_SCRIPTS,
+  SET_CURRENT_SCRIPT_INDEX,
+  SET_CURRENT_SCRIPT
 } from './types';
 
 const initialState: TypingContentState = {
-  words: [],
-  word: '',
-  stories: [],
-  conversation: [],
-  currentWordIndex: 0,
-  currentStoryIndex: 0,
+  scripts: [],
   currentScriptIndex: 0,
-  contentType: ''
+  currentScript: undefined
 };
 
 export function typingContentReducer(
@@ -27,40 +17,10 @@ export function typingContentReducer(
   action: TypingContentActionTypes
 ): TypingContentState {
   switch (action.type) {
-    case SET_WORDS: {
+    case SET_SCRIPTS: {
       return {
         ...state,
-        words: action.payload
-      };
-    }
-    case SET_WORD: {
-      return {
-        ...state,
-        word: action.payload
-      };
-    }
-    case SET_STORIES: {
-      return {
-        ...state,
-        stories: action.payload
-      };
-    }
-    case SET_CONVERSATION: {
-      return {
-        ...state,
-        conversation: action.payload
-      };
-    }
-    case SET_CURRENT_WORD_INDEX: {
-      return {
-        ...state,
-        currentWordIndex: action.payload
-      };
-    }
-    case SET_CURRENT_STORY_INDEX: {
-      return {
-        ...state,
-        currentStoryIndex: action.payload
+        scripts: action.payload
       };
     }
     case SET_CURRENT_SCRIPT_INDEX: {
@@ -69,10 +29,10 @@ export function typingContentReducer(
         currentScriptIndex: action.payload
       };
     }
-    case SET_CONTENT_TYPE: {
+    case SET_CURRENT_SCRIPT: {
       return {
         ...state,
-        contentType: action.payload
+        currentScript: action.payload
       };
     }
     default:

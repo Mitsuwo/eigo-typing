@@ -1,70 +1,28 @@
 import {
-  Word,
-  SET_WORDS,
+  Script,
+  SET_CURRENT_SCRIPT,
+  SET_CURRENT_SCRIPT_INDEX,
   TypingContentActionTypes,
-  SET_WORD,
-  SET_CURRENT_WORD_INDEX,
-  Story,
-  SET_STORIES,
-  Line,
-  SET_CONVERSATION,
-  SET_CURRENT_STORY_INDEX,
-  SET_CONTENT_TYPE,
-  SET_CURRENT_SCRIPT_INDEX
+  SET_SCRIPTS
 } from './types';
 
-export function setWords(words: Word[]): TypingContentActionTypes {
+export function setScripts(scripts: Script[]): TypingContentActionTypes {
   return {
-    type: SET_WORDS,
-    payload: words
+    type: SET_SCRIPTS,
+    payload: scripts
   };
 }
 
-export function setWord(word: string): TypingContentActionTypes {
-  return {
-    type: SET_WORD,
-    payload: word
-  };
-}
-
-export function setStories(stories: Story[]): TypingContentActionTypes {
-  return {
-    type: SET_STORIES,
-    payload: stories
-  };
-}
-
-export function setConversation(conversation: Line[]): TypingContentActionTypes {
-  return {
-    type: SET_CONVERSATION,
-    payload: conversation
-  };
-}
-
-export function setCurrentWordIndex(index: number): TypingContentActionTypes {
-  return {
-    type: SET_CURRENT_WORD_INDEX,
-    payload: index
-  };
-}
-
-export function setCurrentStoryIndex(index: number): TypingContentActionTypes {
-  return {
-    type: SET_CURRENT_STORY_INDEX,
-    payload: index
-  };
-}
-
-export function setCurrentScriptIndex(index: number): TypingContentActionTypes {
+export function setCurrentScriptIndex(currentScriptIndex: number): TypingContentActionTypes {
   return {
     type: SET_CURRENT_SCRIPT_INDEX,
-    payload: index
+    payload: currentScriptIndex
   };
 }
 
-export function setContentType(contentType: string): TypingContentActionTypes {
+export function setCurrentScript(currentScript: Script): TypingContentActionTypes {
   return {
-    type: SET_CONTENT_TYPE,
-    payload: contentType
+    type: SET_CURRENT_SCRIPT,
+    payload: currentScript
   };
 }
