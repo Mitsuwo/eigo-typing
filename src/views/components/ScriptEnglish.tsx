@@ -1,5 +1,4 @@
 import React from 'react';
-import { INDENTION_MARK } from '../../constant/typingConst';
 import { Character } from './Character';
 
 interface Props {
@@ -10,25 +9,48 @@ interface Props {
 }
 
 const ScriptEnglishComponent: React.FC<Props> = (props: Props) => {
+  const [shouldBreakIndexes, setShouldBreakIndexes] = React.useState<number[]>([]);
+  const divRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    if (!props.script || !divRef || !divRef.current || !divRef.current.children) {
+      return;
+    }
+    const maxWidth = divRef.current.getBoundingClientRect().width;
+    let tmpWidth = 0;
+    const charArray = Array.from(divRef.current.children);
+    const tmpIndexes = [];
+    for (let i = 0; i < charArray.length; i++) {
+      const { width } = charArray[i].getBoundingClientRect();
+      tmpWidth += width;
+      if (tmpWidth > maxWidth) {
+        tmpWidth = 0;
+        const lastSpaceIndex = props.script.substring(0, i).lastIndexOf(' ');
+        tmpIndexes.push(lastSpaceIndex);
+        i = lastSpaceIndex;
+      }
+    }
+    setShouldBreakIndexes(tmpIndexes);
+  }, [props.script]);
+  const renderBreak = (index: number) => {
+    const shouldBreak = shouldBreakIndexes.indexOf(index) !== -1;
+    return shouldBreak ? <br /> : '';
+  };
   return (
-    <div id="script" style={{ width: '100%' }}>
+    <div ref={divRef} style={{ width: '100%' }}>
       {props.script.split('').map((char: string, index: number) => {
-        index = index - props.script.slice(0, index + 1).split(INDENTION_MARK).length + 1;
-        const isTypedScript = props.scriptIndex < props.currentScriptIndex;
-        const color = props.correctCharCount > index || isTypedScript ? 'black' : 'grey';
+        const color = props.correctCharCount > index ? 'black' : 'grey';
         const isNextChar = props.correctCharCount === index;
-        const isCurrentScript = props.scriptIndex === props.currentScriptIndex;
-        return char === INDENTION_MARK ? (
-          <br />
-        ) : (
-          <Character
-            id={`char_${props.scriptIndex}_${index}`}
-            key={index}
-            char={char}
-            color={color}
-            isNextChar={isNextChar}
-            isCurrentScript={isCurrentScript}
-          />
+        return (
+          <>
+            <Character
+              id={`char_${props.scriptIndex}_${index}`}
+              key={index}
+              char={char}
+              color={color}
+              isNextChar={isNextChar}
+            />
+            {renderBreak(index)}
+          </>
         );
       })}
     </div>

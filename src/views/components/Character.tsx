@@ -5,7 +5,6 @@ interface Props {
   color: string;
   char: string;
   isNextChar: boolean;
-  isCurrentScript: boolean;
 }
 
 const CharacterComponent: React.FC<Props> = (props: Props) => {
@@ -15,9 +14,9 @@ const CharacterComponent: React.FC<Props> = (props: Props) => {
       style={{
         color: props.color,
         fontSize: '30px',
-        borderBottom: props.isCurrentScript && props.isNextChar ? 'solid' : 'none'
+        borderBottom: props.isNextChar ? 'solid' : 'none'
       }}>
-      {props.char}
+      {props.char === ' ' ? '\u00A0' : props.char}
     </span>
   );
 };
