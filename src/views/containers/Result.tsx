@@ -2,67 +2,79 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { CorrectKey } from '../../store/PageManager/types';
-import { Chart } from '../components/Chart';
-
-interface TypedKey {
-  keyText: string;
-  typedCount: number;
-}
-
-interface IncorrectKey {
-  keyText: string;
-  incorrectCount: number;
-}
+import { BarChart, BarChartData } from '../components/BarChart';
 
 const ResultContainer: React.FC = () => {
   const { correctKeys, incorrectKeys } = useSelector((state: RootState) => state.pageManager);
-  const generateIntervalData = () => {
-    let result: CorrectKey[] = [];
+  const createBarChartData = (keyText: string, volume: number): BarChartData => {
+    if (keyText === ' ') {
+      keyText = 'space';
+    }
+    return { keyText, volume };
+  };
+  const intervalData = React.useMemo<BarChartData[]>(() => {
+    const result: BarChartData[] = [];
     correctKeys.forEach((correctKey: CorrectKey) => {
       const sameKeyIndex = result.findIndex(
-        (addedCorrectKey: CorrectKey) => addedCorrectKey.keyText === correctKey.keyText
+        (addedCorrectKey: BarChartData) => addedCorrectKey.keyText === correctKey.keyText
       );
       if (sameKeyIndex === -1) {
-        result.push(correctKey);
+        const barChartData = createBarChartData(correctKey.keyText, correctKey.interval);
+        result.push(barChartData);
       } else {
-        result[sameKeyIndex].interval = (result[sameKeyIndex].interval + correctKey.interval) / 2;
+        result[sameKeyIndex].volume = (result[sameKeyIndex].volume + correctKey.interval) / 2;
       }
     });
-    result = result.sort((a: CorrectKey, b: CorrectKey) => b.interval - a.interval);
     return result;
-  };
-  const generateIncorrectCountData = (): IncorrectKey[] => {
+  }, [correctKeys]);
+  const incorrectCountData = React.useMemo<BarChartData[]>(() => {
     let joinedIncorrectkeys = incorrectKeys.join('');
-    let result = [];
+    const result: BarChartData[] = [];
     for (let i = 0; i < joinedIncorrectkeys.length; i++) {
       const targetKey = joinedIncorrectkeys[0];
       const incorrectKeysWithoutTargetKey = joinedIncorrectkeys.split(targetKey);
       const incorrectCount = incorrectKeysWithoutTargetKey.length - 1;
       joinedIncorrectkeys = incorrectKeysWithoutTargetKey.join('');
-      result.push({ keyText: targetKey, incorrectCount });
+      const barChartData = createBarChartData(targetKey, incorrectCount);
+      result.push(barChartData);
     }
-    result = result.sort((a: IncorrectKey, b: IncorrectKey) => b.incorrectCount - a.incorrectCount);
     return result;
-  };
-  const generateCorrectCountData = (): TypedKey[] => {
-    let joinedCorrectKeys = correctKeys.join('');
-    let result = [];
+  }, [incorrectKeys]);
+  const correctCountData = React.useMemo<BarChartData[]>(() => {
+    let joinedCorrectKeys = correctKeys
+      .map((correctKey: CorrectKey) => correctKey.keyText)
+      .join('');
+    const result: BarChartData[] = [];
     for (let i = 0; i < joinedCorrectKeys.length; i++) {
       const targetKey = joinedCorrectKeys[0];
       const incorrectKeysWithoutTargetKey = joinedCorrectKeys.split(targetKey);
       const typedCount = incorrectKeysWithoutTargetKey.length - 1;
       joinedCorrectKeys = incorrectKeysWithoutTargetKey.join('');
-      result.push({ keyText: targetKey, typedCount });
+      const barChartData = createBarChartData(targetKey, typedCount);
+      result.push(barChartData);
     }
-    result = result.sort((a: TypedKey, b: TypedKey) => b.typedCount - a.typedCount);
     return result;
-  };
+  }, [correctKeys]);
+  const incorrectTypeRateData = React.useMemo<BarChartData[]>(() => {
+    const result: BarChartData[] = [];
+    correctCountData.forEach((correctKey: BarChartData) => {
+      const incorrectKey = incorrectCountData.find(
+        (incorrectKey: BarChartData) => incorrectKey.keyText === correctKey.keyText
+      );
+      if (incorrectKey && incorrectKey.volume) {
+        const incorrectTypeRate = (incorrectKey.volume / correctKey.volume) * 100;
+        const barChartData = createBarChartData(incorrectKey.keyText, incorrectTypeRate);
+        result.push(barChartData);
+      }
+    });
+    return result;
+  }, [correctKeys, incorrectKeys]);
   return (
     <div>
-      <Chart data={generateIntervalData()} barDataKey="interval" barColor="#f9c00c" />
-      <Chart data={generateIncorrectCountData()} barDataKey="incorrectCount" barColor="#f9320c" />
-      <Chart data={generateCorrectCountData()} barDataKey="typedCount" barColor="#00b9f1" />
-      {/* <Chart data={generateCorrectTypeRateData()} barDataKey="CorrectTypeRate" barColor="#7200da" /> */}
+      <BarChart data={intervalData} barDataKey="interval" barColor="#f9c00c" />
+      <BarChart data={incorrectCountData} barDataKey="incorrectCount" barColor="#f9320c" />
+      <BarChart data={correctCountData} barDataKey="typedCount" barColor="#00b9f1" />
+      <BarChart data={incorrectTypeRateData} barDataKey="incorrectTypeRate" barColor="#7200da" />
     </div>
   );
 };

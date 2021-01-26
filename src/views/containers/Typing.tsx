@@ -18,7 +18,7 @@ import {
   addIncorrectKey,
   addCorrectKey
 } from '../../store/PageManager/actions';
-import { APP_STATE_TIMEUP, APP_STATE_TYPING } from '../../store/PageManager/types';
+import { APP_STATE_TIMEUP } from '../../store/PageManager/types';
 import { SPACE_VALUE } from '../../constant/typingConst';
 import { ScriptEnglish } from '../components/ScriptEnglish';
 import {
@@ -83,7 +83,7 @@ const TypingContainer: React.FC = () => {
   };
   const focusScriptWrapper = (): void => {
     const { current } = scriptWrapperRef;
-    if (isElement(current) && current !== document.activeElement) {
+    if (isElement(current) && current !== document.activeElement && appState !== APP_STATE_TIMEUP) {
       current.focus();
     }
   };
