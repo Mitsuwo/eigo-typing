@@ -93,7 +93,7 @@ const TypingContainer: React.FC = () => {
   const setTypingInterval = (key: string) => {
     if (lastInputTime !== 0) {
       const interval = performance.now() - lastInputTime;
-      dispatch(addCorrectKey({ keyText: key, interval }));
+      dispatch(addCorrectKey({ keyText: key, interval: Math.floor(interval * 1000) / 1000000 }));
     }
     lastInputTime = performance.now();
   };

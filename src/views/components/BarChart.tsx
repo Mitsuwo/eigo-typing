@@ -10,11 +10,20 @@ type Props = {
   data: BarChartData[];
   barDataKey: string;
   barColor: string;
+  ascending: boolean;
 };
 
 const BarChartComponent: React.FC<Props> = (props: Props) => {
   const data = React.useMemo(() => {
-    return props.data.sort((a: BarChartData, b: BarChartData) => b.volume - a.volume).slice(0, 10);
+    return props.data
+      .sort((a: BarChartData, b: BarChartData) => {
+        if (props.ascending) {
+          return a.volume - b.volume;
+        } else {
+          return b.volume - a.volume;
+        }
+      })
+      .slice(0, 10);
   }, [props.data]);
   return (
     <Chart
@@ -32,7 +41,7 @@ const BarChartComponent: React.FC<Props> = (props: Props) => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="volume" fill={props.barColor} />
+      <Bar dataKey="volume" fill={props.barColor} name={props.barDataKey} />
     </Chart>
   );
 };
