@@ -3,9 +3,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { CorrectKey } from '../../store/PageManager/types';
 import { BarChart, BarChartData } from '../components/BarChart';
+import { TypedScripts } from '../components/TypedScripts';
 
 const ResultContainer: React.FC = () => {
   const { correctKeys, incorrectKeys } = useSelector((state: RootState) => state.pageManager);
+  const typedScripts = useSelector((state: RootState) => {
+    const { currentScriptIndex, scripts } = state.typingContent;
+    return scripts.slice(0, currentScriptIndex + 1);
+  });
   const createBarChartData = (keyText: string, volume: number): BarChartData => {
     if (keyText === ' ') {
       keyText = 'space';
@@ -55,26 +60,33 @@ const ResultContainer: React.FC = () => {
     }
     return result;
   }, [correctKeys]);
-  const incorrectTypeRateData = React.useMemo<BarChartData[]>(() => {
-    const result: BarChartData[] = [];
-    correctCountData.forEach((correctKey: BarChartData) => {
-      const incorrectKey = incorrectCountData.find(
-        (incorrectKey: BarChartData) => incorrectKey.keyText === correctKey.keyText
-      );
-      if (incorrectKey && incorrectKey.volume) {
-        const incorrectTypeRate = (incorrectKey.volume / correctKey.volume) * 100;
-        const barChartData = createBarChartData(incorrectKey.keyText, incorrectTypeRate);
-        result.push(barChartData);
-      }
-    });
-    return result;
-  }, [correctKeys, incorrectKeys]);
   return (
     <div>
-      <BarChart data={intervalData} barDataKey="interval" barColor="#f9c00c" />
-      <BarChart data={incorrectCountData} barDataKey="incorrectCount" barColor="#f9320c" />
-      <BarChart data={correctCountData} barDataKey="typedCount" barColor="#00b9f1" />
-      <BarChart data={incorrectTypeRateData} barDataKey="incorrectTypeRate" barColor="#7200da" />
+      <TypedScripts typedScripts={typedScripts} />
+      <BarChart
+        data={intervalData}
+        barDataKey="タイピングするまでの時間 - 長い順（秒）"
+        barColor="#7200da"
+        ascending={false}
+      />
+      <BarChart
+        data={intervalData}
+        barDataKey="タイピングするまでの時間 - 短い順（秒）"
+        barColor="#f9c00c"
+        ascending
+      />
+      <BarChart
+        data={incorrectCountData}
+        barDataKey="タイプミスした回数（回）"
+        barColor="#f9320c"
+        ascending={false}
+      />
+      <BarChart
+        data={correctCountData}
+        barDataKey="正確にタイピングした回数（回）"
+        barColor="#00b9f1"
+        ascending={false}
+      />
     </div>
   );
 };
