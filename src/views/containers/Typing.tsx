@@ -28,6 +28,7 @@ import {
   deleteCurrentKey,
   incrementCorrectCharCount
 } from '../../store/Keyboard/actions';
+import { ScriptJapanese } from '../components/ScriptJapanese';
 
 let lastInputTime = 0;
 
@@ -115,6 +116,7 @@ const TypingContainer: React.FC = () => {
   const handleKeyUp = (event: React.KeyboardEvent): void => {
     dispatch(deleteCurrentKey(event.code));
   };
+  const scriptJapanese = scripts[currentScriptIndex] ? scripts[currentScriptIndex].japanese : '';
   return appState === APP_STATE_TIMEUP ? (
     <div>
       <div>タイムアップ</div>
@@ -136,6 +138,7 @@ const TypingContainer: React.FC = () => {
           currentScriptIndex={currentScriptIndex}
         />
       </ScriptWrapper>
+      <ScriptJapanese scriptJapanese={scriptJapanese} />
       <Keyboard currentKeys={currentKeys} nextKey={nextKey} />
     </div>
   );
@@ -152,7 +155,6 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 const ScriptWrapper = styled.div`
-  height: 50vh;
   width: 94vw;
   margin: 0 3vw 25px 3vw;
   padding: 0;
