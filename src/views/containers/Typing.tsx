@@ -7,7 +7,8 @@ import { RootState } from '../../store';
 import {
   setCurrentScript,
   setCurrentScriptIndex,
-  setScripts
+  setScripts,
+  setShowJapanese
 } from '../../store/TypingContent/actions';
 import { Script } from '../../store/TypingContent/types';
 import { CountDown } from '../components/CountDown';
@@ -29,6 +30,7 @@ import {
   incrementCorrectCharCount
 } from '../../store/Keyboard/actions';
 import { ScriptJapanese } from '../components/ScriptJapanese';
+import { ShowJapaneseCheckBox } from '../components/ShowJapaneseCheckBox';
 
 let lastInputTime = 0;
 
@@ -36,7 +38,7 @@ const TypingContainer: React.FC = () => {
   const { currentKeys, nextKey, correctCharCount } = useSelector(
     (state: RootState) => state.keyboard
   );
-  const { scripts, currentScript, currentScriptIndex } = useSelector(
+  const { scripts, currentScript, currentScriptIndex, showJapanese } = useSelector(
     (state: RootState) => state.typingContent
   );
   const { appState, countDownTime } = useSelector((state: RootState) => state.pageManager);
@@ -116,6 +118,9 @@ const TypingContainer: React.FC = () => {
   const handleKeyUp = (event: React.KeyboardEvent): void => {
     dispatch(deleteCurrentKey(event.code));
   };
+  const switchShowJapanese = () => {
+    dispatch(setShowJapanese(!showJapanese));
+  };
   const scriptJapanese = scripts[currentScriptIndex] ? scripts[currentScriptIndex].japanese : '';
   return appState === APP_STATE_TIMEUP ? (
     <div>
@@ -125,6 +130,7 @@ const TypingContainer: React.FC = () => {
   ) : (
     <div>
       <CountDown countDownTime={countDownTime} />
+      <ShowJapaneseCheckBox showJapanese={showJapanese} switchShowJapanese={switchShowJapanese} />
       <ScriptWrapper
         ref={scriptWrapperRef}
         onKeyDown={handleKeyDown}
@@ -138,7 +144,7 @@ const TypingContainer: React.FC = () => {
           currentScriptIndex={currentScriptIndex}
         />
       </ScriptWrapper>
-      <ScriptJapanese scriptJapanese={scriptJapanese} />
+      {showJapanese ? <ScriptJapanese scriptJapanese={scriptJapanese} /> : ''}
       <Keyboard currentKeys={currentKeys} nextKey={nextKey} />
     </div>
   );
