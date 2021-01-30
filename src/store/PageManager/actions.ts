@@ -5,7 +5,8 @@ import {
   AppStates,
   ADD_INCORRECT_KEY,
   ADD_CORRECT_KEY,
-  CorrectKey
+  CorrectKey,
+  RESET_PAGE_MANAGER
 } from './types';
 
 export function setAppState(appState: AppStates): PageManagerActionTypes {
@@ -33,5 +34,11 @@ export function addIncorrectKey(incorrectKey: string): PageManagerActionTypes {
   return {
     type: ADD_INCORRECT_KEY,
     payload: incorrectKey
+  };
+}
+
+export function resetPageManager(): PageManagerActionTypes {
+  return {
+    type: RESET_PAGE_MANAGER
   };
 }

@@ -19,7 +19,7 @@ import {
   addIncorrectKey,
   addCorrectKey
 } from '../../store/PageManager/actions';
-import { APP_STATE_TIMEUP } from '../../store/PageManager/types';
+import { APP_STATE_TIMEUP, APP_STATE_TYPING } from '../../store/PageManager/types';
 import { SPACE_VALUE } from '../../constant/typingConst';
 import { ScriptEnglish } from '../components/ScriptEnglish';
 import {
@@ -70,6 +70,9 @@ const TypingContainer: React.FC = () => {
     startCountDown();
   };
   const startCountDown = () => {
+    if (appState !== APP_STATE_TYPING) {
+      return;
+    }
     let count = countDownTime;
     const countDown = setInterval(() => {
       count -= 1;
@@ -86,7 +89,7 @@ const TypingContainer: React.FC = () => {
   };
   const focusScriptWrapper = (): void => {
     const { current } = scriptWrapperRef;
-    if (isElement(current) && current !== document.activeElement && appState !== APP_STATE_TIMEUP) {
+    if (isElement(current) && current !== document.activeElement && appState === APP_STATE_TYPING) {
       current.focus();
     }
   };
@@ -122,7 +125,7 @@ const TypingContainer: React.FC = () => {
     dispatch(setShowJapanese(!showJapanese));
   };
   const scriptJapanese = scripts[currentScriptIndex] ? scripts[currentScriptIndex].japanese : '';
-  return appState === APP_STATE_TIMEUP ? (
+  return appState !== APP_STATE_TYPING ? (
     <div>
       <div>タイムアップ</div>
       <Link to="/result">結果を表示する</Link>

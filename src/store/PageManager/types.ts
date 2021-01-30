@@ -2,6 +2,7 @@ export const SET_APP_STATE = 'SET_APP_STATE';
 export const SET_COUNT_DOWN_TIME = 'SET_COUNT_DOWN_TIME';
 export const ADD_CORRECT_KEY = 'ADD_CORRECT_KEY';
 export const ADD_INCORRECT_KEY = 'ADD_INCORRECT_KEY';
+export const RESET_PAGE_MANAGER = 'RESET_PAGE_MANAGER';
 
 interface SetAppStateAction {
   type: typeof SET_APP_STATE;
@@ -23,6 +24,10 @@ interface AddIncorrectKey {
   payload: string;
 }
 
+interface ResetPageManager {
+  type: typeof RESET_PAGE_MANAGER;
+}
+
 export interface CorrectKey {
   keyText: string;
   interval: number;
@@ -41,7 +46,8 @@ export type PageManagerActionTypes =
   | SetAppStateAction
   | SetCountDownTime
   | AddCorrectKey
-  | AddIncorrectKey;
+  | AddIncorrectKey
+  | ResetPageManager;
 
 export interface PageManagerState {
   appState: AppStates;
