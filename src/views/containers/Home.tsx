@@ -30,15 +30,7 @@ const HomeContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps
       <AppTitle>えいごでタイピング</AppTitle>
       <AnimatedTyping />
       <CustomThemeProvider>
-        <div
-          style={{
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            width: '25vw',
-            marginRight: 'auto',
-            marginLeft: 'auto'
-          }}>
+        <ButtonParent>
           <Button variant="contained" color="secondary" onClick={linkToTyping}>
             <p style={{ color: '#e1eef6', fontSize: '20px', margin: 0 }}>START</p>
           </Button>
@@ -46,13 +38,20 @@ const HomeContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps
             showJapanese={showJapanese}
             switchShowJapanese={switchShowJapanese}
           />
-        </div>
+        </ButtonParent>
       </CustomThemeProvider>
     </div>
   );
 };
 
 const AppTitle = styled.div`
+  color: #e1eef6;
+  font-size: 40px;
+  text-align: center;
+  font-family: bokutachi;
+`;
+
+const ButtonParent = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
