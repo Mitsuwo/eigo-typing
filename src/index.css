@@ -1,13 +1,18 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  overflow-y: hidden;
+}
+
+@font-face {
+  font-family: 'bokutachi';
+  src: local('bokutachi'), url(./fonts/bokutachi.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'oxygenMono';
+  src: local('oxygenMono'), url(./fonts/oxygenMono.otf) format('truetype');
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
