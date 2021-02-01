@@ -1,26 +1,43 @@
 import React from 'react';
-import { Checkbox, FormControlLabel } from '@material-ui/core';
-import { CustomThemeProvider } from '../styles/CustomThemeProvider';
+import { Checkbox, createStyles, FormControlLabel, makeStyles } from '@material-ui/core';
 
 interface Props {
   showJapanese: boolean;
+  fontColor: string;
   switchShowJapanese: () => void;
 }
 
+const createClasses = makeStyles(() =>
+  createStyles({
+    root: {
+      color: '#e1eef6',
+      '&$checked': {
+        color: '#7200da'
+      }
+    },
+    checked: {}
+  })
+);
+
 const ShowJapaneseCheckBoxComponent: React.FC<Props> = (props: Props) => {
+  const classes = createClasses();
   return (
-    <FormControlLabel
-      control={
-        <CustomThemeProvider>
+    <div style={{ padding: '2vh' }}>
+      <FormControlLabel
+        control={
           <Checkbox
+            classes={{
+              root: classes.root,
+              checked: classes.checked
+            }}
             checked={props.showJapanese}
             onChange={props.switchShowJapanese}
-            color="primary"
           />
-        </CustomThemeProvider>
-      }
-      label="日本語訳を表示する"
-    />
+        }
+        style={{ color: props.fontColor }}
+        label="日本語訳を表示する"
+      />
+    </div>
   );
 };
 

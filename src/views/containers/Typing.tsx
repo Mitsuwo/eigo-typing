@@ -133,21 +133,27 @@ const TypingContainer: React.FC = () => {
   ) : (
     <div>
       <CountDown countDownTime={countDownTime} />
-      <ShowJapaneseCheckBox showJapanese={showJapanese} switchShowJapanese={switchShowJapanese} />
-      <ScriptWrapper
-        ref={scriptWrapperRef}
-        onKeyDown={handleKeyDown}
-        onKeyUp={handleKeyUp}
-        onBlur={focusScriptWrapper}
-        tabIndex={0}>
-        <ScriptEnglish
-          script={currentScript ? currentScript.english : ''}
-          correctCharCount={correctCharCount}
-          scriptIndex={currentScriptIndex}
-          currentScriptIndex={currentScriptIndex}
+      <div style={{ marginLeft: '5vw', marginRight: '5vw' }}>
+        <ScriptWrapper
+          ref={scriptWrapperRef}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+          onBlur={focusScriptWrapper}
+          tabIndex={0}>
+          <ScriptEnglish
+            script={currentScript ? currentScript.english : ''}
+            correctCharCount={correctCharCount}
+            scriptIndex={currentScriptIndex}
+            currentScriptIndex={currentScriptIndex}
+          />
+          {showJapanese ? <ScriptJapanese scriptJapanese={scriptJapanese} /> : ''}
+        </ScriptWrapper>
+        <ShowJapaneseCheckBox
+          showJapanese={showJapanese}
+          fontColor="black"
+          switchShowJapanese={switchShowJapanese}
         />
-      </ScriptWrapper>
-      {showJapanese ? <ScriptJapanese scriptJapanese={scriptJapanese} /> : ''}
+      </div>
       <Keyboard currentKeys={currentKeys} nextKey={nextKey} />
     </div>
   );
@@ -164,12 +170,15 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 const ScriptWrapper = styled.div`
-  width: 94vw;
-  margin: 0 3vw 25px 3vw;
-  padding: 0;
+  width: 86vw;
+  margin: 0;
+  padding: 2vw;
   overflow-y: scroll;
   display: inline-block;
   text-align: left;
+  :focus {
+    outline: 0.5vh solid grey;
+  }
 `;
 
 export const Typing = TypingContainer;

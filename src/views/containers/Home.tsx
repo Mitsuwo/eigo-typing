@@ -36,20 +36,18 @@ const HomeContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps
       }}>
       <AppTitle>えいごでタイピング</AppTitle>
       <AnimatedTyping />
-      <CustomThemeProvider>
-        <ButtonParent>
-          <Button variant="contained" color="secondary" onClick={linkToTyping}>
-            <p style={{ color: '#e1eef6', fontFamily: 'oxygenMono', fontSize: '20px', margin: 0 }}>
-              START
-            </p>
-          </Button>
-          <ShowJapaneseCheckBox
-            showJapanese={showJapanese}
-            fontColor="#e1eef6"
-            switchShowJapanese={switchShowJapanese}
-          />
-        </ButtonParent>
-      </CustomThemeProvider>
+      <ButtonParent>
+        <Button variant="contained" color="secondary" onClick={linkToTyping}>
+          <p style={{ color: '#e1eef6', fontFamily: 'oxygenMono', fontSize: '20px', margin: 0 }}>
+            START
+          </p>
+        </Button>
+        <ShowJapaneseCheckBox
+          showJapanese={showJapanese}
+          fontColor="#e1eef6"
+          switchShowJapanese={switchShowJapanese}
+        />
+      </ButtonParent>
     </div>
   );
 };

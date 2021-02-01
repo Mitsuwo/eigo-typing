@@ -5,12 +5,13 @@ import {
   SET_COUNT_DOWN_TIME,
   APP_STATE_INITIAL,
   ADD_INCORRECT_KEY,
-  ADD_CORRECT_KEY
+  ADD_CORRECT_KEY,
+  RESET_PAGE_MANAGER
 } from './types';
 
 const initialState: PageManagerState = {
   appState: APP_STATE_INITIAL,
-  countDownTime: 180,
+  countDownTime: 600,
   correctKeys: [],
   incorrectKeys: []
 };
@@ -43,6 +44,9 @@ export function pageManagerReducer(
         ...state,
         incorrectKeys: state.incorrectKeys.concat([action.payload])
       };
+    }
+    case RESET_PAGE_MANAGER: {
+      return initialState;
     }
     default:
       return state;

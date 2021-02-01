@@ -61,7 +61,7 @@ const ResultContainer: React.FC = () => {
     return result;
   }, [correctKeys]);
   return (
-    <div>
+    <div style={{ height: '100vh', overflow: 'scroll' }}>
       <TypedScripts typedScripts={typedScripts} />
       <BarChart
         data={intervalData}

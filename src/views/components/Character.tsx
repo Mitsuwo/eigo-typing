@@ -14,6 +14,7 @@ const CharacterComponent: React.FC<Props> = (props: Props) => {
       style={{
         color: props.color,
         fontSize: '30px',
+        fontFamily: 'oxygenMono',
         borderBottom: props.isNextChar ? 'solid' : 'none'
       }}>
       {props.char === ' ' ? '\u00A0' : props.char}
