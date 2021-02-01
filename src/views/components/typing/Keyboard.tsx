@@ -1,13 +1,13 @@
 import React from 'react';
-import { keys } from '../../constant/keyboardKeys';
+import { keys } from '../../../constant/keyboardKeys';
 import {
   KEY_COLOR_ACTIVE_SHIFT,
   KEY_COLOR_CORRECT,
   KEY_COLOR_DEFAULT,
   KEY_COLOR_DISABLED,
   KEY_COLOR_INCORRECT
-} from '../../constant/styles';
-import { Key } from '../components/Key';
+} from '../../../constant/styles';
+import { Key } from './Key';
 
 interface Props {
   currentKeys: string[];

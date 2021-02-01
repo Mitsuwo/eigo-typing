@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { CorrectKey } from '../../store/PageManager/types';
-import { BarChart, BarChartData } from '../components/BarChart';
-import { TypedScripts } from '../components/TypedScripts';
+import { BarChart, BarChartData } from '../components/result/BarChart';
+import { TypedScripts } from '../components/result/TypedScripts';
 
 const ResultContainer: React.FC = () => {
   const { correctKeys, incorrectKeys } = useSelector((state: RootState) => state.pageManager);

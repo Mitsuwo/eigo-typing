@@ -11,8 +11,8 @@ import {
   setShowJapanese
 } from '../../store/TypingContent/actions';
 import { Script } from '../../store/TypingContent/types';
-import { CountDown } from '../components/CountDown';
-import { Keyboard } from '../components/Keyboard';
+import { CountDown } from '../components/typing/CountDown';
+import { Keyboard } from '../components/typing/Keyboard';
 import {
   setAppState,
   setCountDownTime,
@@ -21,7 +21,7 @@ import {
 } from '../../store/PageManager/actions';
 import { APP_STATE_TIMEUP, APP_STATE_TYPING } from '../../store/PageManager/types';
 import { SPACE_VALUE } from '../../constant/typingConst';
-import { ScriptEnglish } from '../components/ScriptEnglish';
+import { ScriptEnglish } from '../components/typing/ScriptEnglish';
 import {
   clearCorrectCharCount,
   setNextKey,
@@ -29,8 +29,8 @@ import {
   deleteCurrentKey,
   incrementCorrectCharCount
 } from '../../store/Keyboard/actions';
-import { ScriptJapanese } from '../components/ScriptJapanese';
-import { ShowJapaneseCheckBox } from '../components/ShowJapaneseCheckBox';
+import { ScriptJapanese } from '../components/typing/ScriptJapanese';
+import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox';
 
 let lastInputTime = 0;
 

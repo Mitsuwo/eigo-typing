@@ -8,9 +8,9 @@ import { RootState } from '../../store';
 import { resetPageManager, setAppState } from '../../store/PageManager/actions';
 import { APP_STATE_TYPING } from '../../store/PageManager/types';
 import { setShowJapanese } from '../../store/TypingContent/actions';
-import { ShowJapaneseCheckBox } from '../components/ShowJapaneseCheckBox';
+import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox';
 import { CustomThemeProvider } from '../styles/CustomThemeProvider';
-import { AnimatedTyping } from '../components/AnimatedTyping';
+import { AnimatedTyping } from '../components/home/AnimatedTyping';
 
 const HomeContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
   const { showJapanese } = useSelector((state: RootState) => state.typingContent);

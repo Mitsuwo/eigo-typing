@@ -1,5 +1,5 @@
 import React from 'react';
-import { Script } from '../../store/TypingContent/types';
+import { Script } from '../../../store/TypingContent/types';
 
 interface Props {
   typedScripts: Script[];

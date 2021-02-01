@@ -1,4 +1,4 @@
-import { KeyInfo } from '../views/components/Keyboard';
+import { KeyInfo } from '../views/components/typing/Keyboard';
 
 export const keys: KeyInfo[][] = [
   [

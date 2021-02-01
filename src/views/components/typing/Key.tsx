@@ -7,7 +7,7 @@ import {
   KEY_COLOR_INCORRECT,
   KEY_FONT_COLOR_DEFAULT,
   KEY_FONT_COLOR_PRESSED
-} from '../../constant/styles';
+} from '../../../constant/styles';
 
 interface Props {
   text: string;
