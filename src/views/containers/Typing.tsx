@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RouteComponentProps, withRouter } from 'react-router';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import scriptsJson from '../../constant/corpus.json';
 import { RootState } from '../../store';
 import {
@@ -31,10 +31,12 @@ import {
 } from '../../store/Keyboard/actions';
 import { ScriptJapanese } from '../components/typing/ScriptJapanese';
 import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox';
+import { TimeUp } from '../components/typing/TimeUp';
+import { HomeButton } from '../components/common/HomeButton';
 
 let lastInputTime = 0;
 
-const TypingContainer: React.FC = () => {
+const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
   const { currentKeys, nextKey, correctCharCount } = useSelector(
     (state: RootState) => state.keyboard
   );
@@ -65,7 +67,7 @@ const TypingContainer: React.FC = () => {
     dispatch(setScripts(scripts));
     dispatch(setCurrentScript(scripts[currentScriptIndex]));
     dispatch(setNextKey(scripts[currentScriptIndex].english[0]));
-    focusScriptWrapper();
+    focusScriptParent();
     lastInputTime = 0;
     startCountDown();
   };
@@ -83,12 +85,12 @@ const TypingContainer: React.FC = () => {
       }
     }, 1000);
   };
-  const scriptWrapperRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
+  const scriptParentRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
   const isElement = (element: HTMLDivElement | null): element is HTMLDivElement => {
     return typeof element !== null;
   };
-  const focusScriptWrapper = (): void => {
-    const { current } = scriptWrapperRef;
+  const focusScriptParent = (): void => {
+    const { current } = scriptParentRef;
     if (isElement(current) && current !== document.activeElement && appState === APP_STATE_TYPING) {
       current.focus();
     }
@@ -124,21 +126,22 @@ const TypingContainer: React.FC = () => {
   const switchShowJapanese = () => {
     dispatch(setShowJapanese(!showJapanese));
   };
+  const linkTo = (pageName: string) => {
+    props.history.push(`/${pageName}`);
+  };
   const scriptJapanese = scripts[currentScriptIndex] ? scripts[currentScriptIndex].japanese : '';
   return appState !== APP_STATE_TYPING ? (
-    <div>
-      <div>タイムアップ</div>
-      <Link to="/result">結果を表示する</Link>
-    </div>
+    <TimeUp linkTo={linkTo} />
   ) : (
     <div>
+      <HomeButton linkTo={linkTo} />
       <CountDown countDownTime={countDownTime} />
       <div style={{ marginLeft: '5vw', marginRight: '5vw' }}>
-        <ScriptWrapper
-          ref={scriptWrapperRef}
+        <ScriptParent
+          ref={scriptParentRef}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
-          onBlur={focusScriptWrapper}
+          onBlur={focusScriptParent}
           tabIndex={0}>
           <ScriptEnglish
             script={currentScript ? currentScript.english : ''}
@@ -146,11 +149,11 @@ const TypingContainer: React.FC = () => {
             scriptIndex={currentScriptIndex}
             currentScriptIndex={currentScriptIndex}
           />
-          {showJapanese ? <ScriptJapanese scriptJapanese={scriptJapanese} /> : ''}
-        </ScriptWrapper>
+          <ScriptJapanese visible={showJapanese} scriptJapanese={scriptJapanese} />
+        </ScriptParent>
         <ShowJapaneseCheckBox
           showJapanese={showJapanese}
-          fontColor="black"
+          fontColor="#808080"
           switchShowJapanese={switchShowJapanese}
         />
       </div>
@@ -169,16 +172,14 @@ function shuffleArray<T>(array: T[]): T[] {
   return array;
 }
 
-const ScriptWrapper = styled.div`
+const ScriptParent = styled.div`
   width: 86vw;
   margin: 0;
-  padding: 2vw;
   overflow-y: scroll;
   display: inline-block;
   text-align: left;
   :focus {
     outline: 0.5vh solid grey;
-  }
 `;
 
-export const Typing = TypingContainer;
+export const Typing = withRouter(TypingContainer);

@@ -1,11 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { RootState } from '../../store';
 import { CorrectKey } from '../../store/PageManager/types';
+import { HomeButton } from '../components/common/HomeButton';
 import { BarChart, BarChartData } from '../components/result/BarChart';
+import { ResultCard } from '../components/result/ResultCard';
 import { TypedScripts } from '../components/result/TypedScripts';
 
-const ResultContainer: React.FC = () => {
+const ResultContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
   const { correctKeys, incorrectKeys } = useSelector((state: RootState) => state.pageManager);
   const typedScripts = useSelector((state: RootState) => {
     const { currentScriptIndex, scripts } = state.typingContent;
@@ -60,35 +63,83 @@ const ResultContainer: React.FC = () => {
     }
     return result;
   }, [correctKeys]);
+  const linkTo = (pageName: string) => {
+    props.history.push(`/${pageName}`);
+  };
   return (
-    <div style={{ height: '100vh', overflow: 'scroll' }}>
-      <TypedScripts typedScripts={typedScripts} />
-      <BarChart
-        data={intervalData}
-        barDataKey="タイピングするまでの時間 - 長い順（秒）"
-        barColor="#7200da"
-        ascending={false}
-      />
-      <BarChart
-        data={intervalData}
-        barDataKey="タイピングするまでの時間 - 短い順（秒）"
-        barColor="#f9c00c"
-        ascending
-      />
-      <BarChart
-        data={incorrectCountData}
-        barDataKey="タイプミスした回数（回）"
-        barColor="#f9320c"
-        ascending={false}
-      />
-      <BarChart
-        data={correctCountData}
-        barDataKey="正確にタイピングした回数（回）"
-        barColor="#00b9f1"
-        ascending={false}
-      />
+    <div style={{ height: '100vh' }}>
+      <HomeButton linkTo={linkTo} />
+      <div
+        style={{
+          width: '100vw',
+          position: 'fixed',
+          top: '3vh',
+          textAlign: 'center',
+          fontSize: '4vh',
+          fontFamily: 'oxygenMono',
+          color: '#808080'
+        }}>
+        RESULT
+      </div>
+      <div style={{ overflow: 'scroll', height: '90vh', marginTop: '10vh' }}>
+        <ResultCard>
+          <div>
+            <div
+              style={{
+                fontSize: '3vh',
+                fontFamily: 'koruri',
+                color: '#808080',
+                margin: '1vh 2vw'
+              }}>
+              <span style={{ color: '#00b9f1', fontWeight: 'bold' }}>{correctKeys.length}</span>
+              文字を正確にタイピングしました
+            </div>
+            <div
+              style={{
+                fontSize: '3vh',
+                fontFamily: 'koruri',
+                color: '#808080',
+                margin: '1vh 2vw'
+              }}>
+              <span style={{ color: '#f9320c', fontWeight: 'bold' }}>{incorrectKeys.length}</span>
+              回のタイプミスがありました
+            </div>
+          </div>
+        </ResultCard>
+        <ResultCard>
+          <TypedScripts typedScripts={typedScripts} />
+        </ResultCard>
+        <ResultCard>
+          <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', overflowX: 'scroll' }}>
+            <BarChart
+              data={intervalData}
+              barName="タイピングするまでの時間 - 長い順（秒）"
+              barColor="#7200da"
+              ascending={false}
+            />
+            <BarChart
+              data={intervalData}
+              barName="タイピングするまでの時間 - 短い順（秒）"
+              barColor="#f9c00c"
+              ascending
+            />
+            <BarChart
+              data={incorrectCountData}
+              barName="タイプミスした回数（回）"
+              barColor="#f9320c"
+              ascending={false}
+            />
+            <BarChart
+              data={correctCountData}
+              barName="正確にタイピングした回数（回）"
+              barColor="#00b9f1"
+              ascending={false}
+            />
+          </div>
+        </ResultCard>
+      </div>
     </div>
   );
 };
 
-export const Result = ResultContainer;
+export const Result = withRouter(ResultContainer);
