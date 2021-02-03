@@ -19,7 +19,11 @@ import {
   addIncorrectKey,
   addCorrectKey
 } from '../../store/PageManager/actions';
-import { APP_STATE_TIMEUP, APP_STATE_TYPING } from '../../store/PageManager/types';
+import {
+  APP_STATE_INITIAL,
+  APP_STATE_TIMEUP,
+  APP_STATE_TYPING
+} from '../../store/PageManager/types';
 import { SPACE_VALUE } from '../../constant/typingConst';
 import { ScriptEnglish } from '../components/typing/ScriptEnglish';
 import {
@@ -48,6 +52,11 @@ const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
   React.useEffect(() => {
     initialize();
   }, []);
+  React.useEffect(() => {
+    if (appState === APP_STATE_INITIAL) {
+      linkTo('');
+    }
+  }, [appState]);
   React.useEffect(() => {
     if (!currentScript) {
       return;
