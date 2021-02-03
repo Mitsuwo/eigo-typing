@@ -11,7 +11,7 @@ import {
 
 const initialState: PageManagerState = {
   appState: APP_STATE_INITIAL,
-  countDownTime: 600,
+  countDownTime: 180,
   correctKeys: [],
   incorrectKeys: []
 };
