@@ -10,9 +10,13 @@ const TypedScriptsComponent: React.FC<Props> = (props: Props) => {
     <div>
       {props.typedScripts.map((script: Script) => {
         return (
-          <div key={script.id}>
-            <div>{script.english}</div>
-            <div>{script.japanese}</div>
+          <div key={script.id} style={{ margin: '2vw' }}>
+            <div style={{ fontSize: '3vh', fontFamily: 'oxygenMono', color: 'grey' }}>
+              {script.english}
+            </div>
+            <div style={{ fontSize: '3vh', fontFamily: 'koruri', color: 'grey' }}>
+              {script.japanese}
+            </div>
           </div>
         );
       })}

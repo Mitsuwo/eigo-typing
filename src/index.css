@@ -1,6 +1,7 @@
 body {
   margin: 0;
   overflow-y: hidden;
+  background-color: #e0e3da;
 }
 
 @font-face {
@@ -11,6 +12,11 @@ body {
 @font-face {
   font-family: 'oxygenMono';
   src: local('oxygenMono'), url(./fonts/oxygenMono.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'koruri';
+  src: local('koruri'), url(./fonts/Koruri-Regular.ttf) format('truetype');
 }
 
 code {

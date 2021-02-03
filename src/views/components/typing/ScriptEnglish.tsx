@@ -36,7 +36,7 @@ const ScriptEnglishComponent: React.FC<Props> = (props: Props) => {
     return shouldBreak ? <br /> : '';
   };
   return (
-    <div ref={divRef} style={{ width: '100%' }}>
+    <div ref={divRef} style={{ width: '100%', margin: '2vw' }}>
       {props.script.split('').map((char: string, index: number) => {
         const color = props.correctCharCount > index ? 'black' : 'grey';
         const isNextChar = props.correctCharCount === index;

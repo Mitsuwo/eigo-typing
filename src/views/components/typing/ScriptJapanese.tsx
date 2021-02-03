@@ -1,12 +1,22 @@
 import React from 'react';
 
 interface Props {
+  visible: boolean;
   scriptJapanese: string;
 }
 
 const ScriptJapaneseComponent: React.FC<Props> = (props: Props) => {
   return (
-    <div style={{ marginTop: '4vh', fontSize: '3vh', color: 'grey' }}>{props.scriptJapanese}</div>
+    <div
+      style={{
+        display: props.visible ? 'block' : 'none',
+        margin: '2vw',
+        fontSize: '3vh',
+        fontFamily: 'koruri',
+        color: 'grey'
+      }}>
+      {props.scriptJapanese}
+    </div>
   );
 };
 

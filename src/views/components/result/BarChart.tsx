@@ -8,7 +8,7 @@ export interface BarChartData {
 
 type Props = {
   data: BarChartData[];
-  barDataKey: string;
+  barName: string;
   barColor: string;
   ascending: boolean;
 };
@@ -26,23 +26,26 @@ const BarChartComponent: React.FC<Props> = (props: Props) => {
       .slice(0, 10);
   }, [props.data]);
   return (
-    <Chart
-      width={500}
-      height={300}
-      data={data}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="keyText" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="volume" fill={props.barColor} name={props.barDataKey} />
-    </Chart>
+    <div style={{ width: '50%', margin: '4vh auto 0 auto', minWidth: '600px' }}>
+      <Chart
+        width={600}
+        height={300}
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5
+        }}
+        style={{ fontFamily: 'koruri' }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="keyText" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="volume" fill={props.barColor} name={props.barName} />
+      </Chart>
+    </div>
   );
 };
 

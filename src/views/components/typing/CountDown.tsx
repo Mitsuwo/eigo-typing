@@ -10,8 +10,9 @@ const CountDownComponent: React.FC<Props> = (props: Props) => {
     <div
       style={{
         height: '8vh',
-        padding: '4vh 2vw',
+        padding: 'auto',
         width: '10vw',
+        marginTop: '4vh',
         marginLeft: '45vw',
         display: 'flex'
       }}>
