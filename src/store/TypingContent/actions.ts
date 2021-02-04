@@ -4,7 +4,8 @@ import {
   SET_CURRENT_SCRIPT_INDEX,
   TypingContentActionTypes,
   SET_SCRIPTS,
-  SET_SHOW_JAPANESE
+  SET_SHOW_JAPANESE,
+  RESET_TYPING_CONTENT_STATE
 } from './types';
 
 export function setScripts(scripts: Script[]): TypingContentActionTypes {
@@ -32,5 +33,11 @@ export function setShowJapanese(showJapanese: boolean): TypingContentActionTypes
   return {
     type: SET_SHOW_JAPANESE,
     payload: showJapanese
+  };
+}
+
+export function resetTypingContentState(): TypingContentActionTypes {
+  return {
+    type: RESET_TYPING_CONTENT_STATE
   };
 }

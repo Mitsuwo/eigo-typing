@@ -4,7 +4,8 @@ import {
   SET_SCRIPTS,
   SET_CURRENT_SCRIPT_INDEX,
   SET_CURRENT_SCRIPT,
-  SET_SHOW_JAPANESE
+  SET_SHOW_JAPANESE,
+  RESET_TYPING_CONTENT_STATE
 } from './types';
 
 const initialState: TypingContentState = {
@@ -42,6 +43,9 @@ export function typingContentReducer(
         ...state,
         showJapanese: action.payload
       };
+    }
+    case RESET_TYPING_CONTENT_STATE: {
+      return initialState;
     }
     default:
       return state;

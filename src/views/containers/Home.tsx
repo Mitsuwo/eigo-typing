@@ -4,9 +4,10 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import styled from 'styled-components';
 import bgImage from '../../images/bg.jpg';
 import { RootState } from '../../store';
+import { clearCorrectCharCount } from '../../store/Keyboard/actions';
 import { resetPageManager, setAppState } from '../../store/PageManager/actions';
 import { APP_STATE_TYPING } from '../../store/PageManager/types';
-import { setShowJapanese } from '../../store/TypingContent/actions';
+import { resetTypingContentState, setShowJapanese } from '../../store/TypingContent/actions';
 import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox';
 import { AnimatedTyping } from '../components/home/AnimatedTyping';
 import { StartButton } from '../components/home/StartButton';
@@ -17,11 +18,13 @@ const HomeContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps
   React.useEffect(() => {
     dispatch(resetPageManager());
   }, []);
-  const switchShowJapanese = () => {
+  const switchShowJapanese = (): void => {
     dispatch(setShowJapanese(!showJapanese));
   };
-  const linkToTyping = () => {
+  const linkToTyping = (): void => {
     dispatch(setAppState(APP_STATE_TYPING));
+    dispatch(clearCorrectCharCount());
+    dispatch(resetTypingContentState());
     props.history.push('/typing');
   };
   return (
