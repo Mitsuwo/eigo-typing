@@ -15,14 +15,14 @@ const ResultContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
     return scripts.slice(0, currentScriptIndex + 1);
   });
   const createBarChartData = (keyText: string, volume: number): BarChartData => {
-    if (keyText === ' ') {
-      keyText = 'space';
-    }
     return { keyText, volume };
   };
   const intervalData = React.useMemo<BarChartData[]>(() => {
     const result: BarChartData[] = [];
     correctKeys.forEach((correctKey: CorrectKey) => {
+      if (correctKey.keyText === ' ') {
+        correctKey.keyText = 'space';
+      }
       const sameKeyIndex = result.findIndex(
         (addedCorrectKey: BarChartData) => addedCorrectKey.keyText === correctKey.keyText
       );
@@ -63,7 +63,7 @@ const ResultContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
     }
     return result;
   }, [correctKeys]);
-  const linkTo = (pageName: string) => {
+  const linkTo = (pageName: string): void => {
     props.history.push(`/${pageName}`);
   };
   return (
