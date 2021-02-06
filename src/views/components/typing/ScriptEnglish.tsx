@@ -31,10 +31,6 @@ const ScriptEnglishComponent: React.FC<Props> = (props: Props) => {
     }
     setShouldBreakIndexes(tmpIndexes);
   }, [props.script]);
-  const renderBreak = (index: number) => {
-    const shouldBreak = shouldBreakIndexes.indexOf(index) !== -1;
-    return shouldBreak ? <br /> : '';
-  };
   return (
     <div ref={divRef} style={{ width: '100%', margin: '2vw' }}>
       {props.script.split('').map((char: string, index: number) => {
@@ -49,7 +45,7 @@ const ScriptEnglishComponent: React.FC<Props> = (props: Props) => {
               color={color}
               isNextChar={isNextChar}
             />
-            {renderBreak(index)}
+            {shouldBreakIndexes.indexOf(index) !== -1 ? <br /> : ''}
           </>
         );
       })}
@@ -57,4 +53,4 @@ const ScriptEnglishComponent: React.FC<Props> = (props: Props) => {
   );
 };
 
-export const ScriptEnglish = React.memo(ScriptEnglishComponent);
+export const ScriptEnglish = React.memo<Props>(ScriptEnglishComponent);
