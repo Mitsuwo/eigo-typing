@@ -7,18 +7,12 @@ import { RootState } from '../../store';
 import {
   setCurrentScript,
   setCurrentScriptIndex,
-  setScripts,
-  setShowJapanese
+  setScripts
 } from '../../store/TypingContent/actions';
 import { Script } from '../../store/TypingContent/types';
 import { CountDown } from '../components/typing/CountDown';
 import { Keyboard } from '../components/typing/Keyboard';
-import {
-  setAppState,
-  setCountDownTime,
-  addIncorrectKey,
-  addCorrectKey
-} from '../../store/PageManager/actions';
+import { setAppState, setCountDownTime, setShowJapanese } from '../../store/PageManager/actions';
 import {
   APP_STATE_INITIAL,
   APP_STATE_TIMEUP,
@@ -37,6 +31,7 @@ import { ScriptJapanese } from '../components/typing/ScriptJapanese';
 import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox';
 import { TimeUp } from '../components/typing/TimeUp';
 import { HomeButton } from '../components/common/HomeButton';
+import { addCorrectKey, addIncorrectKey } from '../../store/Result/actions';
 
 let lastInputTime = 0;
 
@@ -44,10 +39,12 @@ const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
   const { currentKeys, nextKey, correctCharCount } = useSelector(
     (state: RootState) => state.keyboard
   );
-  const { scripts, currentScript, currentScriptIndex, showJapanese } = useSelector(
+  const { scripts, currentScript, currentScriptIndex } = useSelector(
     (state: RootState) => state.typingContent
   );
-  const { appState, countDownTime } = useSelector((state: RootState) => state.pageManager);
+  const { appState, countDownTime, showJapanese } = useSelector(
+    (state: RootState) => state.pageManager
+  );
   const dispatch = useDispatch();
   React.useEffect(() => {
     initialize();
@@ -80,7 +77,7 @@ const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
     lastInputTime = 0;
     startCountDown();
   };
-  const startCountDown = () => {
+  const startCountDown = (): void => {
     if (appState !== APP_STATE_TYPING) {
       return;
     }
@@ -107,7 +104,7 @@ const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
   const isCorrectInput = (key: string): boolean => {
     return key === nextKey;
   };
-  const setTypingInterval = (key: string) => {
+  const setTypingInterval = (key: string): void => {
     if (lastInputTime !== 0) {
       const interval = performance.now() - lastInputTime;
       dispatch(addCorrectKey({ keyText: key, interval: Math.floor(interval * 1000) / 1000000 }));
@@ -132,10 +129,10 @@ const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
   const handleKeyUp = (event: React.KeyboardEvent): void => {
     dispatch(deleteCurrentKey(event.code));
   };
-  const switchShowJapanese = () => {
+  const switchShowJapanese = (): void => {
     dispatch(setShowJapanese(!showJapanese));
   };
-  const linkTo = (pageName: string) => {
+  const linkTo = (pageName: string): void => {
     props.history.push(`/${pageName}`);
   };
   const scriptJapanese = scripts[currentScriptIndex] ? scripts[currentScriptIndex].japanese : '';

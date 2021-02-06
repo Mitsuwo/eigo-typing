@@ -2,11 +2,9 @@ import {
   SET_APP_STATE,
   PageManagerActionTypes,
   SET_COUNT_DOWN_TIME,
+  SET_SHOW_JAPANESE,
   AppStates,
-  ADD_INCORRECT_KEY,
-  ADD_CORRECT_KEY,
-  CorrectKey,
-  RESET_PAGE_MANAGER
+  RESET_COUNT_DOWN
 } from './types';
 
 export function setAppState(appState: AppStates): PageManagerActionTypes {
@@ -23,22 +21,15 @@ export function setCountDownTime(countDownTime: number): PageManagerActionTypes 
   };
 }
 
-export function addCorrectKey(interval: CorrectKey): PageManagerActionTypes {
+export function setShowJapanese(showJapanese: boolean): PageManagerActionTypes {
   return {
-    type: ADD_CORRECT_KEY,
-    payload: interval
+    type: SET_SHOW_JAPANESE,
+    payload: showJapanese
   };
 }
 
-export function addIncorrectKey(incorrectKey: string): PageManagerActionTypes {
+export function resetCountDown(): PageManagerActionTypes {
   return {
-    type: ADD_INCORRECT_KEY,
-    payload: incorrectKey
-  };
-}
-
-export function resetPageManager(): PageManagerActionTypes {
-  return {
-    type: RESET_PAGE_MANAGER
+    type: RESET_COUNT_DOWN
   };
 }

@@ -2,14 +2,14 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { RootState } from '../../store';
-import { CorrectKey } from '../../store/PageManager/types';
+import { CorrectKey } from '../../store/Result/types';
 import { HomeButton } from '../components/common/HomeButton';
 import { BarChart, BarChartData } from '../components/result/BarChart';
 import { ResultCard } from '../components/result/ResultCard';
 import { TypedScripts } from '../components/result/TypedScripts';
 
 const ResultContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
-  const { correctKeys, incorrectKeys } = useSelector((state: RootState) => state.pageManager);
+  const { correctKeys, incorrectKeys } = useSelector((state: RootState) => state.resultState);
   const typedScripts = useSelector((state: RootState) => {
     const { currentScriptIndex, scripts } = state.typingContent;
     return scripts.slice(0, currentScriptIndex + 1);

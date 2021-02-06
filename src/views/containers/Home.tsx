@@ -5,18 +5,19 @@ import styled from 'styled-components';
 import bgImage from '../../images/bg.jpg';
 import { RootState } from '../../store';
 import { clearCorrectCharCount } from '../../store/Keyboard/actions';
-import { resetPageManager, setAppState } from '../../store/PageManager/actions';
-import { APP_STATE_TYPING } from '../../store/PageManager/types';
-import { resetTypingContentState, setShowJapanese } from '../../store/TypingContent/actions';
+import { setAppState, resetCountDown, setShowJapanese } from '../../store/PageManager/actions';
+import { APP_STATE_INITIAL, APP_STATE_TYPING } from '../../store/PageManager/types';
+import { resetResultState } from '../../store/Result/actions';
+import { resetTypingContentState } from '../../store/TypingContent/actions';
 import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox';
 import { AnimatedTyping } from '../components/home/AnimatedTyping';
 import { StartButton } from '../components/home/StartButton';
 
 const HomeContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
-  const { showJapanese } = useSelector((state: RootState) => state.typingContent);
+  const { showJapanese } = useSelector((state: RootState) => state.pageManager);
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(resetPageManager());
+    dispatch(setAppState(APP_STATE_INITIAL));
   }, []);
   const switchShowJapanese = (): void => {
     dispatch(setShowJapanese(!showJapanese));
@@ -25,6 +26,8 @@ const HomeContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps
     dispatch(setAppState(APP_STATE_TYPING));
     dispatch(clearCorrectCharCount());
     dispatch(resetTypingContentState());
+    dispatch(resetCountDown());
+    dispatch(resetResultState());
     props.history.push('/typing');
   };
   return (

@@ -4,15 +4,13 @@ import {
   SET_SCRIPTS,
   SET_CURRENT_SCRIPT_INDEX,
   SET_CURRENT_SCRIPT,
-  SET_SHOW_JAPANESE,
   RESET_TYPING_CONTENT_STATE
 } from './types';
 
 const initialState: TypingContentState = {
   scripts: [],
   currentScriptIndex: 0,
-  currentScript: undefined,
-  showJapanese: true
+  currentScript: undefined
 };
 
 export function typingContentReducer(
@@ -36,12 +34,6 @@ export function typingContentReducer(
       return {
         ...state,
         currentScript: action.payload
-      };
-    }
-    case SET_SHOW_JAPANESE: {
-      return {
-        ...state,
-        showJapanese: action.payload
       };
     }
     case RESET_TYPING_CONTENT_STATE: {

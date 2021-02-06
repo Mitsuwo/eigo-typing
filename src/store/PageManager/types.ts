@@ -1,8 +1,7 @@
 export const SET_APP_STATE = 'SET_APP_STATE';
 export const SET_COUNT_DOWN_TIME = 'SET_COUNT_DOWN_TIME';
-export const ADD_CORRECT_KEY = 'ADD_CORRECT_KEY';
-export const ADD_INCORRECT_KEY = 'ADD_INCORRECT_KEY';
-export const RESET_PAGE_MANAGER = 'RESET_PAGE_MANAGER';
+export const SET_SHOW_JAPANESE = 'SET_SHOW_JAPANESE';
+export const RESET_COUNT_DOWN = 'RESET_COUNT_DOWN';
 
 interface SetAppStateAction {
   type: typeof SET_APP_STATE;
@@ -14,23 +13,13 @@ interface SetCountDownTime {
   payload: number;
 }
 
-interface AddCorrectKey {
-  type: typeof ADD_CORRECT_KEY;
-  payload: CorrectKey;
+interface SetShowJapanese {
+  type: typeof SET_SHOW_JAPANESE;
+  payload: boolean;
 }
 
-interface AddIncorrectKey {
-  type: typeof ADD_INCORRECT_KEY;
-  payload: string;
-}
-
-interface ResetPageManager {
-  type: typeof RESET_PAGE_MANAGER;
-}
-
-export interface CorrectKey {
-  keyText: string;
-  interval: number;
+interface ResetCountDown {
+  type: typeof RESET_COUNT_DOWN;
 }
 
 export const APP_STATE_INITIAL = 'initial';
@@ -45,13 +34,11 @@ export type AppStates =
 export type PageManagerActionTypes =
   | SetAppStateAction
   | SetCountDownTime
-  | AddCorrectKey
-  | AddIncorrectKey
-  | ResetPageManager;
+  | SetShowJapanese
+  | ResetCountDown;
 
 export interface PageManagerState {
   appState: AppStates;
   countDownTime: number;
-  correctKeys: CorrectKey[];
-  incorrectKeys: string[];
+  showJapanese: boolean;
 }

@@ -4,16 +4,14 @@ import {
   SET_APP_STATE,
   SET_COUNT_DOWN_TIME,
   APP_STATE_INITIAL,
-  ADD_INCORRECT_KEY,
-  ADD_CORRECT_KEY,
-  RESET_PAGE_MANAGER
+  SET_SHOW_JAPANESE,
+  RESET_COUNT_DOWN
 } from './types';
 
 const initialState: PageManagerState = {
   appState: APP_STATE_INITIAL,
   countDownTime: 180,
-  correctKeys: [],
-  incorrectKeys: []
+  showJapanese: true
 };
 
 export function pageManagerReducer(
@@ -33,20 +31,17 @@ export function pageManagerReducer(
         countDownTime: action.payload
       };
     }
-    case ADD_CORRECT_KEY: {
+    case SET_SHOW_JAPANESE: {
       return {
         ...state,
-        correctKeys: state.correctKeys.concat([action.payload])
+        showJapanese: action.payload
       };
     }
-    case ADD_INCORRECT_KEY: {
+    case RESET_COUNT_DOWN: {
       return {
         ...state,
-        incorrectKeys: state.incorrectKeys.concat([action.payload])
+        countDownTime: initialState.countDownTime
       };
-    }
-    case RESET_PAGE_MANAGER: {
-      return initialState;
     }
     default:
       return state;
