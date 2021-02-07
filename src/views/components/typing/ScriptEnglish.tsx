@@ -37,16 +37,14 @@ const ScriptEnglishComponent: React.FC<Props> = (props: Props) => {
         const color = props.correctCharCount > index ? 'black' : 'grey';
         const isNextChar = props.correctCharCount === index;
         return (
-          <>
-            <Character
-              id={`char_${props.scriptIndex}_${index}`}
-              key={index}
-              char={char}
-              color={color}
-              isNextChar={isNextChar}
-            />
-            {shouldBreakIndexes.indexOf(index) !== -1 ? <br /> : ''}
-          </>
+          <Character
+            id={`char_${props.scriptIndex}_${index}`}
+            key={index}
+            char={char}
+            color={color}
+            isNextChar={isNextChar}
+            shouldBreak={shouldBreakIndexes.indexOf(index) !== -1}
+          />
         );
       })}
     </div>
