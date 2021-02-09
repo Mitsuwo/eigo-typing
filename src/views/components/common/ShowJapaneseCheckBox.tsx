@@ -1,13 +1,17 @@
 import React from 'react';
 import { Checkbox, createStyles, FormControlLabel, makeStyles } from '@material-ui/core';
+import styled from 'styled-components';
+import { AppLabel } from './AppLabel';
 
-interface Props {
+type Props = {
   showJapanese: boolean;
   fontColor: string;
-  switchShowJapanese: () => void;
-}
+  onChange: () => void;
+  label?: JSX.Element;
+  className?: string;
+};
 
-const ShowJapaneseCheckBoxComponent: React.FC<Props> = (props: Props) => {
+const View: React.FC<Props> = (props: Props) => {
   const createClasses = makeStyles(() =>
     createStyles({
       root: {
@@ -21,26 +25,37 @@ const ShowJapaneseCheckBoxComponent: React.FC<Props> = (props: Props) => {
   );
   const classes = createClasses();
   return (
-    <div style={{ padding: '2vh' }}>
-      <FormControlLabel
-        control={
-          <Checkbox
-            classes={{
-              root: classes.root,
-              checked: classes.checked
-            }}
-            checked={props.showJapanese}
-            onChange={props.switchShowJapanese}
-          />
-        }
-        label={
-          <div style={{ color: props.fontColor, fontFamily: 'koruri', fontWeight: 'bold' }}>
-            日本語訳を表示する
-          </div>
-        }
-      />
-    </div>
+    <FormControlLabel
+      className={props.className}
+      control={
+        <Checkbox
+          classes={{
+            root: classes.root,
+            checked: classes.checked
+          }}
+          checked={props.showJapanese}
+          onChange={props.onChange}
+        />
+      }
+      label={props.label}
+    />
   );
 };
 
-export const ShowJapaneseCheckBox = React.memo(ShowJapaneseCheckBoxComponent);
+const StyledView = styled(View)`
+  padding: 2vh;
+`;
+
+export const ShowJapaneseCheckBox: React.FC<Props> = (props: Props) => {
+  return React.useMemo(
+    () => (
+      <StyledView
+        showJapanese={props.showJapanese}
+        fontColor={props.fontColor}
+        onChange={props.onChange}
+        label={<AppLabel fontColor={props.fontColor} text="日本語訳を表示する" />}
+      />
+    ),
+    [props.showJapanese, props.fontColor]
+  );
+};

@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, BrowserRouter } from 'react-router-dom';
 import './index.css';
-import { Home } from './views/containers/Home';
-import { Typing } from './views/containers/Typing';
-import { Result } from './views/containers/Result';
+import { Home } from './views/pages/Home';
+import { Typing } from './views/pages/Typing';
+import { Result } from './views/pages/Result';
 import { store } from './store';
 
 ReactDOM.render(

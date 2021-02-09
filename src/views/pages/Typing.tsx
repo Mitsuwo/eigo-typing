@@ -140,7 +140,7 @@ const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
     <TimeUp linkTo={linkTo} />
   ) : (
     <div>
-      <HomeButton linkTo={linkTo} />
+      <HomeButton />
       <CountDown countDownTime={countDownTime} />
       <div style={{ marginLeft: '5vw', marginRight: '5vw' }}>
         <ScriptParent
@@ -160,7 +160,7 @@ const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
         <ShowJapaneseCheckBox
           showJapanese={showJapanese}
           fontColor="#808080"
-          switchShowJapanese={switchShowJapanese}
+          onChange={switchShowJapanese}
         />
       </div>
       <Keyboard currentKeys={currentKeys} nextKey={nextKey} />

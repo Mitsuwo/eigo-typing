@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router';
+import useReactRouter from 'use-react-router';
 import styled from 'styled-components';
 import bgImage from '../../images/bg.jpg';
 import { RootState } from '../../store';
@@ -13,7 +13,7 @@ import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox'
 import { AnimatedTyping } from '../components/home/AnimatedTyping';
 import { StartButton } from '../components/home/StartButton';
 
-const HomeContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
+const HomeContainer: React.FC = () => {
   const { showJapanese } = useSelector((state: RootState) => state.pageManager);
   const dispatch = useDispatch();
   React.useEffect(() => {
@@ -28,7 +28,8 @@ const HomeContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps
     dispatch(resetTypingContentState());
     dispatch(resetCountDown());
     dispatch(resetResultState());
-    props.history.push('/typing');
+    const { history } = useReactRouter();
+    history.push('/typing');
   };
   return (
     <div
@@ -42,11 +43,11 @@ const HomeContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps
       <AppTitle>えいごでタイピング</AppTitle>
       <AnimatedTyping />
       <ButtonParent>
-        <StartButton linkToTyping={linkToTyping} />
+        <StartButton handleClickToTyping={linkToTyping} />
         <ShowJapaneseCheckBox
           showJapanese={showJapanese}
           fontColor="#e1eef6"
-          switchShowJapanese={switchShowJapanese}
+          onChange={switchShowJapanese}
         />
       </ButtonParent>
     </div>
@@ -72,4 +73,4 @@ const ButtonParent = styled.div`
   margin-left: auto;
 `;
 
-export const Home = withRouter(HomeContainer);
+export const Home = HomeContainer;

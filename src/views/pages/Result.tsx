@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router';
 import { RootState } from '../../store';
 import { CorrectKey } from '../../store/Result/types';
 import { HomeButton } from '../components/common/HomeButton';
@@ -8,7 +7,7 @@ import { BarChart, BarChartData } from '../components/result/BarChart';
 import { ResultCard } from '../components/result/ResultCard';
 import { TypedScripts } from '../components/result/TypedScripts';
 
-const ResultContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
+const ResultContainer: React.FC = () => {
   const { correctKeys, incorrectKeys } = useSelector((state: RootState) => state.resultState);
   const typedScripts = useSelector((state: RootState) => {
     const { currentScriptIndex, scripts } = state.typingContent;
@@ -63,12 +62,9 @@ const ResultContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
     }
     return result;
   }, [correctKeys]);
-  const linkTo = (pageName: string): void => {
-    props.history.push(`/${pageName}`);
-  };
   return (
     <div style={{ height: '100vh' }}>
-      <HomeButton linkTo={linkTo} />
+      <HomeButton />
       <div
         style={{
           width: '100vw',
@@ -142,4 +138,4 @@ const ResultContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
   );
 };
 
-export const Result = withRouter(ResultContainer);
+export const Result = ResultContainer;
