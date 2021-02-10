@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { keys } from '../../../constant/keyboardKeys';
 import {
   KEY_COLOR_ACTIVE_SHIFT,
@@ -9,10 +10,16 @@ import {
 } from '../../../constant/styles';
 import { Key } from './Key';
 
-interface Props {
+type ContainerProps = {
   currentKeys: string[];
   nextKey: string;
-}
+};
+
+type Props = {
+  isCurrentKey: (code: string) => boolean;
+  isCorrectKey: (text: string) => boolean;
+  className?: string;
+};
 
 export interface KeyInfo {
   text: string;
@@ -20,8 +27,47 @@ export interface KeyInfo {
   width: string;
 }
 
-const KeyboardComponent: React.FC<Props> = (props: Props) => {
-  const [shiftKey, setShiftKey] = React.useState(false);
+const View: React.FC<Props> = (props: Props) => {
+  return (
+    <div className={props.className}>
+      {keys.map((keyRow: KeyInfo[], index: number) => {
+        return (
+          <div key={index}>
+            {keyRow.map((keyInfo: KeyInfo, index: number) => {
+              const { text, code, width } = keyInfo;
+              const disabled = text === '';
+              let keyColor = KEY_COLOR_DEFAULT;
+              if (disabled) {
+                keyColor = KEY_COLOR_DISABLED;
+              } else if (props.isCurrentKey(code)) {
+                if (props.isCorrectKey(text)) {
+                  keyColor = KEY_COLOR_CORRECT;
+                } else if (text === 'shift') {
+                  keyColor = KEY_COLOR_ACTIVE_SHIFT;
+                } else {
+                  keyColor = KEY_COLOR_INCORRECT;
+                }
+              }
+              return <Key key={`${text}_${index}`} text={text} width={width} keyColor={keyColor} />;
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const StyledView = styled(View)`
+  height: 260px;
+  width: 814px;
+  margin: auto;
+  > div {
+    display: flex;
+  }
+`;
+
+export const Keyboard: React.FC<ContainerProps> = (props: ContainerProps) => {
+  const [shiftKey, setShiftKey] = React.useState<boolean>(false);
   React.useEffect(() => {
     setShiftKey(props.currentKeys.some((currentKey: string) => currentKey.startsWith('Shift')));
   }, [props.currentKeys]);
@@ -43,33 +89,8 @@ const KeyboardComponent: React.FC<Props> = (props: Props) => {
     }
     return props.nextKey === key;
   };
-  return (
-    <div style={{ height: '260px', width: '814px', margin: 'auto' }}>
-      {keys.map((keyRow: KeyInfo[], index: number) => {
-        return (
-          <div key={index} style={{ display: 'flex' }}>
-            {keyRow.map((keyInfo: KeyInfo, index: number) => {
-              const { text, code, width } = keyInfo;
-              const disabled = text === '';
-              let keyColor = KEY_COLOR_DEFAULT;
-              if (disabled) {
-                keyColor = KEY_COLOR_DISABLED;
-              } else if (isCurrentKey(code)) {
-                if (isCorrectKey(text)) {
-                  keyColor = KEY_COLOR_CORRECT;
-                } else if (text === 'shift') {
-                  keyColor = KEY_COLOR_ACTIVE_SHIFT;
-                } else {
-                  keyColor = KEY_COLOR_INCORRECT;
-                }
-              }
-              return <Key key={`${text}_${index}`} text={text} width={width} keyColor={keyColor} />;
-            })}
-          </div>
-        );
-      })}
-    </div>
+  return React.useMemo(
+    () => <StyledView isCurrentKey={isCurrentKey} isCorrectKey={isCorrectKey} />,
+    [props.currentKeys]
   );
 };
-
-export const Keyboard = React.memo(KeyboardComponent);

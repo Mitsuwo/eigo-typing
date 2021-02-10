@@ -13,9 +13,59 @@ import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox'
 import { AnimatedTyping } from '../components/home/AnimatedTyping';
 import { StartButton } from '../components/home/StartButton';
 
-const HomeContainer: React.FC = () => {
+type Props = {
+  linkToTyping: () => void;
+  showJapanese: boolean;
+  switchShowJapanese: () => void;
+  className?: string;
+};
+
+const View: React.FC<Props> = (props: Props) => {
+  return (
+    <div className={props.className}>
+      <div className="app-title">えいごでタイピング</div>
+      <AnimatedTyping />
+      <div className="button-parent">
+        <StartButton handleClickToTyping={props.linkToTyping} />
+        <ShowJapaneseCheckBox
+          showJapanese={props.showJapanese}
+          fontColor="#e1eef6"
+          onChange={props.switchShowJapanese}
+        />
+      </div>
+    </div>
+  );
+};
+
+const StyledView = styled(View)`
+  height: 100vh;
+  width: 100vw;
+  background-image: url(${bgImage});
+  background-size: 100% 100%;
+  overflow-y: hidden;
+  > .app-title {
+    height: 5vh;
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+    color: #e1eef6;
+    font-size: 40px;
+    text-align: center;
+    font-family: bokutachi;
+  }
+  > .button-parent {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    margin-right: auto;
+    margin-left: auto;
+  }
+`;
+
+export const Home: React.FC = () => {
   const { showJapanese } = useSelector((state: RootState) => state.pageManager);
   const dispatch = useDispatch();
+  const { history } = useReactRouter();
   React.useEffect(() => {
     dispatch(setAppState(APP_STATE_INITIAL));
   }, []);
@@ -28,49 +78,13 @@ const HomeContainer: React.FC = () => {
     dispatch(resetTypingContentState());
     dispatch(resetCountDown());
     dispatch(resetResultState());
-    const { history } = useReactRouter();
     history.push('/typing');
   };
   return (
-    <div
-      style={{
-        height: '100vh',
-        width: '100vw',
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: '100% 100%',
-        overflowY: 'hidden'
-      }}>
-      <AppTitle>えいごでタイピング</AppTitle>
-      <AnimatedTyping />
-      <ButtonParent>
-        <StartButton handleClickToTyping={linkToTyping} />
-        <ShowJapaneseCheckBox
-          showJapanese={showJapanese}
-          fontColor="#e1eef6"
-          onChange={switchShowJapanese}
-        />
-      </ButtonParent>
-    </div>
+    <StyledView
+      showJapanese={showJapanese}
+      switchShowJapanese={switchShowJapanese}
+      linkToTyping={linkToTyping}
+    />
   );
 };
-
-const AppTitle = styled.div`
-  height: 5vh;
-  margin-top: 15vh;
-  margin-bottom: 5vh;
-  color: #e1eef6;
-  font-size: 40px;
-  text-align: center;
-  font-family: bokutachi;
-`;
-
-const ButtonParent = styled.div`
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  width: 25vw;
-  margin-right: auto;
-  margin-left: auto;
-`;
-
-export const Home = HomeContainer;

@@ -1,14 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Character } from './Character';
 
-interface Props {
+type Props = {
   script: string;
   correctCharCount: number;
   scriptIndex: number;
   currentScriptIndex: number;
-}
+  className?: string;
+};
 
-const ScriptEnglishComponent: React.FC<Props> = (props: Props) => {
+const View: React.FC<Props> = (props: Props) => {
   const [shouldBreakIndexes, setShouldBreakIndexes] = React.useState<number[]>([]);
   const divRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
@@ -32,7 +34,7 @@ const ScriptEnglishComponent: React.FC<Props> = (props: Props) => {
     setShouldBreakIndexes(tmpIndexes);
   }, [props.script]);
   return (
-    <div ref={divRef} style={{ width: '100%', margin: '2vw' }}>
+    <div className={props.className} ref={divRef}>
       {props.script.split('').map((char: string, index: number) => {
         const color = props.correctCharCount > index ? 'black' : 'grey';
         const isNextChar = props.correctCharCount === index;
@@ -51,4 +53,7 @@ const ScriptEnglishComponent: React.FC<Props> = (props: Props) => {
   );
 };
 
-export const ScriptEnglish = React.memo<Props>(ScriptEnglishComponent);
+export const ScriptEnglish = styled(View)`
+  width: 100%;
+  margin: 2vw;
+`;

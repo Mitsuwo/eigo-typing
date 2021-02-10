@@ -1,22 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Script } from '../../../store/TypingContent/types';
 
-interface Props {
+type Props = {
   typedScripts: Script[];
-}
+  className?: string;
+};
 
-const TypedScriptsComponent: React.FC<Props> = (props: Props) => {
+const View: React.FC<Props> = (props: Props) => {
   return (
-    <div>
+    <div className={props.className}>
       {props.typedScripts.map((script: Script) => {
         return (
-          <div key={script.id} style={{ margin: '2vw' }}>
-            <div style={{ fontSize: '3vh', fontFamily: 'oxygenMono', color: 'grey' }}>
-              {script.english}
-            </div>
-            <div style={{ fontSize: '3vh', fontFamily: 'koruri', color: 'grey' }}>
-              {script.japanese}
-            </div>
+          <div key={script.id} className="script">
+            <p>{script.english}</p>
+            <p>{script.japanese}</p>
           </div>
         );
       })}
@@ -24,4 +22,22 @@ const TypedScriptsComponent: React.FC<Props> = (props: Props) => {
   );
 };
 
-export const TypedScripts = React.memo(TypedScriptsComponent);
+const StyledView = styled(View)`
+  > .script {
+    margin: 2vw;
+    > p {
+      font-size: 3vh;
+      color: #808080;
+    }
+    > p:nth-child(1) {
+      font-family: oxygenMono;
+    }
+    > p:nth-child(2) {
+      font-family: koruri;
+    }
+  }
+`;
+
+export const TypedScripts: React.FC<Props> = (props: Props) => {
+  return React.useMemo(() => <StyledView typedScripts={props.typedScripts} />, []);
+};

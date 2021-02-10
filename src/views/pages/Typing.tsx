@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router';
+import useReactRouter from 'use-react-router';
 import styled from 'styled-components';
 import scriptsJson from '../../constant/corpus.json';
 import { RootState } from '../../store';
@@ -33,9 +33,10 @@ import { TimeUp } from '../components/typing/TimeUp';
 import { HomeButton } from '../components/common/HomeButton';
 import { addCorrectKey, addIncorrectKey } from '../../store/Result/actions';
 
+// TODO: storeに入れる
 let lastInputTime = 0;
 
-const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
+const View: React.FC = () => {
   const { currentKeys, nextKey, correctCharCount } = useSelector(
     (state: RootState) => state.keyboard
   );
@@ -46,6 +47,7 @@ const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
     (state: RootState) => state.pageManager
   );
   const dispatch = useDispatch();
+  const { history } = useReactRouter();
   React.useEffect(() => {
     initialize();
   }, []);
@@ -133,11 +135,11 @@ const TypingContainer: React.FC<RouteComponentProps> = (props: RouteComponentPro
     dispatch(setShowJapanese(!showJapanese));
   };
   const linkTo = (pageName: string): void => {
-    props.history.push(`/${pageName}`);
+    history.push(`/${pageName}`);
   };
   const scriptJapanese = scripts[currentScriptIndex] ? scripts[currentScriptIndex].japanese : '';
   return appState !== APP_STATE_TYPING ? (
-    <TimeUp linkTo={linkTo} />
+    <TimeUp />
   ) : (
     <div>
       <HomeButton />
@@ -188,4 +190,4 @@ const ScriptParent = styled.div`
     outline: 0.5vh solid grey;
 `;
 
-export const Typing = withRouter(TypingContainer);
+export const Typing = React.memo(View);

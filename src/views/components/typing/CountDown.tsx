@@ -1,28 +1,38 @@
 import React from 'react';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import styled from 'styled-components';
 
-interface Props {
+type Props = {
   countDownTime: number;
-}
+  className?: string;
+};
 
-const CountDownComponent: React.FC<Props> = (props: Props) => {
+const View: React.FC<Props> = (props: Props) => {
   return (
-    <div
-      style={{
-        height: '8vh',
-        padding: 'auto',
-        width: '10vw',
-        marginTop: '4vh',
-        marginLeft: '45vw',
-        display: 'flex'
-      }}>
+    <div className={props.className}>
       <AccessTimeIcon htmlColor="grey" fontSize="large" />
-      <div
-        style={{ fontSize: '3.5vh', fontFamily: 'oxygenMono', color: 'grey', marginLeft: '5px' }}>
-        {props.countDownTime}
-      </div>
+      <div className="time">{props.countDownTime}</div>
     </div>
   );
 };
 
-export const CountDown = React.memo(CountDownComponent);
+const StyledView = styled(View)`
+  height: 8vh;
+  padding: auto;
+  width: 10vw;
+  margin-top: 4vh;
+  margin-left: 45vw;
+  display: flex;
+  > .time {
+    font-size: 3.5vh;
+    font-family: oxygenMono;
+    color: #808080;
+    margin-left: 5px;
+  }
+`;
+
+export const CountDown: React.FC<Props> = (props: Props) => {
+  return React.useMemo(() => <StyledView countDownTime={props.countDownTime} />, [
+    props.countDownTime
+  ]);
+};

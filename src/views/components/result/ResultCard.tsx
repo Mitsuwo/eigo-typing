@@ -1,25 +1,26 @@
-import { Card, CardContent, makeStyles } from '@material-ui/core';
+import { Card, CardContent } from '@material-ui/core';
 import React from 'react';
+import styled from 'styled-components';
 
-interface Props {
+type Props = {
   children: JSX.Element;
-}
+  className?: string;
+};
 
-const useStyles = makeStyles({
-  root: {
-    width: '90vw',
-    margin: '1vh 5vw',
-    backgroundColor: '#FFFFF3'
-  }
-});
-
-const ResultCardComponent: React.FC<Props> = (props: Props) => {
-  const classes = useStyles();
+const View: React.FC<Props> = (props: Props) => {
   return (
-    <Card className={classes.root}>
+    <Card className={props.className}>
       <CardContent>{props.children}</CardContent>
     </Card>
   );
 };
 
-export const ResultCard = React.memo(ResultCardComponent);
+const StyledView = styled(View)`
+  width: 90vw;
+  margin: 1vh 5vw;
+  background-color: #fffff3;
+`;
+
+export const ResultCard: React.FC<Props> = (props: Props) => {
+  return React.useMemo(() => <StyledView>{props.children}</StyledView>, []);
+};

@@ -1,13 +1,113 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { RootState } from '../../store';
 import { CorrectKey } from '../../store/Result/types';
+import { Script } from '../../store/TypingContent/types';
 import { HomeButton } from '../components/common/HomeButton';
 import { BarChart, BarChartData } from '../components/result/BarChart';
 import { ResultCard } from '../components/result/ResultCard';
 import { TypedScripts } from '../components/result/TypedScripts';
 
-const ResultContainer: React.FC = () => {
+type Props = {
+  correctKeyLength: number;
+  incorrectKeyLength: number;
+  typedScripts: Script[];
+  intervalData: BarChartData[];
+  incorrectCountData: BarChartData[];
+  correctCountData: BarChartData[];
+  className?: string;
+};
+
+// TODO: タイピング数部分をコンポーネント化
+
+const View: React.FC<Props> = (props: Props) => {
+  return (
+    <div className={props.className}>
+      <HomeButton />
+      <div className="page-title">RESULT</div>
+      <div className="scrollable">
+        <ResultCard>
+          <div>
+            <div
+              style={{
+                fontSize: '3vh',
+                fontFamily: 'koruri',
+                color: '#808080',
+                margin: '1vh 2vw'
+              }}>
+              <span style={{ color: '#00b9f1', fontWeight: 'bold' }}>{props.correctKeyLength}</span>
+              文字を正確にタイピングしました
+            </div>
+            <div
+              style={{
+                fontSize: '3vh',
+                fontFamily: 'koruri',
+                color: '#808080',
+                margin: '1vh 2vw'
+              }}>
+              <span style={{ color: '#f9320c', fontWeight: 'bold' }}>
+                {props.incorrectKeyLength}
+              </span>
+              回のタイプミスがありました
+            </div>
+          </div>
+        </ResultCard>
+        <ResultCard>
+          <TypedScripts typedScripts={props.typedScripts} />
+        </ResultCard>
+        <ResultCard>
+          <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', overflowX: 'scroll' }}>
+            <BarChart
+              data={props.intervalData}
+              barName="タイピングするまでの時間 - 長い順（秒）"
+              barColor="#7200da"
+              ascending={false}
+            />
+            <BarChart
+              data={props.intervalData}
+              barName="タイピングするまでの時間 - 短い順（秒）"
+              barColor="#f9c00c"
+              ascending
+            />
+            <BarChart
+              data={props.incorrectCountData}
+              barName="タイプミスした回数（回）"
+              barColor="#f9320c"
+              ascending={false}
+            />
+            <BarChart
+              data={props.correctCountData}
+              barName="正確にタイピングした回数（回）"
+              barColor="#00b9f1"
+              ascending={false}
+            />
+          </div>
+        </ResultCard>
+      </div>
+    </div>
+  );
+};
+
+const StyledView = styled(View)`
+  height: 100vh;
+  > .page-title {
+    width: 100vw;
+    position: fixed;
+    top: 3vh;
+    text-align: center;
+    font-size: 4vh;
+    font-family: oxygenMono;
+    color: #808080;
+  }
+  > .scrollable {
+    margin-top: 3vh;
+    overflow: scroll;
+    height: 90vh;
+  }
+`;
+
+export const Result: React.FC<Props> = () => {
   const { correctKeys, incorrectKeys } = useSelector((state: RootState) => state.resultState);
   const typedScripts = useSelector((state: RootState) => {
     const { currentScriptIndex, scripts } = state.typingContent;
@@ -63,79 +163,13 @@ const ResultContainer: React.FC = () => {
     return result;
   }, [correctKeys]);
   return (
-    <div style={{ height: '100vh' }}>
-      <HomeButton />
-      <div
-        style={{
-          width: '100vw',
-          position: 'fixed',
-          top: '3vh',
-          textAlign: 'center',
-          fontSize: '4vh',
-          fontFamily: 'oxygenMono',
-          color: '#808080'
-        }}>
-        RESULT
-      </div>
-      <div style={{ overflow: 'scroll', height: '90vh', marginTop: '10vh' }}>
-        <ResultCard>
-          <div>
-            <div
-              style={{
-                fontSize: '3vh',
-                fontFamily: 'koruri',
-                color: '#808080',
-                margin: '1vh 2vw'
-              }}>
-              <span style={{ color: '#00b9f1', fontWeight: 'bold' }}>{correctKeys.length}</span>
-              文字を正確にタイピングしました
-            </div>
-            <div
-              style={{
-                fontSize: '3vh',
-                fontFamily: 'koruri',
-                color: '#808080',
-                margin: '1vh 2vw'
-              }}>
-              <span style={{ color: '#f9320c', fontWeight: 'bold' }}>{incorrectKeys.length}</span>
-              回のタイプミスがありました
-            </div>
-          </div>
-        </ResultCard>
-        <ResultCard>
-          <TypedScripts typedScripts={typedScripts} />
-        </ResultCard>
-        <ResultCard>
-          <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', overflowX: 'scroll' }}>
-            <BarChart
-              data={intervalData}
-              barName="タイピングするまでの時間 - 長い順（秒）"
-              barColor="#7200da"
-              ascending={false}
-            />
-            <BarChart
-              data={intervalData}
-              barName="タイピングするまでの時間 - 短い順（秒）"
-              barColor="#f9c00c"
-              ascending
-            />
-            <BarChart
-              data={incorrectCountData}
-              barName="タイプミスした回数（回）"
-              barColor="#f9320c"
-              ascending={false}
-            />
-            <BarChart
-              data={correctCountData}
-              barName="正確にタイピングした回数（回）"
-              barColor="#00b9f1"
-              ascending={false}
-            />
-          </div>
-        </ResultCard>
-      </div>
-    </div>
+    <StyledView
+      correctKeyLength={correctKeys.length}
+      incorrectKeyLength={incorrectKeys.length}
+      intervalData={intervalData}
+      typedScripts={typedScripts}
+      incorrectCountData={incorrectCountData}
+      correctCountData={correctCountData}
+    />
   );
 };
-
-export const Result = ResultContainer;

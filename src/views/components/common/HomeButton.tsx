@@ -28,7 +28,7 @@ const StyledView = styled(View)`
   top: 2.5vh;
   left: 4vw;
   z-index: 1;
-  > .home-outlined {
+  .home-outlined {
     color: #808080;
   }
 `;

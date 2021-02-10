@@ -2,31 +2,38 @@ import React from 'react';
 import Typing from 'react-typing-animation';
 import styled from 'styled-components';
 
-const AnimatedTypingComponent: React.FC = () => {
+type Props = {
+  className?: string;
+};
+
+const View: React.FC<Props> = (props: Props) => {
   return (
-    <StyledAnimatedTyping>
-      <Typing cursorClassName="cursor">
-        <div style={{ color: '#e1eef6', fontSize: '3vh', fontFamily: 'oxygenMono' }}>
-          <span>This is English Typing Practice.</span>
-          <Typing.Delay ms={2000} />
-          <br />
-          <span>You can improve your typing speed and learn English.</span>
-          <Typing.Delay ms={2000} />
-          <br />
-          <span>Please click the START button below.</span>
-        </div>
-      </Typing>
-    </StyledAnimatedTyping>
+    <Typing cursorClassName="cursor" className={props.className}>
+      <span>This is English Typing Practice.</span>
+      <Typing.Delay ms={2000} />
+      <br />
+      <span>You can improve your typing speed and learn English.</span>
+      <Typing.Delay ms={2000} />
+      <br />
+      <span>Please click the START button below.</span>
+    </Typing>
   );
 };
 
-const StyledAnimatedTyping = styled.div`
+const StyledView = styled(View)`
   margin-top: 10vh;
   height: 20vh;
   text-align: center;
   .cursor {
     color: #e1eef6;
   }
+  > span {
+    color: #e1eef6;
+    font-size: 3vh;
+    font-family: oxygenMono;
+  }
 `;
 
-export const AnimatedTyping = React.memo(AnimatedTypingComponent);
+export const AnimatedTyping: React.FC = () => {
+  return React.useMemo(() => <StyledView />, []);
+};
