@@ -15,10 +15,10 @@ export const keys: KeyInfo[][] = [
     { text: ') 0', code: 'Digit0', width: '54px' },
     { text: '_ -', code: 'Minus', width: '54px' },
     { text: '+ =', code: 'Equal', width: '54px' },
-    { text: '', code: '', width: '100%' }
+    { text: '', code: '', width: '80px' }
   ],
   [
-    { text: '', code: '', width: '100%' },
+    { text: '', code: '', width: '80px' },
     { text: 'Q', code: 'KeyQ', width: '54px' },
     { text: 'W', code: 'KeyW', width: '54px' },
     { text: 'E', code: 'KeyE', width: '54px' },
@@ -34,7 +34,7 @@ export const keys: KeyInfo[][] = [
     { text: '| ¥', code: 'Backslash', width: '54px' }
   ],
   [
-    { text: '', code: '', width: '100%' },
+    { text: '', code: '', width: '93px' },
     { text: 'A', code: 'KeyA', width: '54px' },
     { text: 'S', code: 'KeyS', width: '54px' },
     { text: 'D', code: 'KeyD', width: '54px' },
@@ -46,7 +46,7 @@ export const keys: KeyInfo[][] = [
     { text: 'L', code: 'KeyL', width: '54px' },
     { text: ': ;', code: 'Semicolon', width: '54px' },
     { text: `" '`, code: 'Quote', width: '54px' },
-    { text: '', code: '', width: '100%' }
+    { text: '', code: '', width: '93px' }
   ],
   [
     { text: 'shift', code: 'ShiftLeft', width: '125px' },
@@ -63,14 +63,14 @@ export const keys: KeyInfo[][] = [
     { text: 'shift', code: 'ShiftRight', width: '125px' }
   ],
   [
-    { text: '', code: '', width: '100%' },
-    { text: '', code: '', width: '100%' },
-    { text: '', code: '', width: '100%' },
+    { text: '', code: '', width: '60px' },
+    { text: '', code: '', width: '60px' },
+    { text: '', code: '', width: '60px' },
     { text: '', code: '', width: '67px' },
     { text: 'space', code: '', width: '278px' },
     { text: '', code: '', width: '67px' },
-    { text: '', code: '', width: '100%' },
-    { text: '', code: '', width: '100%' },
-    { text: '', code: '', width: '100%' }
+    { text: '', code: '', width: '60px' },
+    { text: '', code: '', width: '60px' },
+    { text: '', code: '', width: '60px' }
   ]
 ];

@@ -57,7 +57,7 @@ const View: React.FC<Props> = (props: Props) => {
           <TypedScripts typedScripts={props.typedScripts} />
         </ResultCard>
         <ResultCard>
-          <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', overflowX: 'scroll' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', overflow: 'hidden' }}>
             <BarChart
               data={props.intervalData}
               barName="タイピングするまでの時間 - 長い順（秒）"
