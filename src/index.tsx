@@ -10,13 +10,17 @@ import { store } from './store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/typing" component={Typing} />
-        <Route exact path="/result" component={Result} />
-      </BrowserRouter>
-    </Provider>
+    {navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i) ? (
+      <h6>お使いのデバイスには対応しておりません。</h6>
+    ) : (
+      <Provider store={store}>
+        <BrowserRouter>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/typing" component={Typing} />
+          <Route exact path="/result" component={Result} />
+        </BrowserRouter>
+      </Provider>
+    )}
   </React.StrictMode>,
   document.getElementById('root')
 );

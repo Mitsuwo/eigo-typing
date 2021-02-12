@@ -4,6 +4,10 @@ body {
   background-color: #e0e3da;
 }
 
+h6 {
+  text-align: center;
+}
+
 @font-face {
   font-family: 'bokutachi';
   src: local('bokutachi'), url(./fonts/bokutachi.otf) format('truetype');
