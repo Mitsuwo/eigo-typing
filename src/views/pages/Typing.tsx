@@ -18,7 +18,6 @@ import {
   APP_STATE_TIMEUP,
   APP_STATE_TYPING
 } from '../../store/PageManager/types';
-import { SPACE_VALUE } from '../../constant/typingConst';
 import { ScriptEnglish } from '../components/typing/ScriptEnglish';
 import {
   clearCorrectCharCount,
@@ -32,6 +31,8 @@ import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox'
 import { TimeUp } from '../components/typing/TimeUp';
 import { HomeButton } from '../components/common/HomeButton';
 import { addCorrectKey, addIncorrectKey } from '../../store/Result/actions';
+
+const SPACE_VALUE = ' ';
 
 // TODO: storeに入れる
 let lastInputTime = 0;
