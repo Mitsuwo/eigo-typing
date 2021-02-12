@@ -160,6 +160,10 @@ const View: React.FC = () => {
           />
           <ScriptJapanese visible={showJapanese} scriptJapanese={scriptJapanese} />
         </ScriptParent>
+        <div style={{ right: '10vw', color: '#808080', position: 'absolute' }}>
+          Translation by{' '}
+          <a href="http://www.edrdg.org/wiki/index.php/Tanaka_Corpus">Yasuhito Tanaka</a>
+        </div>
         <ShowJapaneseCheckBox
           showJapanese={showJapanese}
           fontColor="#808080"

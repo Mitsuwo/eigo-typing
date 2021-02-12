@@ -54,7 +54,13 @@ const View: React.FC<Props> = (props: Props) => {
           </div>
         </ResultCard>
         <ResultCard>
-          <TypedScripts typedScripts={props.typedScripts} />
+          <>
+            <TypedScripts typedScripts={props.typedScripts} />
+            <div style={{ textAlign: 'end', color: '#808080' }}>
+              Translation by{' '}
+              <a href="http://www.edrdg.org/wiki/index.php/Tanaka_Corpus">Yasuhito Tanaka</a>
+            </div>
+          </>
         </ResultCard>
         <ResultCard>
           <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', overflow: 'hidden' }}>
