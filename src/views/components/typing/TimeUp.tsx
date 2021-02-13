@@ -21,10 +21,10 @@ const View: React.FC<Props> = (props: Props) => {
       <CardContent className="card-content">タイムアップ！</CardContent>
       <CardActions className="card-actions">
         <Button variant="contained" onClick={handleClickToHome}>
-          <div style={{ fontSize: '15px', fontFamily: 'koruri' }}>ホームにもどる</div>
+          <div style={{ fontSize: '15px', fontFamily: 'Noto Sans JP' }}>ホームにもどる</div>
         </Button>
         <Button variant="contained" onClick={handleClickToResult}>
-          <div style={{ fontSize: '15px', fontFamily: 'koruri' }}>結果を表示する</div>
+          <div style={{ fontSize: '15px', fontFamily: 'Noto Sans JP' }}>結果を表示する</div>
         </Button>
       </CardActions>
     </Card>
@@ -45,7 +45,7 @@ const StyledView = styled(View)`
     text-align: center;
     color: #566270;
     font-size: 40px;
-    font-family: koruri;
+    font-family: Noto Sans JP;
   }
   > .card-actions {
     margin-left: 140px;

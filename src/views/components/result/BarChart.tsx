@@ -42,7 +42,7 @@ const StyledView = styled(View)`
   width: 50%;
   margin: 4vh auto 0 auto;
   min-width: 600px;
-  font-family: koruri;
+  font-family: Noto Sans JP;
 `;
 
 export const BarChart: React.FC<Props> = (props: Props) => {

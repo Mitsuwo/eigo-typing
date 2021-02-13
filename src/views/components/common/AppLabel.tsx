@@ -13,7 +13,7 @@ const View: React.FC<Props> = (props: Props) => {
 
 const StyledView = styled(View)`
   color: ${(props: Props) => props.fontColor};
-  font-family: koruri;
+  font-family: Noto Sans JP;
   font-weight: bold;
 `;
 

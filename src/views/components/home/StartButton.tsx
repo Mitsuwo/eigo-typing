@@ -12,7 +12,7 @@ const View: React.FC<Props> = (props: Props) => {
       style={{
         backgroundColor: '#bd1550',
         color: '#e1eef6',
-        fontFamily: 'oxygenMono',
+        fontFamily: 'serif',
         fontSize: '20px',
         margin: 0
       }}

@@ -30,10 +30,10 @@ const StyledView = styled(View)`
       color: #808080;
     }
     > p:nth-child(1) {
-      font-family: oxygenMono;
+      font-family: serif;
     }
     > p:nth-child(2) {
-      font-family: koruri;
+      font-family: Noto Sans JP;
     }
   }
 `;

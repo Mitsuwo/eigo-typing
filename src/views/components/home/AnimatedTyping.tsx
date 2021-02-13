@@ -30,7 +30,7 @@ const StyledView = styled(View)`
   > span {
     color: #e1eef6;
     font-size: 3vh;
-    font-family: oxygenMono;
+    font-family: serif;
   }
 `;
 

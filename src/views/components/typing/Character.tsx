@@ -21,7 +21,7 @@ const View: React.FC<Props> = (props: Props) => {
 const StyledView = styled(View)`
   color: ${(props: Props) => props.color};
   font-size: 30px;
-  font-family: oxygenMono;
+  font-family: serif;
   border-bottom: ${(props: Props) => (props.isNextChar ? 'solid' : 'none')};
 `;
 

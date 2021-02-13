@@ -15,7 +15,7 @@ const StyledView = styled(View)`
   display: ${(props: Props) => (props.visible ? 'block' : 'none')};
   margin: 2vw;
   font-size: 3vh;
-  font-family: koruri;
+  font-family: Noto Sans JP;
   color: grey;
 `;
 

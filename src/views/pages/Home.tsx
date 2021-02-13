@@ -50,7 +50,8 @@ const StyledView = styled(View)`
     color: #e1eef6;
     font-size: 40px;
     text-align: center;
-    font-family: bokutachi;
+    font-family: Noto Sans JP;
+    font-weight: bold;
   }
   > .button-parent {
     text-align: center;

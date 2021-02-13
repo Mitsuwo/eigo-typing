@@ -25,7 +25,7 @@ const StyledView = styled(View)`
   display: flex;
   > .time {
     font-size: 3.5vh;
-    font-family: oxygenMono;
+    font-family: serif;
     color: #808080;
     margin-left: 5px;
   }

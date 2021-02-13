@@ -32,7 +32,7 @@ const View: React.FC<Props> = (props: Props) => {
             <div
               style={{
                 fontSize: '3vh',
-                fontFamily: 'koruri',
+                fontFamily: 'Noto Sans JP',
                 color: '#808080',
                 margin: '1vh 2vw'
               }}>
@@ -42,7 +42,7 @@ const View: React.FC<Props> = (props: Props) => {
             <div
               style={{
                 fontSize: '3vh',
-                fontFamily: 'koruri',
+                fontFamily: 'Noto Sans JP',
                 color: '#808080',
                 margin: '1vh 2vw'
               }}>
@@ -103,7 +103,7 @@ const StyledView = styled(View)`
     top: 3vh;
     text-align: center;
     font-size: 4vh;
-    font-family: oxygenMono;
+    font-family: serif;
     color: #808080;
   }
   > .scrollable {
