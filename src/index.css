@@ -10,12 +10,12 @@ h6 {
 
 @font-face {
   font-family: 'bokutachi';
-  src: local('bokutachi'), url(./fonts/bokutachi.otf) format('truetype');
+  src: local('bokutachi'), url(./fonts/bokutachi.otf) format('opentype');
 }
 
 @font-face {
   font-family: 'oxygenMono';
-  src: local('oxygenMono'), url(./fonts/oxygenMono.otf) format('truetype');
+  src: local('oxygenMono'), url(./fonts/oxygenMono.otf) format('opentype');
 }
 
 @font-face {
