@@ -7,6 +7,7 @@ import { Script } from '../../store/TypingContent/types';
 import { HomeButton } from '../components/common/HomeButton';
 import { BarChart, BarChartData } from '../components/result/BarChart';
 import { ResultCard } from '../components/result/ResultCard';
+import { TypedCount } from '../components/result/TypedCount';
 import { TypedScripts } from '../components/result/TypedScripts';
 
 type Props = {
@@ -19,8 +20,6 @@ type Props = {
   className?: string;
 };
 
-// TODO: タイピング数部分をコンポーネント化
-
 const View: React.FC<Props> = (props: Props) => {
   return (
     <div className={props.className}>
@@ -28,30 +27,18 @@ const View: React.FC<Props> = (props: Props) => {
       <div className="page-title">RESULT</div>
       <div className="scrollable">
         <ResultCard>
-          <div>
-            <div
-              style={{
-                fontSize: '3vh',
-                fontFamily: 'Noto Sans JP',
-                color: '#808080',
-                margin: '1vh 2vw'
-              }}>
-              <span style={{ color: '#00b9f1', fontWeight: 'bold' }}>{props.correctKeyLength}</span>
-              文字を正確にタイピングしました
-            </div>
-            <div
-              style={{
-                fontSize: '3vh',
-                fontFamily: 'Noto Sans JP',
-                color: '#808080',
-                margin: '1vh 2vw'
-              }}>
-              <span style={{ color: '#f9320c', fontWeight: 'bold' }}>
-                {props.incorrectKeyLength}
-              </span>
-              回のタイプミスがありました
-            </div>
-          </div>
+          <>
+            <TypedCount
+              count={props.correctKeyLength}
+              restText="文字を正確にタイピングしました"
+              countColor="#00b9f1"
+            />
+            <TypedCount
+              count={props.incorrectKeyLength}
+              restText="回のタイプミスがありました"
+              countColor="#f9320c"
+            />
+          </>
         </ResultCard>
         <ResultCard>
           <>
