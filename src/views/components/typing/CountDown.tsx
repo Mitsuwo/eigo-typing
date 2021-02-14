@@ -11,20 +11,25 @@ const View: React.FC<Props> = (props: Props) => {
   return (
     <div className={props.className}>
       <AccessTimeIcon htmlColor="grey" fontSize="large" />
-      <div className="time">{props.countDownTime}</div>
+      <span>{props.countDownTime}</span>
     </div>
   );
 };
 
 const StyledView = styled(View)`
-  height: 8vh;
-  padding: auto;
+  position: absolute;
   width: 10vw;
-  margin-top: 4vh;
+  padding: auto;
+  top: 25px;
   margin-left: 45vw;
   display: flex;
-  > .time {
-    font-size: 3.5vh;
+  > svg {
+    height: 59px;
+  }
+  > span {
+    line-height: 59px;
+    padding: auto;
+    font-size: 30px;
     font-family: serif;
     color: #808080;
     margin-left: 5px;

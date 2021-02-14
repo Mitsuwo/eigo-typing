@@ -25,7 +25,7 @@ const View: React.FC<Props> = (props: Props) => {
 const StyledView = styled(View)`
   padding: auto;
   position: fixed;
-  top: 2.5vh;
+  top: 25px;
   left: 4vw;
   z-index: 1;
   .home-outlined {

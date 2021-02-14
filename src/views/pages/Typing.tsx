@@ -137,7 +137,7 @@ const View: React.FC = () => {
     <div>
       <HomeButton />
       <CountDown countDownTime={countDownTime} />
-      <div style={{ marginLeft: '5vw', marginRight: '5vw' }}>
+      <div style={{ margin: '50px 5vw 0 5vw' }}>
         <ScriptParent
           ref={scriptParentRef}
           onKeyDown={handleKeyDown}
@@ -152,7 +152,7 @@ const View: React.FC = () => {
           />
           <ScriptJapanese visible={showJapanese} scriptJapanese={scriptJapanese} />
         </ScriptParent>
-        <div style={{ right: '10vw', color: '#808080', position: 'absolute' }}>
+        <div style={{ right: '5vw', color: '#808080', position: 'absolute' }}>
           Translation by{' '}
           <a href="http://www.edrdg.org/wiki/index.php/Tanaka_Corpus">Yasuhito Tanaka</a>
         </div>
@@ -178,7 +178,7 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 const ScriptParent = styled.div`
-  width: 86vw;
+  width: 90vw;
   margin: 0;
   overflow-y: scroll;
   display: inline-block;

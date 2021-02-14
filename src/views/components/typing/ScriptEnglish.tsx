@@ -54,6 +54,6 @@ const View: React.FC<Props> = (props: Props) => {
 };
 
 export const ScriptEnglish = styled(View)`
-  width: 100%;
+  width: calc(100% - 4vw);
   margin: 2vw;
 `;
