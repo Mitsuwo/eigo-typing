@@ -12,12 +12,13 @@ import {
 import { Script } from '../../store/TypingContent/types';
 import { CountDown } from '../components/typing/CountDown';
 import { Keyboard } from '../components/typing/Keyboard';
-import { setAppState, setCountDownTime, setShowJapanese } from '../../store/PageManager/actions';
 import {
-  APP_STATE_INITIAL,
-  APP_STATE_TIMEUP,
-  APP_STATE_TYPING
-} from '../../store/PageManager/types';
+  setAppState,
+  setCountDownTime,
+  setLastInputTime,
+  setShowJapanese
+} from '../../store/AppBase/actions';
+import { APP_STATE_INITIAL, APP_STATE_TIMEUP, APP_STATE_TYPING } from '../../store/AppBase/types';
 import { ScriptEnglish } from '../components/typing/ScriptEnglish';
 import {
   clearCorrectCharCount,
@@ -34,9 +35,6 @@ import { addCorrectKey, addIncorrectKey } from '../../store/Result/actions';
 
 const SPACE_VALUE = ' ';
 
-// TODO: storeに入れる
-let lastInputTime = 0;
-
 const View: React.FC = () => {
   const { currentKeys, nextKey, correctCharCount } = useSelector(
     (state: RootState) => state.keyboard
@@ -44,13 +42,23 @@ const View: React.FC = () => {
   const { scripts, currentScript, currentScriptIndex } = useSelector(
     (state: RootState) => state.typingContent
   );
-  const { appState, countDownTime, showJapanese } = useSelector(
-    (state: RootState) => state.pageManager
+  const { appState, countDownTime, showJapanese, lastInputTime } = useSelector(
+    (state: RootState) => state.appBase
   );
   const dispatch = useDispatch();
   const { history } = useReactRouter();
   React.useEffect(() => {
     initialize();
+    let count = countDownTime;
+    const countDown = setInterval(() => {
+      count -= 1;
+      dispatch(setCountDownTime(count));
+      if (count <= 0) {
+        clearInterval(countDown);
+        dispatch(setAppState(APP_STATE_TIMEUP));
+      }
+    }, 1000);
+    return () => clearInterval(countDown);
   }, []);
   React.useEffect(() => {
     if (appState === APP_STATE_INITIAL) {
@@ -77,22 +85,6 @@ const View: React.FC = () => {
     dispatch(setCurrentScript(scripts[currentScriptIndex]));
     dispatch(setNextKey(scripts[currentScriptIndex].english[0]));
     focusScriptParent();
-    lastInputTime = 0;
-    startCountDown();
-  };
-  const startCountDown = (): void => {
-    if (appState !== APP_STATE_TYPING) {
-      return;
-    }
-    let count = countDownTime;
-    const countDown = setInterval(() => {
-      count -= 1;
-      dispatch(setCountDownTime(count));
-      if (count === 0) {
-        clearInterval(countDown);
-        dispatch(setAppState(APP_STATE_TIMEUP));
-      }
-    }, 1000);
   };
   const scriptParentRef: React.MutableRefObject<HTMLDivElement | null> = React.useRef(null);
   const isElement = (element: HTMLDivElement | null): element is HTMLDivElement => {
@@ -112,7 +104,7 @@ const View: React.FC = () => {
       const interval = performance.now() - lastInputTime;
       dispatch(addCorrectKey({ keyText: key, interval: Math.floor(interval * 1000) / 1000000 }));
     }
-    lastInputTime = performance.now();
+    dispatch(setLastInputTime(performance.now()));
   };
   const handleKeyDown = (event: React.KeyboardEvent): void => {
     const { code, key } = event;

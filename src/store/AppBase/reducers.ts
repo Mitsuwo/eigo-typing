@@ -1,23 +1,22 @@
 import {
-  PageManagerState,
-  PageManagerActionTypes,
+  AppBaseState,
+  AppBaseActionTypes,
   SET_APP_STATE,
   SET_COUNT_DOWN_TIME,
   APP_STATE_INITIAL,
   SET_SHOW_JAPANESE,
-  RESET_COUNT_DOWN
+  SET_LAST_INPUT_TIME,
+  RESET_APP_BASE
 } from './types';
 
-const initialState: PageManagerState = {
+const initialState: AppBaseState = {
   appState: APP_STATE_INITIAL,
   countDownTime: 180,
-  showJapanese: true
+  showJapanese: true,
+  lastInputTime: 0
 };
 
-export function pageManagerReducer(
-  state = initialState,
-  action: PageManagerActionTypes
-): PageManagerState {
+export function appBaseReducer(state = initialState, action: AppBaseActionTypes): AppBaseState {
   switch (action.type) {
     case SET_APP_STATE: {
       return {
@@ -37,11 +36,14 @@ export function pageManagerReducer(
         showJapanese: action.payload
       };
     }
-    case RESET_COUNT_DOWN: {
+    case SET_LAST_INPUT_TIME: {
       return {
         ...state,
-        countDownTime: initialState.countDownTime
+        lastInputTime: action.payload
       };
+    }
+    case RESET_APP_BASE: {
+      return initialState;
     }
     default:
       return state;

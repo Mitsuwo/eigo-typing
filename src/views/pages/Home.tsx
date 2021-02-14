@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import bgImage from '../../images/bg.jpg';
 import { RootState } from '../../store';
 import { clearCorrectCharCount } from '../../store/Keyboard/actions';
-import { setAppState, resetCountDown, setShowJapanese } from '../../store/PageManager/actions';
-import { APP_STATE_INITIAL, APP_STATE_TYPING } from '../../store/PageManager/types';
+import { setAppState, setShowJapanese, resetAppBase } from '../../store/AppBase/actions';
+import { APP_STATE_TYPING } from '../../store/AppBase/types';
 import { resetResultState } from '../../store/Result/actions';
 import { resetTypingContentState } from '../../store/TypingContent/actions';
 import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox';
@@ -64,11 +64,11 @@ const StyledView = styled(View)`
 `;
 
 export const Home: React.FC = () => {
-  const { showJapanese } = useSelector((state: RootState) => state.pageManager);
+  const { showJapanese } = useSelector((state: RootState) => state.appBase);
   const dispatch = useDispatch();
   const { history } = useReactRouter();
   React.useEffect(() => {
-    dispatch(setAppState(APP_STATE_INITIAL));
+    dispatch(resetAppBase());
   }, []);
   const switchShowJapanese = (): void => {
     dispatch(setShowJapanese(!showJapanese));
@@ -77,7 +77,6 @@ export const Home: React.FC = () => {
     dispatch(setAppState(APP_STATE_TYPING));
     dispatch(clearCorrectCharCount());
     dispatch(resetTypingContentState());
-    dispatch(resetCountDown());
     dispatch(resetResultState());
     history.push('/typing');
   };

@@ -1,7 +1,8 @@
 export const SET_APP_STATE = 'SET_APP_STATE';
 export const SET_COUNT_DOWN_TIME = 'SET_COUNT_DOWN_TIME';
 export const SET_SHOW_JAPANESE = 'SET_SHOW_JAPANESE';
-export const RESET_COUNT_DOWN = 'RESET_COUNT_DOWN';
+export const SET_LAST_INPUT_TIME = 'SET_LAST_INPUT_TIME';
+export const RESET_APP_BASE = 'RESET_APP_BASE';
 
 interface SetAppStateAction {
   type: typeof SET_APP_STATE;
@@ -18,8 +19,13 @@ interface SetShowJapanese {
   payload: boolean;
 }
 
-interface ResetCountDown {
-  type: typeof RESET_COUNT_DOWN;
+interface SetLastInputTime {
+  type: typeof SET_LAST_INPUT_TIME;
+  payload: number;
+}
+
+interface ResetAppBase {
+  type: typeof RESET_APP_BASE;
 }
 
 export const APP_STATE_INITIAL = 'initial';
@@ -31,14 +37,16 @@ export type AppStates =
   | typeof APP_STATE_TYPING
   | typeof APP_STATE_TIMEUP;
 
-export type PageManagerActionTypes =
+export type AppBaseActionTypes =
   | SetAppStateAction
   | SetCountDownTime
   | SetShowJapanese
-  | ResetCountDown;
+  | SetLastInputTime
+  | ResetAppBase;
 
-export interface PageManagerState {
+export interface AppBaseState {
   appState: AppStates;
   countDownTime: number;
   showJapanese: boolean;
+  lastInputTime: number;
 }
