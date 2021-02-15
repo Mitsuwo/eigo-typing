@@ -1,14 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import useReactRouter from 'use-react-router';
 import scriptsJson from '../../constant/corpus.json';
 import { RootState } from '../../store';
-import { setCurrentScript, setScripts } from '../../store/TypingContent/actions';
 import { Script } from '../../store/TypingContent/types';
 import { CountDown } from '../components/typing/CountDown';
 import { Keyboard } from '../components/typing/Keyboard';
-import { APP_STATE_INITIAL } from '../../store/AppBase/types';
-import { setNextKey } from '../../store/Keyboard/actions';
+import { setNextKey, clearCorrectCharCount } from '../../store/Keyboard/actions';
+import { resetResultState } from '../../store/Result/actions';
+import {
+  resetTypingContentState,
+  setCurrentScript,
+  setScripts
+} from '../../store/TypingContent/actions';
 import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox';
 import { HomeButton } from '../components/common/HomeButton';
 import { ScriptParent } from '../components/typing/ScriptParent';
@@ -34,24 +37,19 @@ const View: React.FC = () => {
 
 const Container: React.FC = () => {
   const { currentScriptIndex } = useSelector((state: RootState) => state.typingContent);
-  const { appState } = useSelector((state: RootState) => state.appBase);
   const dispatch = useDispatch();
-  const { history } = useReactRouter();
   React.useEffect(() => {
     initialize();
-    if (appState === APP_STATE_INITIAL) {
-      linkTo('');
-    }
   }, []);
   const initialize = () => {
+    dispatch(clearCorrectCharCount());
+    dispatch(resetTypingContentState());
+    dispatch(resetResultState());
     let scripts: Script[] = JSON.parse(JSON.stringify(scriptsJson));
     scripts = shuffleArray<Script>(scripts);
     dispatch(setScripts(scripts));
     dispatch(setCurrentScript(scripts[currentScriptIndex]));
     dispatch(setNextKey(scripts[currentScriptIndex].english[0]));
-  };
-  const linkTo = (pageName: string): void => {
-    history.push(`/${pageName}`);
   };
   return React.useMemo(() => <View />, []);
 };

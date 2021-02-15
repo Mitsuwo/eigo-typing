@@ -4,14 +4,12 @@ import {
   ADD_CURRENT_KEY,
   DELETE_CURRENT_KEY,
   SET_NEXT_KEY,
-  CLEAR_CURRENT_KEYS,
   INCREMENT_CORRECT_CHAR_COUNT,
   CLEAR_CORRECT_CHAR_COUNT
 } from './types';
 
 const initialState: KeyboardState = {
   currentKeys: [],
-  currentKey: '',
   nextKey: '',
   correctCharCount: 0
 };
@@ -30,12 +28,6 @@ export function keyboardReducer(state = initialState, action: KeyboardActionType
         currentKeys: state.currentKeys.filter(
           (key: string) => key.toUpperCase() !== action.payload.toUpperCase()
         )
-      };
-    }
-    case CLEAR_CURRENT_KEYS: {
-      return {
-        ...state,
-        currentKeys: []
       };
     }
     case SET_NEXT_KEY: {

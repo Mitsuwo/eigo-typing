@@ -1,6 +1,5 @@
 export const ADD_CURRENT_KEY = 'ADD_CURRENT_KEY';
 export const DELETE_CURRENT_KEY = 'DELETE_CURRENT_KEY';
-export const CLEAR_CURRENT_KEYS = 'CLEAR_CURRENT_KEY';
 export const SET_NEXT_KEY = 'SET_NEXT_KEY';
 export const INCREMENT_CORRECT_CHAR_COUNT = 'INCREMENT_CORRECT_CHAR_COUNT';
 export const CLEAR_CORRECT_CHAR_COUNT = 'CLEAR_CORRECT_CHAR_COUNT';
@@ -13,10 +12,6 @@ interface AddCurrentKeyAction {
 interface DeleteCurrentKeyAction {
   type: typeof DELETE_CURRENT_KEY;
   payload: string;
-}
-
-interface ClearCurrentKeys {
-  type: typeof CLEAR_CURRENT_KEYS;
 }
 
 interface SetNextKey {
@@ -35,14 +30,12 @@ interface ClearCorrectCharCount {
 export type KeyboardActionTypes =
   | AddCurrentKeyAction
   | DeleteCurrentKeyAction
-  | ClearCurrentKeys
   | SetNextKey
   | IncrementCorrectCharCount
   | ClearCorrectCharCount;
 
 export interface KeyboardState {
   currentKeys: string[];
-  currentKey: string;
   nextKey: string;
   correctCharCount: number;
 }

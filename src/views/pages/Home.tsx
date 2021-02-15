@@ -3,11 +3,7 @@ import { useDispatch } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import styled from 'styled-components';
 import bgImage from '../../images/bg.jpg';
-import { clearCorrectCharCount } from '../../store/Keyboard/actions';
-import { setAppState, resetAppBase } from '../../store/AppBase/actions';
-import { APP_STATE_TYPING } from '../../store/AppBase/types';
-import { resetResultState } from '../../store/Result/actions';
-import { resetTypingContentState } from '../../store/TypingContent/actions';
+import { resetAppBase } from '../../store/AppBase/actions';
 import { ShowJapaneseCheckBox } from '../components/common/ShowJapaneseCheckBox';
 import { AnimatedTyping } from '../components/home/AnimatedTyping';
 import { StartButton } from '../components/home/StartButton';
@@ -63,10 +59,6 @@ export const Home: React.FC = () => {
     dispatch(resetAppBase());
   }, []);
   const linkToTyping = (): void => {
-    dispatch(setAppState(APP_STATE_TYPING));
-    dispatch(clearCorrectCharCount());
-    dispatch(resetTypingContentState());
-    dispatch(resetResultState());
     history.push('/typing');
   };
   return <StyledView linkToTyping={linkToTyping} />;

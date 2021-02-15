@@ -2,10 +2,6 @@ import React from 'react';
 import useReactRouter from 'use-react-router';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
-import { setAppState, setCountDownTime } from '../../../store/AppBase/actions';
-import { APP_STATE_TIMEUP } from '../../../store/AppBase/types';
 
 type Props = {
   countDownTime: number;
@@ -42,17 +38,16 @@ const StyledView = styled(View)`
 `;
 
 export const CountDown: React.FC = () => {
-  const { countDownTime } = useSelector((state: RootState) => state.appBase);
-  const dispatch = useDispatch();
+  const TIME_LIMIT = 180;
+  const [countDownTime, setCountDownTime] = React.useState<number>(TIME_LIMIT);
   const { history } = useReactRouter();
   React.useEffect(() => {
     let count = countDownTime;
     const countDown = setInterval(() => {
       count -= 1;
-      dispatch(setCountDownTime(count));
+      setCountDownTime(count);
       if (count <= 0) {
         clearInterval(countDown);
-        dispatch(setAppState(APP_STATE_TIMEUP));
         history.push('/timeup');
       }
     }, 1000);
