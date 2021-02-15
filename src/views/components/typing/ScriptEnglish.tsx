@@ -1,20 +1,47 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { RootState } from '../../../store';
 import { Character } from './Character';
 
 type Props = {
   script: string;
-  correctCharCount: number;
-  scriptIndex: number;
-  currentScriptIndex: number;
+  shouldBreakIndexes: number[];
+  divRef: React.RefObject<HTMLDivElement>;
   className?: string;
 };
 
 const View: React.FC<Props> = (props: Props) => {
+  return (
+    <div className={props.className} ref={props.divRef}>
+      {props.script.split('').map((char: string, index: number) => {
+        return (
+          <Character
+            key={index}
+            char={char}
+            index={index}
+            shouldBreak={props.shouldBreakIndexes.indexOf(index) !== -1}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+const StyledView = styled(View)`
+  width: calc(100% - 4vw);
+  margin: 2vw;
+`;
+
+const Container: React.FC = () => {
+  const scriptEnglish = useSelector((state: RootState) => {
+    const { currentScript } = state.typingContent;
+    return currentScript ? currentScript.english : '';
+  });
   const [shouldBreakIndexes, setShouldBreakIndexes] = React.useState<number[]>([]);
   const divRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
-    if (!props.script || !divRef || !divRef.current || !divRef.current.children) {
+    if (!scriptEnglish || !divRef || !divRef.current || !divRef.current.children) {
       return;
     }
     const maxWidth = divRef.current.getBoundingClientRect().width;
@@ -26,34 +53,19 @@ const View: React.FC<Props> = (props: Props) => {
       tmpWidth += width;
       if (tmpWidth > maxWidth) {
         tmpWidth = 0;
-        const lastSpaceIndex = props.script.substring(0, i).lastIndexOf(' ');
+        const lastSpaceIndex = scriptEnglish.substring(0, i).lastIndexOf(' ');
         tmpIndexes.push(lastSpaceIndex);
         i = lastSpaceIndex;
       }
     }
     setShouldBreakIndexes(tmpIndexes);
-  }, [props.script]);
-  return (
-    <div className={props.className} ref={divRef}>
-      {props.script.split('').map((char: string, index: number) => {
-        const color = props.correctCharCount > index ? 'black' : 'grey';
-        const isNextChar = props.correctCharCount === index;
-        return (
-          <Character
-            id={`char_${props.scriptIndex}_${index}`}
-            key={index}
-            char={char}
-            color={color}
-            isNextChar={isNextChar}
-            shouldBreak={shouldBreakIndexes.indexOf(index) !== -1}
-          />
-        );
-      })}
-    </div>
+  }, [scriptEnglish]);
+  return React.useMemo(
+    () => (
+      <StyledView script={scriptEnglish} shouldBreakIndexes={shouldBreakIndexes} divRef={divRef} />
+    ),
+    [scriptEnglish, shouldBreakIndexes]
   );
 };
 
-export const ScriptEnglish = styled(View)`
-  width: calc(100% - 4vw);
-  margin: 2vw;
-`;
+export const ScriptEnglish = React.memo(Container);

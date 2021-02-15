@@ -1,11 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import styled from 'styled-components';
 import bgImage from '../../images/bg.jpg';
-import { RootState } from '../../store';
 import { clearCorrectCharCount } from '../../store/Keyboard/actions';
-import { setAppState, setShowJapanese, resetAppBase } from '../../store/AppBase/actions';
+import { setAppState, resetAppBase } from '../../store/AppBase/actions';
 import { APP_STATE_TYPING } from '../../store/AppBase/types';
 import { resetResultState } from '../../store/Result/actions';
 import { resetTypingContentState } from '../../store/TypingContent/actions';
@@ -15,8 +14,6 @@ import { StartButton } from '../components/home/StartButton';
 
 type Props = {
   linkToTyping: () => void;
-  showJapanese: boolean;
-  switchShowJapanese: () => void;
   className?: string;
 };
 
@@ -27,11 +24,7 @@ const View: React.FC<Props> = (props: Props) => {
       <AnimatedTyping />
       <div className="button-parent">
         <StartButton handleClickToTyping={props.linkToTyping} />
-        <ShowJapaneseCheckBox
-          showJapanese={props.showJapanese}
-          fontColor="#e1eef6"
-          onChange={props.switchShowJapanese}
-        />
+        <ShowJapaneseCheckBox fontColor="#e1eef6" />
       </div>
     </div>
   );
@@ -64,15 +57,11 @@ const StyledView = styled(View)`
 `;
 
 export const Home: React.FC = () => {
-  const { showJapanese } = useSelector((state: RootState) => state.appBase);
   const dispatch = useDispatch();
   const { history } = useReactRouter();
   React.useEffect(() => {
     dispatch(resetAppBase());
   }, []);
-  const switchShowJapanese = (): void => {
-    dispatch(setShowJapanese(!showJapanese));
-  };
   const linkToTyping = (): void => {
     dispatch(setAppState(APP_STATE_TYPING));
     dispatch(clearCorrectCharCount());
@@ -80,11 +69,5 @@ export const Home: React.FC = () => {
     dispatch(resetResultState());
     history.push('/typing');
   };
-  return (
-    <StyledView
-      showJapanese={showJapanese}
-      switchShowJapanese={switchShowJapanese}
-      linkToTyping={linkToTyping}
-    />
-  );
+  return <StyledView linkToTyping={linkToTyping} />;
 };

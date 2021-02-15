@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { RootState } from '../../../store';
 
 type Props = {
   visible: boolean;
@@ -19,9 +21,16 @@ const StyledView = styled(View)`
   color: grey;
 `;
 
-export const ScriptJapanese: React.FC<Props> = (props: Props) => {
+const Container: React.FC = () => {
+  const { showJapanese } = useSelector((state: RootState) => state.appBase);
+  const scriptJapanese = useSelector((state: RootState) => {
+    const { currentScript } = state.typingContent;
+    return currentScript ? currentScript.japanese : '';
+  });
   return React.useMemo(
-    () => <StyledView visible={props.visible} scriptJapanese={props.scriptJapanese} />,
-    [props.visible, props.scriptJapanese]
+    () => <StyledView visible={showJapanese} scriptJapanese={scriptJapanese} />,
+    [showJapanese, scriptJapanese]
   );
 };
+
+export const ScriptJapanese = React.memo(Container);

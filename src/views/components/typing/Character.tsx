@@ -1,21 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { RootState } from '../../../store';
 
 type Props = {
-  id: string;
   color: string;
   char: string;
   isNextChar: boolean;
-  shouldBreak?: boolean;
   className?: string;
 };
 
+type ContainerProps = {
+  char: string;
+  index: number;
+  shouldBreak: boolean;
+};
+
 const View: React.FC<Props> = (props: Props) => {
-  return (
-    <span id={props.id} className={props.className}>
-      {props.char === ' ' ? '\u00A0' : props.char}
-    </span>
-  );
+  return <span className={props.className}>{props.char === ' ' ? '\u00A0' : props.char}</span>;
 };
 
 const StyledView = styled(View)`
@@ -25,18 +27,18 @@ const StyledView = styled(View)`
   border-bottom: ${(props: Props) => (props.isNextChar ? 'solid' : 'none')};
 `;
 
-export const Character: React.FC<Props> = (props: Props) => {
+const Container: React.FC<ContainerProps> = (props: ContainerProps) => {
+  const { correctCharCount } = useSelector((state: RootState) => state.keyboard);
+  const color = correctCharCount > props.index ? 'black' : 'grey';
+  const isNextChar = correctCharCount === props.index;
   return React.useMemo(() => {
     return (
       <>
-        <StyledView
-          id={props.id}
-          color={props.color}
-          char={props.char}
-          isNextChar={props.isNextChar}
-        />
+        <StyledView color={color} char={props.char} isNextChar={isNextChar} />
         {props.shouldBreak ? <br /> : ''}
       </>
     );
-  }, [props.color, props.char, props.isNextChar, props.shouldBreak]);
+  }, [color, props.char, isNextChar, props.shouldBreak]);
 };
+
+export const Character = React.memo(Container);

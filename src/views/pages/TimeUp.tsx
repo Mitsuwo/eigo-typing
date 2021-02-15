@@ -1,7 +1,8 @@
 import React from 'react';
 import useReactRouter from 'use-react-router';
-import { Button, Card, CardActions, CardContent } from '@material-ui/core';
+import { Card, CardActions, CardContent } from '@material-ui/core';
 import styled from 'styled-components';
+import { AppButton } from '../components/common/AppButton';
 
 type Props = {
   linkTo: (pageName: string) => void;
@@ -15,17 +16,12 @@ const View: React.FC<Props> = (props: Props) => {
   const handleClickToHome = (): void => {
     props.linkTo('');
   };
-  // TODO: buttonをコンポーネント化
   return (
     <Card className={props.className}>
       <CardContent className="card-content">タイムアップ！</CardContent>
       <CardActions className="card-actions">
-        <Button variant="contained" onClick={handleClickToHome}>
-          <div style={{ fontSize: '15px', fontFamily: 'Noto Sans JP' }}>ホームにもどる</div>
-        </Button>
-        <Button variant="contained" onClick={handleClickToResult}>
-          <div style={{ fontSize: '15px', fontFamily: 'Noto Sans JP' }}>結果を表示する</div>
-        </Button>
+        <AppButton text="ホームにもどる" handleClick={handleClickToHome} />
+        <AppButton text="結果を表示する" handleClick={handleClickToResult} />
       </CardActions>
     </Card>
   );
